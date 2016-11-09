@@ -15,13 +15,13 @@
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
-            .state('home', {
+            .state('login', {
                 url: '/',
                 templateUrl: 'app/login/login.html'
             })
-            .state('authenticated', {
-                url: '/authenticated',
-                templateUrl: 'app/index/index.html',
+            .state('profile', {
+                url: '/profile',
+                templateUrl: 'app/profile/profile.html',
                 resolve: {
                     // controller will not be loaded until $waitForAuth resolves
                     // Auth refers to our $firebaseAuth wrapper in the example above

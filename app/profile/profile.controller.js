@@ -6,19 +6,19 @@
 
     angular
         .module('app')
-        .controller('indexController', indexController);
+        .controller('profileController', profileController);
 
-    indexController.$inject = ['$state', 'Config'];
+    profileController.$inject = ['$state', 'Config'];
 
 
 
-    function indexController ($state, Config) {
+    function profileController ($state, Config) {
         var vm = this;
         var authObj = Config.auth;
 
         vm.logout = function () {
             authObj.$signOut();
-            $state.go('home');
+            $state.go('login');
         }
     }
 })();

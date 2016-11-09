@@ -34,10 +34,7 @@
 
         function authDataCallback(authData) {
             if (authData) {
-                console.log("User " + authData.uid + " is logged in with " + authData.providerData[0].providerId);
-                vm.isLoggedIn = true;
-                // Retrieve User
-                console.log(authData);
+                $state.go('profile')
                 var user = $firebaseObject(ref.child('users').child(authData.uid));
                 user.$loaded().then(function () {
                     if (user.displayName == undefined) {
@@ -47,14 +44,13 @@
                 });
 
             } else {
-                console.log("User is logged out");
                 vm.isLoggedIn = false;
             }
         }
 
         vm.logout = function () {
             authObj.$signOut();
-            $state.go('home');
+            $state.go('login');
         }
 
         vm.signIn = function(){

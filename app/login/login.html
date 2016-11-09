@@ -1,26 +1,48 @@
-<section>
-    <div>
-        <img src="" alt="LOGO"/>
-        <h1>Bienvenue sur GroupIn</h1>
-    </div>
-    <div class="box" ng-controller="loginController as vm">
-        <input type="email" ng-model="vm.email" required/>
-        <input type="password" ng-model="vm.password" required/>
+<link rel="stylesheet" href="style/login.css">
 
-        <button class="button button--isi button--border-thin button--size-s button--round-s"
-                ng-click="vm.signIn()" ng-show="!vm.isLoggedIn">
-            <i class="fa fa-email fa-2x"></i>
-            <span>Continuer avec l'email</span>
-        </button>
-        <button class="button button--isi button--border-thin button--size-s button--round-s"
-                ng-click="vm.googleLogin()" ng-show="!vm.isLoggedIn">
-            <i class="fa fa-google-plus-square fa-2x"></i>
-            <span>Google+</span>
-        </button>
-        <button class="button button--isi button--border-thin button--size-s button--round-s"
-                ng-click="vm.facebookLogin()" ng-show="!vm.isLoggedIn">
-            <i class="fa fa-facebook fa-2x"></i>
-            <span>Facebook</span>
-        </button>
+<div class="container" ng-controller="loginController as vm">
+    <div class="login" >
+        <div class="omb_login">
+            <div class="logo">
+                <img src="../../style/logo.png" width="300">
+            </div>
+            <br>
+            <div class="social-buttons">
+                <a class="btn btn-block btn-social btn-google-plus"
+                   ng-click="vm.googleLogin()">
+                    <i class="fa fa-google-plus"></i>
+                    <span>Google+</span>
+                </a>
+                <a class="btn btn-block btn-social btn-facebook"
+                   ng-click="vm.facebookLogin()">
+                    <i class="fa fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+            </div>
+
+            <div class="row omb_loginOr">
+                <div class="col-xs-12 col-sm-12">
+                    <hr class="omb_hrOr">
+                    <span class="omb_spanOr">ou</span>
+                </div>
+            </div>
+            <form>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="email" ng-model="vm.email" required class="form-control" name="username" placeholder="Email">
+                </div>
+                <span class="help-block"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input  type="password" ng-model="vm.password" required class="form-control" name="password" placeholder="Mot de passe">
+                </div>
+                <br >
+                <button class="btn btn-block btn-github"
+                        ng-click="vm.signIn()" >
+                    <span>Continuer avec l'email</span>
+                </button>
+            </form>
+        </div>
     </div>
-</section>
+</div>

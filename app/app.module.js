@@ -7,7 +7,7 @@
     angular
         .module('app', [
             'app.core',
-            'app.auth',
-            'app.index'
+            'app.login',
+            'app.profile'
         ]);
 })();

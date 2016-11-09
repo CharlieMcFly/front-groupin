@@ -5,6 +5,6 @@
     'use strict';
 
     angular
-        .module('app.index', []);
+        .module('app.profile', []);
 
 })();
