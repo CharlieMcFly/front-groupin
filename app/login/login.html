@@ -1,0 +1,26 @@
+<section>
+    <div>
+        <img src="" alt="LOGO"/>
+        <h1>Bienvenue sur GroupIn</h1>
+    </div>
+    <div class="box" ng-controller="loginController as vm">
+        <input type="email" ng-model="vm.email" required/>
+        <input type="password" ng-model="vm.password" required/>
+
+        <button class="button button--isi button--border-thin button--size-s button--round-s"
+                ng-click="vm.signIn()" ng-show="!vm.isLoggedIn">
+            <i class="fa fa-email fa-2x"></i>
+            <span>Continuer avec l'email</span>
+        </button>
+        <button class="button button--isi button--border-thin button--size-s button--round-s"
+                ng-click="vm.googleLogin()" ng-show="!vm.isLoggedIn">
+            <i class="fa fa-google-plus-square fa-2x"></i>
+            <span>Google+</span>
+        </button>
+        <button class="button button--isi button--border-thin button--size-s button--round-s"
+                ng-click="vm.facebookLogin()" ng-show="!vm.isLoggedIn">
+            <i class="fa fa-facebook fa-2x"></i>
+            <span>Facebook</span>
+        </button>
+    </div>
+</section>

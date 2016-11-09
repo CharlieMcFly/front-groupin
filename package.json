@@ -1,0 +1,22 @@
+{
+  "name": "tp4-frameworkjs",
+  "version": "1.0.0",
+  "description": "TP4",
+  "main": "public/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "author": "Francois GRUCHALA <@FGruchala>",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "angularfire": "^2.1.0",
+    "bootstrap": "^3.3.7",
+    "firebase": "^3.5.2"
+  }
+}
