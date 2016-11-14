@@ -7,9 +7,9 @@
         .module('app')
         .service('User', User);
 
-    User.$injection = [];
+    User.$injection = ['UserService'];
 
-    function User(){
+    function User(UserService){
 
         var user = {
             "name":"",
@@ -25,6 +25,7 @@
             user.photo = data.photoURL;
             user.providerId = data.providerId;
             user.uid = data.uid;
+            UserService.save(user);
             return user;
         }
 

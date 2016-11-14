@@ -16,7 +16,7 @@
         function signIn(email, pwd) {
             authObj.$signInWithEmailAndPassword(email, pwd)
                 .then(function (userData) {
-
+                    // Nothing to do
                 }).catch(function (error) {
                     alert(error.message);
             });

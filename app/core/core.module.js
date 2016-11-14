@@ -7,7 +7,8 @@
     angular
         .module('app.core', [
             'ui.router',
-            'firebase'
+            'firebase',
+            'ngResource'
         ]);
 
 })();

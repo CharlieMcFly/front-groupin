@@ -8,8 +8,8 @@
         .module('app')
         .controller('mainController', mainController);
 
-    mainController.$inject = ['Config', '$firebaseObject', '$state', 'User'];
-    function mainController(Config, $firebaseObject, $state, User) {
+    mainController.$inject = ['Config', '$firebaseObject', '$state', 'User', '$http'];
+    function mainController(Config, $firebaseObject, $state, User, $http) {
         var vm = this;
 
         Config.init;
@@ -30,13 +30,6 @@
         // Callback pour récupérer les données du user
         function authDataCallback(authData) {
             if (authData) {
-                var user = $firebaseObject(ref.child('users').child(authData.uid));
-                user.$loaded().then(function () {
-                    if (user.displayName == undefined) {
-                        var newUser = authData.providerData[0];
-                        user.$ref().set(newUser);
-                    }
-                });
                 User.create(authData.providerData[0]);
                 $state.go('profile');
             }else{
