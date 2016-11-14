@@ -5,44 +5,43 @@
     'use strict';
     angular
         .module('app')
-        .factory('UserFactory', UserFactory);
+        .service('User', User);
 
-    UserFactory.$injection = [];
+    User.$injection = [];
 
-    function UserFactory(){
-        /**
-         * Constructor, with class name
-         */
-        function User(name, email, photo, provider, id) {
-            // Public properties, assigned to the instance ('this')
-            this.name = name;
-            this.email = email;
-            this.photo = photo;
-            this.proverderId = provider;
-            this.uid = id;
-        }
+    function User(){
 
-        /**
-         * Public method, assigned to prototype
-         */
-        User.prototype.getName = function ()
-        {
-            return this.name;
+        var user = {
+            "name":"",
+            "email":"",
+            "photo":"",
+            "providerId":"",
+            "uid":""
         };
 
-        /**
-         * Static method, assigned to class
-         * Instance ('this') is not available in static context
-         */
-        User.build = function (data) {
-            return new User(
-                data.displayName,
-                data.email,
-                data.photoURL,
-                data.providerId,
-                data.uid
-            );
+        this.create = function(data){
+            user.name = data.displayName;
+            user.email = data.email;
+            user.photo = data.photoURL;
+            user.providerId = data.providerId;
+            user.uid = data.uid;
+            return user;
         }
+
+        this.getUser = function(){
+            return user;
+        }
+
+        this.cleanUser = function(){
+            this.user = {
+                "name":"",
+                "email":"",
+                "photo":"",
+                "providerId":"",
+                "uid":""
+            };
+        }
+
     }
 
 })();

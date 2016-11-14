@@ -1,16 +1,8 @@
-
-/*
-    Note: It is best to use a less version of this file ( see http://css2less.cc
-    For the media queries use @screen-sm-min instead of 768px.
-    For .omb_spanOr use @body-bg instead of white.
-*/
-
-@media (min-width: 768px) {
-    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
-        margin-left: 25%;
+@media screen and (min-width: 738px) {
+    .login {
+        width:50%;
     }
 }
-
 .omb_login .omb_loginOr {
     position: relative;
     font-size: 1.5em;
@@ -63,7 +55,7 @@
     width:35%;
     margin-right: auto;
     margin-left: auto;
-    margin-top:10%;
+    margin-top:5%;
     border : solid #444444 2px;
     padding : 15px;
     background-color: white;
@@ -71,6 +63,10 @@
 
 .logo {
     text-align: center;
+}
+
+img{
+    width:50%;
 }
 
 body {

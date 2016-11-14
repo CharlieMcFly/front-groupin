@@ -1,8 +1,35 @@
+<link rel="stylesheet" src="../../style/profile.css">
 <div ng-controller="profileController as vm">
-    PROFILE
-    <button class="button button--isi button--border-thin button--size-s button--round-s"
-            ng-click="vm.logout()">
-        <i class="fa fa-sign-out fa-2x"></i>
-        <span>Logout</span>
-    </button>
+<header>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                <img src="../../style/logo.png" width="150px"/>
+            </div>
+            <p>{{vm.name}}</p>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+            <span style="font-size: 25px">GROUPIN</span>
+            </div>
+            <div class="row">
+                <span><i>"Le plus important est de partager de bons moments avec les gens qu'on aime"</i></span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-default btn-sm" ng-click="vm.logout()">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>
+        </div>
+    </div>
+</header>
+
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">Home</a></li>
+    <li role="presentation"><a href="#">Profile</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+</ul>
+<div style="background-color: red; height: 120px">
+
+</div>
 </div>
