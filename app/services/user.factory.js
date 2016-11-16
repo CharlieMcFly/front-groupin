@@ -11,36 +11,29 @@
 
     function User(UserService){
 
-        var user = {
-            "name":"",
-            "email":"",
-            "photo":"",
-            "providerId":"",
-            "uid":""
-        };
+        var user = {};
 
         this.create = function(data){
-            user.name = data.displayName;
-            user.email = data.email;
-            user.photo = data.photoURL;
-            user.providerId = data.providerId;
-            user.uid = data.uid;
-            UserService.save(user);
+
+            // Creation de l'utilisateur dans l'application
+            user.name = data.providerData[0].displayName;
+            user.email = data.providerData[0].email;
+            user.photo = data.providerData[0].photoURL;
+            user.providerId = data.providerData[0].providerId;
+            user.uid = data.providerData[0].uid;
+
+            // Creation de l'utilisateur dans la db
+            UserService.save(data.providerData[0]);
+
             return user;
         }
 
-        this.getUser = function(){
+        this.getUser = function(uid){
             return user;
         }
 
         this.cleanUser = function(){
-            this.user = {
-                "name":"",
-                "email":"",
-                "photo":"",
-                "providerId":"",
-                "uid":""
-            };
+            this.user = {};
         }
 
     }

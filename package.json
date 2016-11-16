@@ -14,10 +14,15 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-bootstrap-calendar": "^0.27.0",
+    "angular-ui-calendar": "latest",
+    "angular-ui-bootstrap": "^2.2.0",
     "angular-ui-router": "^0.3.1",
     "angularfire": "^2.1.0",
     "bootstrap": "^3.3.7",
     "firebase": "^3.5.2",
-    "firebase-tools": "^3.1.0"
+    "firebase-tools": "^3.1.0",
+    "fullcalendar": "~2.7.1",
+    "moment": "^2.16.0"
   }
 }

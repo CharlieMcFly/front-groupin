@@ -15,10 +15,20 @@
     <ui-view ng-controller="mainController as vm">
     </ui-view>
 
+    <!-- Calendar -->
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="node_modules/fullcalendar/dist/gcal.js"></script>
+
+
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+
+
+    <script type="text/javascript" src="node_modules/angular-ui-calendar/src/calendar.js"></script>
 
 
 
@@ -40,15 +50,26 @@
 
     <script src="app/services/user.service.js"></script>
 
-
     <script src="app/services/user.factory.js"></script>
     <script src="app/services/auth.factory.js"></script>
 
-    <script src="app/login/login.module.js"></script>
-    <script src="app/login/login.controller.js"></script>
+    <script src="app/groups/groups.module.js"></script>
+    <script src="app/groups/groups.controller.js"></script>
+
+    <script src="app/events/events.module.js"></script>
+    <script src="app/events/events.controller.js"></script>
+
+    <script src="app/amis/amis.module.js"></script>
+    <script src="app/amis/amis.controller.js"></script>
+
+    <script src="app/votes/votes.module.js"></script>
+    <script src="app/votes/votes.controller.js"></script>
 
     <script src="app/profile/profile.module.js"></script>
     <script src="app/profile/profile.controller.js"></script>
+
+    <script src="app/login/login.module.js"></script>
+    <script src="app/login/login.controller.js"></script>
 </body>
 
 </html>

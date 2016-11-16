@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="../../node_modules/fullcalendar/dist/fullcalendar.css"/>
+<!-- jquery, moment, and angular have to get included before fullcalendar -->
+
+
+<div class="container" ng-controller="eventsController as vm">
+    <h1>Mes Evènements</h1>
+    <hr >
+    <div class="row">
+        <div class="col-md-8" >
+            <div ui-calendar ng-model="vm.eventSources">
+            </div>
+        </div>
+        <div class="col-md-4" >
+            <ul class="nav nav-tabs">
+                <li><a ui-sref="profile.events">Event</a></li>
+                <li><a ui-sref=".votes">Vote</a></li>
+            </ul>
+            <div ui-view>
+                EVENT
+            </div>
+        </div>
+    </div>
+
+</div>

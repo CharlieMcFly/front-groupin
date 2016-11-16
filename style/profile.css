@@ -1,4 +1,57 @@
+.row, .col-md-2, .col-md-9{
+    background-color: transparent;
+}
+
 header{
-    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(entete.png);
+}
+
+.titre{
+    color:white;
+}
+
+#titreG{
+    font-size: 50px;
+}
+
+.center{
     text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.container-fluid {
+    height:80px;
+}
+
+.navbar-header{
+    display : inline-flex;
+    height : 100%;
+    line-height: 100%; /* hauteur de ligne (identique) */
+}
+
+.navbar-brand{
+    height: 100%;
+    margin: auto;
+}
+
+.navbar-brand-img{
+    margin:auto;
+    text-align: center;
+    margin-right: 20px;
+}
+
+a, a:hover{
+    color : #777;
+    text-decoration: none;
+}
+
+.navbar-nav , .navbar-nav > li, .navbar-nav > li > a {
+    height: 100%;
+}
+
+.navbar-nav > li > a {
+    padding-top: 30px;
 }

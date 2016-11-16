@@ -8,6 +8,10 @@
         .module('app', [
             'app.core',
             'app.login',
-            'app.profile'
+            'app.profile',
+            'app.amis',
+            'app.events',
+            'app.votes',
+            'app.groups'
         ]);
 })();

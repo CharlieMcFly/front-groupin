@@ -1,35 +1,38 @@
-<link rel="stylesheet" src="../../style/profile.css">
+<link rel="stylesheet" href="../../style/profile.css">
+
 <div ng-controller="profileController as vm">
-<header>
+<header id="entete" >
     <div class="row">
-        <div class="col-md-2">
-            <div class="row">
-                <img src="../../style/logo.png" width="150px"/>
-            </div>
-            <p>{{vm.name}}</p>
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-            <span style="font-size: 25px">GROUPIN</span>
-            </div>
-            <div class="row">
-                <span><i>"Le plus important est de partager de bons moments avec les gens qu'on aime"</i></span>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <button type="button" class="btn btn-default btn-sm" ng-click="vm.logout()">
-                <span class="glyphicon glyphicon-log-out"></span> Log out
-            </button>
+        <div class="center">
+            <span id="titreG" class="titre">GROUPIN</span>
+            <br>
+            <span class="titre" ><i>"Le plus important est de partager de bons moments avec les gens qu'on aime"</i></span>
         </div>
     </div>
 </header>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand-img">
+                <img src="../../style/logoentete.png"/>
+                <a>{{vm.name}}</a>
+            </div>
 
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Home</a></li>
-    <li role="presentation"><a href="#">Profile</a></li>
-    <li role="presentation"><a href="#">Messages</a></li>
-</ul>
-<div style="background-color: red; height: 120px">
-
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="profile">Accueil</a></li>
+            <li><a ui-sref=".groups">Groupes</a></li>
+            <li><a ui-sref=".events">Evènements</a></li>
+            <li><a ui-sref=".amis">Amis</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" class="navbar-link" ng-click="vm.logout()">Se déconnecter</a></li>
+        </ul>
+    </div>
+</nav>
 </div>
+<div ui-view>
+    <div class="container">
+        <h1>Accueil</h1>
+    </div>
 </div>

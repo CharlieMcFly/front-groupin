@@ -23,5 +23,6 @@
             authObj.$signOut();
             $state.go('login');
         }
+
     }
 })();

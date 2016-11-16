@@ -17,10 +17,12 @@
         $stateProvider
             .state('login', {
                 url: '/',
-                templateUrl: 'app/login/login.html'
+                templateUrl: 'app/login/login.html',
+                controller : 'loginController'
             })
             .state('profile', {
                 url: '/profile',
+                controller : 'profileController',
                 templateUrl: 'app/profile/profile.html',
                 resolve: {
                     // controller will not be loaded until $waitForAuth resolves
@@ -32,6 +34,23 @@
                         return authObj.$requireSignIn();
                     }]
                 }
-            });
+            })
+            .state('profile.amis', {
+                url: '/amis',
+                templateUrl: 'app/amis/amis.html'
+            })
+            .state('profile.events', {
+                url: '/events',
+                templateUrl: 'app/events/events.html'
+            })
+            .state('profile.events.votes', {
+                url: '/votes',
+                templateUrl: 'app/votes/votes.html'
+            })
+            .state('profile.groups', {
+                url: '/groups',
+                templateUrl: 'app/groups/groups.html'
+            })
+            ;
     }
 })();
