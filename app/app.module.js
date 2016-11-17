@@ -11,7 +11,15 @@
             'app.profile',
             'app.amis',
             'app.events',
-            'app.votes',
-            'app.groups'
+            'app.events-votes',
+            'app.events-event',
+            'app.groups',
+            'app.group-events',
+            'app.group-membres',
+            'app.group-votes',
+            'app.group-euro',
+            'app.group-chat',
+            'app.group-photos'
+
         ]);
 })();

@@ -1,5 +1,28 @@
 <div class="container">
     <h1>Mes Groupes</h1>
     <hr >
-
+    <div class="col-md-4">
+        <div class="list-group">
+            <a  class="list-group-item disabled">Lien Désactiver</a>
+            <a  class="list-group-item">Dapibus ac facilisis in</a>
+            <a  class="list-group-item active">Morbi leo risus</a>
+            <a  class="list-group-item">Porta ac consectetur ac</a>
+            <a  class="list-group-item">Vestibulum at eros</a>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h1> Nom du groupe </h1>
+        <button>Quitter groupe</button>
+        <ul class="nav nav-tabs">
+            <li><a ui-sref=".events">Evenements</a></li>
+            <li><a ui-sref=".membres">Membres</a></li>
+            <li><a ui-sref=".votes">Votes</a></li>
+            <li><a ui-sref=".euro">€</a></li>
+            <li><a ui-sref=".chat">Chat</a></li>
+            <li><a ui-sref=".photos">Photos</a></li>
+        </ul>
+        <div ui-view>
+            No Group Selected
+        </div>
+    </div>
 </div>

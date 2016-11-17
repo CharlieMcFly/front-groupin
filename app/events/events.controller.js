@@ -18,13 +18,9 @@
         var m = date.getMonth();
         var y = date.getFullYear();
 
-        vm.changeTo = 'Hungarian';
         /* event source that pulls from google.com */
-        vm.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
-        };
+        vm.eventSource = {};
+
         /* event source that contains custom events on the scope */
         vm.events = [
             {title: 'All Day Event',start: new Date(y, m, 1)},
@@ -114,7 +110,7 @@
                 header:{
                     left: 'title',
                     center: '',
-                    right: 'today prev,next'
+                    right: 'aujourd\'hui prev,next'
                 },
                 eventClick: vm.alertOnEventClick,
                 eventDrop: vm.alertOnDrop,

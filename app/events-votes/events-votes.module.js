@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.votes', []);
+        .module('app.events-votes', []);
 
 
 })();

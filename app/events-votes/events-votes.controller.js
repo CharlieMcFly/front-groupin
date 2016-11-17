@@ -6,11 +6,11 @@
 
     angular
         .module('app')
-        .controller('votesController', votesController);
+        .controller('eventsVotesController', eventsVotesController);
 
-    votesController.$inject = [];
+    eventsVotesController.$inject = [];
 
-    function votesController () {
+    function eventsVotesController () {
         var vm = this;
 
         vm.hello = "hello";

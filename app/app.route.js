@@ -43,13 +43,41 @@
                 url: '/events',
                 templateUrl: 'app/events/events.html'
             })
+            .state('profile.events.event', {
+                url: '/event',
+                templateUrl: 'app/events-event/events-event.html'
+            })
             .state('profile.events.votes', {
-                url: '/votes',
-                templateUrl: 'app/votes/votes.html'
+                url: '/events-votes',
+                templateUrl: 'app/events-votes/events-votes.html'
             })
             .state('profile.groups', {
                 url: '/groups',
                 templateUrl: 'app/groups/groups.html'
+            })
+            .state('profile.groups.events', {
+                url: '/events',
+                templateUrl: 'app/group-events/group-events.html'
+            })
+            .state('profile.groups.membres', {
+                url: '/membres',
+                templateUrl: 'app/group-membres/group-membres.html'
+            })
+            .state('profile.groups.votes', {
+                url: '/votes',
+                templateUrl: 'app/group-votes/group-votes.html'
+            })
+            .state('profile.groups.euro', {
+                url: '/euro',
+                templateUrl: 'app/group-euro/group-euro.html'
+            })
+            .state('profile.groups.chat', {
+                url: '/chat',
+                templateUrl: 'app/group-chat/group-chat.html'
+            })
+            .state('profile.groups.photos', {
+                url: '/photos',
+                templateUrl: 'app/group-photos/group-photos.html'
             })
             ;
     }
