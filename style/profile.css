@@ -54,12 +54,10 @@
 
 body {
     margin:0;
-    padding-top: 250px;
     padding-bottom: 70px;
     background: url(background.png) no-repeat center fixed;
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover; /* version standardisée */
-    overflow: hidden;
 }
 
 h1 {
@@ -67,11 +65,15 @@ h1 {
 }
 
 .container{
-    overflow-y: auto;
-    overflow-x: hidden;
     height:100%;
 }
 
 .btn-group-lg > .btn, .btn-lg {
     padding: 22px 16px;
 }
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
