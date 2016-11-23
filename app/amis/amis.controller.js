@@ -13,6 +13,13 @@
     function amisController () {
         var vm = this;
 
-        vm.hello = "hello";
+        vm.items = ['item1', 'item2', 'item3'];
+
+        vm.friends = [
+            {name:"John", img:"mon-img"},
+            {name:"Frans", img:"mon-img"},
+            {name:"Marc", img:"mon-img"},
+            {name:"Georges", img:"mon-img"}
+        ];
     }
 })();

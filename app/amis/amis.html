@@ -1,38 +1,29 @@
 <div class="container" ng-controller="amisController as vm">
+
+    <!-- RECHERCHE -->
     <div class="row">
-        <div class="form-group">
-            <div class="input-group input-group-md icon-addon addon-md">
-                <input type="text" placeholder="Texte" name="" id="schbox" class="form-control">
-                <i class="icon icon-search"></i>
-                <span class="input-group-btn">
-            <button type="submit" class="btn">Rechercher</button>
-        </span>
-            </div>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" ng-model="search" class="form-control" placeholder="Recherche">
         </div>
     </div>
+
+    <!-- LISTE DES AMIS -->
     <div class="row">
         <h1>Mes amis </h1>
         <hr >
-            <!-- LISTE DES AMIS -->
             <ul class="list-group">
-                <li class="list-group-item col-md-4">Amis n°1 </li>
-                <li class="list-group-item col-md-4">Amis n°2 </li>
-                <li class="list-group-item col-md-4">Amis n°3 </li>
-                <li class="list-group-item col-md-4">Amis n°4 </li>
-                <li class="list-group-item col-md-4">Amis n°5 </li>
-                <li class="list-group-item col-md-4">Amis n°6 </li>
-                <li class="list-group-item col-md-4">Amis n°1 </li>
-                <li class="list-group-item col-md-4">Amis n°2 </li>
-                <li class="list-group-item col-md-4">Amis n°3 </li>
-                <li class="list-group-item col-md-4">Amis n°4 </li>
-                <li class="list-group-item col-md-4">Amis n°5 </li>
-                <li class="list-group-item col-md-4">Amis n°6 </li>
-                <li class="list-group-item col-md-4">Amis n°1 </li>
-                <li class="list-group-item col-md-4">Amis n°2 </li>
-                <li class="list-group-item col-md-4">Amis n°3 </li>
-                <li class="list-group-item col-md-4">Amis n°4 </li>
-                <li class="list-group-item col-md-4">Amis n°5 </li>
-                <li class="list-group-item col-md-4">Amis n°6 </li>
+                <li class="list-group-item col-md-4" ng-repeat="friend in vm.friends | filter : search | orderBy: 'name'">
+                    <div class="media">
+                        <div class="media-left">
+                            <a><img class="media-object" alt="{{friend.img}}" style="width: 64px; height: 64px;" src="../../style/logoentete.png"></a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{friend.name}}</h4>
+                        </div>
+                    </div>
+                </li>
             </ul>
+        <button type="button" ng-click="vm.ajoutAmis()" class="btn btn-secondary btn-lg btn-block navbar-fixed-bottom">Ajouter un ami</button>
     </div>
 </div>

@@ -8,7 +8,9 @@
         .module('app.core', [
             'ui.router',
             'firebase',
-            'ngResource'
+            'ngResource',
+            'ngAnimate',
+            'ngSanitize'
         ]);
 
 })();
