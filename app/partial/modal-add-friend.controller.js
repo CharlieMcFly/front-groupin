@@ -8,9 +8,9 @@
         .module('app')
         .controller('modalAjoutFriendController', modalAjoutFriendController);
 
-    modalAjoutFriendController.$inject = ['$uibModal', '$log', '$document'];
+    modalAjoutFriendController.$inject = [];
 
-    function modalAjoutFriendController ($uibModal, $log, $document) {
+    function modalAjoutFriendController () {
         var vm = this;
 
     }

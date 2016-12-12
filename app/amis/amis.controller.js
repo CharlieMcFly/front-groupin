@@ -8,9 +8,9 @@
         .module('app')
         .controller('amisController', amisController);
 
-    amisController.$inject = ['$uibModal', '$log', '$document'];
+    amisController.$inject = ['$uibModal', '$log', '$document', 'UserService'];
 
-    function amisController ($uibModal, $log, $document) {
+    function amisController ($uibModal, $log, $document, UserService) {
         var vm = this;
 
         vm.items = ['item1', 'item2', 'item3'];
@@ -39,19 +39,16 @@
                 controller: 'modalAjoutFriendController',
                 controllerAs: 'vm',
                 size: size,
-                appendTo: parentElem,
-                resolve: {
-                    items: function () {
-                        return vm.items;
-                    }
-                }
+                appendTo: parentElem
             });
 
             modalInstance.result.then(function (selectedItem) {
                 vm.selected = selectedItem;
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                $log.info('Ami ajouté');
             });
         };
+
+        UserService.get();
     }
 })();
