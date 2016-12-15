@@ -8,47 +8,44 @@
         .module('app')
         .controller('amisController', amisController);
 
-    amisController.$inject = ['$uibModal', '$log', '$document', 'UserService'];
+    amisController.$inject = ['$uibModal', 'User', 'Users', 'NotifsAmisService'];
 
-    function amisController ($uibModal, $log, $document, UserService) {
+    function amisController ($uibModal, User, Users, NotifsAmisService) {
+
+
         var vm = this;
+        var user = User.getUser();
+        var users = Users.getAllUsers();
+        var friends = User.getFriends();
 
-        vm.items = ['item1', 'item2', 'item3'];
+        // Affichage des amis
+        vm.friends = [];
+        if(friends.friends != undefined){
+            Object.keys(friends.friends).forEach(function(key,index) {
+                vm.friends.push(users.users[key]);
+            });
+        }
 
-        vm.friends = [
-            {name:"John", img:"mon-img"},
-            {name:"Frans", img:"mon-img"},
-            {name:"Marc", img:"mon-img"},
-            {name:"Georges", img:"mon-img"},
-            {name:"Geanine", img:"mon-img"},
-            {name:"Charlie", img:"mon-img"},
-            {name:"Edouard", img:"mon-img"},
-            {name:"Walid", img:"mon-img"}
-        ];
-
+        // Gestion de la fenetre d'ajout d'un amis
         vm.animationsEnabled = true;
 
-        vm.open = function (size, parentSelector) {
-            var parentElem = parentSelector ?
-                angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+        vm.open = function (size) {
             var modalInstance = $uibModal.open({
                 animation: vm.animationsEnabled,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
                 templateUrl: 'app/partial/modal-add-friend.html',
                 controller: 'modalAjoutFriendController',
-                controllerAs: 'vm',
-                size: size,
-                appendTo: parentElem
+                controllerAs: 'vm'
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                vm.selected = selectedItem;
-            }, function () {
-                $log.info('Ami ajouté');
+            modalInstance.result.then(function (users) {
+                users.forEach(function(entry){
+                   var data = {
+                        "uidD" : user.uid,
+                        "uidR" : entry.uid
+                    }
+                    NotifsAmisService.save(data);
+                });
             });
         };
-
-        UserService.get();
     }
 })();

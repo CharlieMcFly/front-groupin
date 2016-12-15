@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="navbar-brand-img">
-                    <img width="50px" height="50px" src="../../style/logoentete.png"/>
+                    <img width="64px" height="64px" ng-src="{{vm.photo}}"/>
                     <a>{{vm.name}}</a>
                 </div>
 
@@ -36,12 +36,11 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Notifications</h3>
                 </div>
-                <div class="list-group">
-                    <a  class="list-group-item"><span class="badge badge-inverse">14</span> Cras justo odio</a>
-                    <a  class="list-group-item active"><span class="badge badge-success">20</span> Dapibus ac facilisis in</a>
-                    <a  class="list-group-item"><span class="badge badge-info">10</span> Morbi leo risus</a>
-                    <a  class="list-group-item"><span class="badge badge-warning">25</span> Porta ac consectetur ac</a>
-                    <a  class="list-group-item"><span class="badge badge-danger">80</span> Vestibulum at eros</a>
+                <div class="list-group" ng-repeat="notif in vm.notifAmis">
+                    <a  class="list-group-item">
+                        {{notif.displayName}} vous demande en ami.
+                        <span ng-click="vm.addFriends(notif.uid)" class="glyphicon glyphicon-ok"></span><span ng-click="vm.dontAddFriend(notif.uid)" class="glyphicon glyphicon-remove"></span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -51,7 +50,10 @@
                     <h3 class="panel-title">Groupes Récents</h3>
                 </div>
                 <div class="list-group">
-                    <a  class="list-group-item"><span class="badge badge-inverse">14</span> Cras justo odio</a>
+                    <a  class="list-group-item">Cras justo odio
+                        <span class="glyphicon glyphicon-ok "></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
                     <a  class="list-group-item active"><span class="badge badge-success">20</span> Dapibus ac facilisis in</a>
                     <a  class="list-group-item"><span class="badge badge-info">10</span> Morbi leo risus</a>
                     <a  class="list-group-item"><span class="badge badge-warning">25</span> Porta ac consectetur ac</a>

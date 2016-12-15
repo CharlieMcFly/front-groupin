@@ -22,7 +22,6 @@
             })
             .state('profile', {
                 url: '/profile',
-                controller : 'profileController',
                 templateUrl: 'app/profile/profile.html',
                 resolve: {
                     // controller will not be loaded until $waitForAuth resolves

@@ -8,16 +8,40 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$state','Config', 'User'];
+    profileController.$inject = ['$state','Config', 'User', 'Users', '$http'];
 
-    function profileController ($state, Config, User) {
+    function profileController ($state, Config, User, Users, $http) {
+
         var vm = this;
-        var authObj = Config.auth;
 
-        if(User.getUser().name == undefined)
-            vm.name = User.getUser().email;
+        var authObj = Config.auth;
+        var user = User.getUser();
+        var users = Users.getAllUsers();
+
+        if(user.displayName == undefined)
+            vm.name = user.email;
         else
-            vm.name = User.getUser().name;
+            vm.name = user.displayName;
+
+        vm.photo = user.photoURL;
+
+        vm.notifAmis = [];
+        $http.get("http://localhost:8080/notifications_amis/"+user.uid).then(function(n){
+            var mesNotifs = n.data.notifs;
+            if(mesNotifs != undefined){
+                Object.keys(mesNotifs).forEach(function(key,index) {
+                    vm.notifAmis.push(users.users[key]);
+                });
+            }
+        });
+
+        vm.addFriends = function(data){
+            alert("Ajout de " +data.displayName);
+        }
+
+        vm.dontAddFriend = function(data){
+            alert("Ne pas ajouter");
+        }
 
         vm.logout = function () {
             authObj.$signOut();

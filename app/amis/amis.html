@@ -12,18 +12,19 @@
     <div class="row">
         <h1>Mes amis </h1>
         <hr >
-            <ul class="list-group">
+            <ul class="list-group" ng-if="vm.friends.length">
                 <li class="list-group-item col-md-4" ng-repeat="friend in vm.friends | filter : search | orderBy: 'name'">
                     <div class="media">
                         <div class="media-left">
-                            <a><img class="media-object" alt="{{friend.img}}" style="width: 64px; height: 64px;" src="../../style/logoentete.png"></a>
+                            <a><img class="media-object" style="width: 64px; height: 64px;" ng-src="{{friend.photoURL}}"></a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{friend.name}}</h4>
+                            <h4 class="media-heading">{{friend.displayName}}</h4>
                         </div>
                     </div>
                 </li>
             </ul>
+            <p ng-if="!vm.friends.length">Ta liste d'amis est vide, ajoute des nouveaux amis avec le bouton "Ajouter un ami"</p>
         <button type="button" ng-click="vm.open()" class="btn btn-secondary btn-lg btn-block">Ajouter un ami</button>
     </div>
 </div>
