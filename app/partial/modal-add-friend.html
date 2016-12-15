@@ -1,25 +1,26 @@
-
+<div>
     <div class="modal-header">
         <h3 class="modal-title" id="modal-title">Ajout d'amis</h3>
     </div>
     <div class="modal-body" id="modal-body">
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" class="form-control" placeholder="Recherche">
+            <input type="text" class="form-control" ng-model="search" placeholder="Recherche">
         </div>
-        <div> Aucun Résultat </div>
-        <div>
+        <div ng-if="!vm.users" > Aucun Résultat </div>
+        <div ng-if="vm.users"  ng-repeat="user in vm.users | filter:search " ng-click="vm.selectionAmis(user)">
             <div class="media">
                 <div class="media-left">
-                    <a><img class="media-object" alt="personne" style="width: 64px; height: 64px;" src="../../style/logoentete.png"></a>
+                    <a><img class="media-object" style="width: 64px; height: 64px;" ng-src="{{user.photoURL}}" /></a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">Nom Amis</h4>
+                    <h4 class="media-heading">{{user.displayName}}</h4>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" type="button" >Ajouter</button>
-        <button class="btn btn-danger" type="button" >Cancel</button>
+        <button class="btn btn-success" type="button" ng-click="vm.ajouter()" >Ajouter</button>
+        <button class="btn btn-danger" type="button" ng-click="vm.cancel()">Annuler</button>
     </div>
+</div>
