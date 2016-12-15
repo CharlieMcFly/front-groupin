@@ -20,14 +20,14 @@
         var users = Users.getAllUsers();
 
         vm.users = [];
-        if(users.data != undefined){
-            Object.keys(users.data).forEach(function(key) {
-                if(friends.data != undefined){
-                    if(friends.data[key] == undefined && key != user.uid)
-                        vm.users.push(users.data[key]);
+        if(users.users != undefined){
+            Object.keys(users.users).forEach(function(key) {
+                if(friends.friends != undefined){
+                    if(friends.friends[key] == undefined && key != user.uid)
+                        vm.users.push(users.users[key]);
                 }else{
                     if(key != user.uid)
-                        vm.users.push(users.data[key]);
+                        vm.users.push(users.users[key]);
                 }
             });
         }
