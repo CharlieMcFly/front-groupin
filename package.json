@@ -2,14 +2,22 @@
   "name": "tp4-frameworkjs",
   "version": "1.0.0",
   "description": "TP4",
-  "main": "public/index.html",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "lite-server"
   },
-  "author": "Francois GRUCHALA <@FGruchala>",
+  "author": "Charlie Quetstroey",
   "license": "ISC",
   "devDependencies": {
+    "angular": "^1.6.0",
+    "angular-mocks": "^1.6.0",
+    "angular-ui-router": "^0.3.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.0",
     "lite-server": "^2.2.2"
   },
   "dependencies": {

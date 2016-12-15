@@ -16,7 +16,7 @@
     </ui-view>
 
     <!-- Calendar -->
-    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
     <script type="text/javascript" src="node_modules/fullcalendar/dist/gcal.js"></script>
@@ -43,16 +43,18 @@
     <script src="app/app.module.js"></script>
     <script src="app/core/core.module.js"></script>
     <script src="app/app.route.js"></script>
-    <script src="app/services/config.factory.js"></script>
+    <script src="app/factories/config.factory.js"></script>
 
     <script src="app/app.controller.js"></script>
 
     <!-- App Services-->
     <script src="app/services/user.service.js"></script>
-
+    <script src="app/services/friends.service.js"></script>
+    <script src="app/services/notification_amis.service.js"></script>
     <!-- App Factories-->
-    <script src="app/services/user.factory.js"></script>
-    <script src="app/services/auth.factory.js"></script>
+    <script src="app/factories/users.factory.js"></script>
+    <script src="app/factories/user.factory.js"></script>
+    <script src="app/factories/auth.factory.js"></script>
 
     <!-- App entities-->
 
