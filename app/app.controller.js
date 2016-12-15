@@ -30,7 +30,7 @@
         // Callback pour récupérer les données du user
         function authDataCallback(authData) {
             if (authData) {
-                User.create(authData);
+                User.login(authData);
                 $state.go('profile');
             }else{
                 User.cleanUser();
