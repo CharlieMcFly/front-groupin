@@ -18,6 +18,9 @@
         var user = User.getUser();
         var users = Users.getAllUsers();
 
+        this.uid = user.uid;
+
+
         if(user.displayName == undefined)
             vm.name = user.email;
         else
@@ -26,7 +29,7 @@
         vm.photo = user.photoURL;
 
         vm.notifAmis = [];
-        $http.get("http://localhost:8080/notifications_amis/"+user.uid).then(function(n){
+        $http.get("http://localhost:8080/notifications_amis/"+this.uid).then(function(n){
             var mesNotifs = n.data.notifs;
             if(mesNotifs != undefined){
                 Object.keys(mesNotifs).forEach(function(key,index) {
@@ -36,11 +39,20 @@
         });
 
         vm.addFriends = function(data){
-            alert("Ajout de " +data.displayName);
+            var data = {
+                "uidD" : data,
+                "uidR" : this.uid
+            }
+            console.log(data);
+            $http.delete("http://localhost:8080/notifications_amis/"+this.uid+"/"+data);
+            $http.delete("http://localhost:8080/notifications_amis/"+data+"/"+this.uid);
+            $http.post("http://localhost:8080/friends", data);
+            // TODO : Raffraichir la liste des amis
         }
 
         vm.dontAddFriend = function(data){
-            alert("Ne pas ajouter");
+            $http.delete("http://localhost:8080/notifications_amis/"+this.uid+"/"+data);
+            // TODO : Raffraichir la liste
         }
 
         vm.logout = function () {

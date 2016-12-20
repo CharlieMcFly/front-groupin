@@ -12,12 +12,11 @@
 
     function modalAjoutFriendController (Users, User, $uibModalInstance) {
 
-        vm = this;
-
         var vm = this;
-        var friends = User.getFriends();
-        var user = User.getUser();
+        var user = User.getUser().user;
         var users = Users.getAllUsers();
+        var friends = User.getFriends();
+
 
         vm.users = [];
         if(users.users != undefined){

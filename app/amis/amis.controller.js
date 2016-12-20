@@ -12,9 +12,9 @@
 
     function amisController ($uibModal, User, Users, NotifsAmisService) {
 
-
         var vm = this;
-        var user = User.getUser();
+
+        var user = User.getUser().user;
         var users = Users.getAllUsers();
         var friends = User.getFriends();
 
@@ -26,12 +26,9 @@
             });
         }
 
-        // Gestion de la fenetre d'ajout d'un amis
-        vm.animationsEnabled = true;
-
         vm.open = function (size) {
             var modalInstance = $uibModal.open({
-                animation: vm.animationsEnabled,
+                animation: true,
                 templateUrl: 'app/partial/modal-add-friend.html',
                 controller: 'modalAjoutFriendController',
                 controllerAs: 'vm'
@@ -43,6 +40,7 @@
                         "uidD" : user.uid,
                         "uidR" : entry.uid
                     }
+                    console.log(data);
                     NotifsAmisService.save(data);
                 });
             });

@@ -25,6 +25,9 @@
             return this.friends;
         }
 
+        this.setFriends = function(data){
+            this.friends = data;
+        }
 
         this.getUser = function(){
             return this.user;

@@ -33,7 +33,7 @@
                 User.login(authData);
                 $state.go('profile');
             }else{
-                User.cleanUser();
+                User.logout();
                 $state.go('login');
             }
         }
