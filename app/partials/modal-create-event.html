@@ -1,0 +1,57 @@
+<link href="../../node_modules/angular-moment-picker/src/angular-moment-picker.css" rel="stylesheet">
+
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Création d'event</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+            <div ng-if="!vm.photoURL" class="form-group" style="text-align: center">
+                <img src="http://placehold.it/150x150&text=img-circle" alt="" class="img-circle" style="text-align: center">
+            </div>
+            <div ng-if="vm.photoURL" class="form-group" style="text-align: center">
+                <img ng-src="{{vm.photoURL}}" alt="" class="img-circle" style="text-align: center; width: 150px; height: 150px">
+            </div>
+            <div class="form-group">
+                <label for="NomGroupe">Nom de l'event</label>
+                <input type="text" ng-model="vm.nomE" class="form-control" id="NomGroupe" placeholder="Nom du groupe">
+            </div>
+            <div class="form-group">
+                <label for="DescriptionGroupe">Description</label>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <textarea id="DescriptionGroupe"  ng-model="vm.descE" class="form-control" placeholder="Description du groupe" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="URLPhotoGroupe">URL de la photo</label>
+                <input type="text" ng-model="vm.photoURL" class="form-control" id="URLPhotoGroupe" placeholder="URL de la photo du groupe">
+            </div>
+            <!-- DATE -->
+            <div class="form-group">
+                <label for="dateD">Date de début</label>
+                <input class="form-control" ng-model="vm.dateD" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateD" id="dateD">
+            </div>
+            <div class="form-group">
+                <label for="dateD">Date de fin</label>
+                <input class="form-control" ng-model="vm.dateF" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateF" id="dateF">
+            </div>
+            <div class="form-group">
+                <label for="themeEvent">Thème de l'évent</label>
+                <input type="text" ng-model="vm.theme" class="form-control" id="themeEvent" placeholder="Carnaval">
+            </div>
+            <div class="form-group">
+                <label for="prixEvent">Prix de l'évent</label>
+                <input type="text" ng-model="vm.prix" class="form-control" id="prixEvent" placeholder="10 €">
+            </div>
+            <div class="form-group">
+                <label for="objEvent">Chose à ramener</label>
+                <input type="text" ng-model="vm.obj" class="form-control" id="objEvent" placeholder="une teille">
+            </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="vm.creer()" >Créer</button>
+        <button class="btn btn-danger" type="button" ng-click="vm.cancel()">Annuler</button>
+    </div>
+</div>

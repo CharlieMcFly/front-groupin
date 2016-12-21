@@ -8,9 +8,9 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups'];
+    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups', 'Events'];
 
-    function profileController ($state, Config, User, Users, $http, Groups) {
+    function profileController ($state, Config, User, Users, $http, Groups, Events) {
 
         var vm = this;
 
@@ -18,7 +18,7 @@
         var user = User.getUser();
         var users = Users.getAllUsers();
         var groups = Groups.getAllGroups();
-
+        var events = Events.getAllEvents();
 
         this.uid = user.uid;
 
@@ -45,7 +45,6 @@
                 "uidD" : data,
                 "uidR" : this.uid
             }
-            console.log(data);
             $http.delete("http://localhost:8080/notifications_amis/"+this.uid+"/"+data);
             $http.delete("http://localhost:8080/notifications_amis/"+data+"/"+this.uid);
             $http.post("http://localhost:8080/friends", data);

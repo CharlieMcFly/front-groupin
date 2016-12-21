@@ -31,7 +31,8 @@
             vm.affiche = true;
             vm.nomG = group.nom;
             vm.descG = group.description;
-        }
+            Groups.setGroupSelected(group);
+        };
 
         vm.open = function (size) {
             var modalInstance = $uibModal.open({

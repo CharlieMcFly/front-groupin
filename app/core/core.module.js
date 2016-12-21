@@ -10,7 +10,8 @@
             'firebase',
             'ngResource',
             'ngAnimate',
-            'ngSanitize'
+            'ngSanitize',
+            'moment-picker'
         ]);
 
 })();

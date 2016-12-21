@@ -15,6 +15,8 @@
     <ui-view ng-controller="mainController as vm">
     </ui-view>
 
+
+
     <!-- Calendar -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
@@ -29,6 +31,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
     <script type="text/javascript" src="node_modules/angular-ui-calendar/src/calendar.js"></script>
+
+    <!-- DateTime Picker-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
+    <script src="node_modules/angular-moment-picker/src/angular-moment-picker.js"></script>
+
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.5.0/firebase-app.js"></script>
@@ -53,11 +60,16 @@
     <script src="app/services/notification_amis.service.js"></script>
     <script src="app/services/groups.service.js"></script>
     <script src="app/services/user_groups.service.js"></script>
+    <script src="app/services/group_events.service.js"></script>
+    <script src="app/services/events.service.js"></script>
+    <script src="app/services/user_events.service.js"></script>
+
 
     <!-- App Factories-->
     <script src="app/factories/users.factory.js"></script>
     <script src="app/factories/user.factory.js"></script>
     <script src="app/factories/groups.factory.js"></script>
+    <script src="app/factories/events.factory.js"></script>
     <script src="app/factories/auth.factory.js"></script>
 
     <!-- App entities-->
@@ -90,6 +102,8 @@
     <script src="app/group-events/group-events.module.js"></script>
     <script src="app/group-events/group-events.controller.js"></script>
 
+    <script src="app/partials/modal-create-event.controller.js"></script>
+
     <script src="app/group-membres/group-membres.module.js"></script>
     <script src="app/group-membres/group-membres.controller.js"></script>
 
@@ -104,8 +118,6 @@
 
     <script src="app/group-photos/group-photos.module.js"></script>
     <script src="app/group-photos/group-photos.controller.js"></script>
-
-
 
 </body>
 

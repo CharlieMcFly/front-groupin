@@ -1,1 +1,21 @@
-<div> EVENT </div>
+<div ng-controller="groupEventController as vm">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Evènements</h3>
+        </div>
+        <ul class="list-group" ng-if="vm.events.length">
+            <li class="list-group-item" ng-repeat="event in vm.events" ng-click="vm.afficheEvent(group)">
+                <div class="media">
+                    <div class="media-left">
+                        <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{event.photoURL}}"></a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{event.nom}}</h4>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <p ng-if="!vm.events.length">Aucun évènements !</p>
+    </div>
+    <button type="button" ng-click="vm.open()" class="btn btn-secondary btn-lg btn-block">Créer un évènement</button>
+</div>
