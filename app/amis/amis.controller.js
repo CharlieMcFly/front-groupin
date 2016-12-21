@@ -29,7 +29,7 @@
         vm.open = function (size) {
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'app/partial/modal-add-friend.html',
+                templateUrl: 'app/partials/modal-add-friend.html',
                 controller: 'modalAjoutFriendController',
                 controllerAs: 'vm'
             });

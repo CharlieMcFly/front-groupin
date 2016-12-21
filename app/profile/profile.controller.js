@@ -8,15 +8,17 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$state','Config', 'User', 'Users', '$http'];
+    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups'];
 
-    function profileController ($state, Config, User, Users, $http) {
+    function profileController ($state, Config, User, Users, $http, Groups) {
 
         var vm = this;
 
         var authObj = Config.auth;
         var user = User.getUser();
         var users = Users.getAllUsers();
+        var groups = Groups.getAllGroups();
+
 
         this.uid = user.uid;
 

@@ -1,17 +1,30 @@
-<div class="container">
+<div class="container" ng-controller="groupsController as vm">
     <h1>Mes Groupes</h1>
     <hr >
     <div class="col-md-4">
-        <div class="list-group">
-            <a  class="list-group-item disabled">Lien Désactiver</a>
-            <a  class="list-group-item">Dapibus ac facilisis in</a>
-            <a  class="list-group-item active">Morbi leo risus</a>
-            <a  class="list-group-item">Porta ac consectetur ac</a>
-            <a  class="list-group-item">Vestibulum at eros</a>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Groupes</h3>
+            </div>
+            <ul class="list-group" ng-if="vm.groups.length">
+                <li class="list-group-item" ng-repeat="group in vm.groups" ng-click="vm.afficheGroupe(group)">
+                    <div class="media">
+                        <div class="media-left">
+                            <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{group.nom}}</h4>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <p ng-if="!vm.groups.length">Aucun groupe !</p>
         </div>
+        <button type="button" ng-click="vm.open()" class="btn btn-secondary btn-lg btn-block">Créer un groupe</button>
     </div>
-    <div class="col-md-8">
-        <h1> Nom du groupe </h1>
+    <div class="col-md-8" ng-if="vm.affiche">
+        <h1> {{vm.nomG}} </h1>
+        <p> {{vm.descG}} </p>
         <button>Quitter groupe</button>
         <ul class="nav nav-tabs">
             <li><a ui-sref=".events">Evenements</a></li>
@@ -22,7 +35,7 @@
             <li><a ui-sref=".photos">Photos</a></li>
         </ul>
         <div ui-view>
-            No Group Selected
         </div>
+
     </div>
 </div>
