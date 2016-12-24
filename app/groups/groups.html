@@ -10,7 +10,8 @@
                 <li class="list-group-item" ng-repeat="group in vm.groups" ng-click="vm.afficheGroupe(group)">
                     <div class="media">
                         <div class="media-left">
-                            <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
+                            <a ng-if="group.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
+                            <a ng-if="!group.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" src="http://placehold.it/64x64&text=img-circle"></a>
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">{{group.nom}}</h4>
@@ -24,8 +25,7 @@
     </div>
     <div class="col-md-8" ng-if="vm.affiche">
         <h1> {{vm.nomG}} </h1>
-        <p> {{vm.descG}} </p>
-        <button>Quitter groupe</button>
+        <button ng-click="vm.quitGroupe()">Quitter groupe</button>
         <ul class="nav nav-tabs">
             <li><a ui-sref=".events">Evenements</a></li>
             <li><a ui-sref=".membres">Membres</a></li>
@@ -35,6 +35,7 @@
             <li><a ui-sref=".photos">Photos</a></li>
         </ul>
         <div ui-view>
+            <p> {{vm.descG}} </p>
         </div>
 
     </div>

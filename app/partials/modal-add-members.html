@@ -1,6 +1,6 @@
 <div>
     <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">Ajout d'amis</h3>
+        <h3 class="modal-title" id="modal-title">Ajout de membres</h3>
     </div>
     <div class="modal-body" id="modal-body">
         <div class="input-group">
@@ -15,6 +15,9 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">{{user.displayName}}</h4>
+                </div>
+                <div class="media-right" ng-if="user.isMyFriend">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 </div>
                 <div class="media-right" ng-if="user.isSelected">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>

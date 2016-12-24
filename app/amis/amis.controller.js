@@ -15,18 +15,12 @@
         var vm = this;
 
         var user = User.getUser().user;
-        var users = Users.getAllUsers();
-        var friends = User.getFriends();
 
         // Affichage des amis
-        vm.friends = [];
-        if(friends.friends != undefined){
-            Object.keys(friends.friends).forEach(function(key,index) {
-                vm.friends.push(users.users[key]);
-            });
-        }
+        vm.friends = User.getFriends();
 
-        vm.open = function (size) {
+        // Ouvre la fenetre d'ajout d'amis
+        vm.openAjoutFriends = function (size) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/partials/modal-add-friend.html',
@@ -40,7 +34,6 @@
                         "uidD" : user.uid,
                         "uidR" : entry.uid
                     }
-                    console.log(data);
                     NotifsAmisService.save(data);
                 });
             });

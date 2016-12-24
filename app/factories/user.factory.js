@@ -7,46 +7,62 @@
         .module('app')
         .service('User', User);
 
-    User.$injection = ['UserService', 'FriendsService', 'UserGroupsService', 'UserEventsService'];
+    User.$injection = ['UserService', 'Users', 'NotifsAmisService', 'Groups'];
 
-    function User(UserService, FriendsService, UserGroupsService, UserEventsService){
+    function User(UserService, Users, NotifsAmisService, Groups){
 
         var user = {};
-        var friends = {};
-        var groups= {};
-        var events = {};
+        var notifsAmis = {};
 
         this.login = function(data){
             // Creation de l'utilisateur dans la db
             this.user = UserService.save(data.providerData[0]);
-            this.friends = FriendsService.get({uid : this.user.uid});
-            this.groups = UserGroupsService.get({uid : this.user.uid});
-            this.events = UserEventsService.get({uid : this.user.uid});
             return this.user;
-        }
-
-        this.getFriends = function(){
-            return this.friends;
-        }
-
-        this.getGroups = function(){
-            return this.groups;
-        }
+        };
 
         this.getUser = function(){
             return this.user;
+        };
+
+        this.setUser = function(data){
+            this.user = data.data;
+            console.log(Object.keys(this.user));
+        };
+
+        /**
+         * Renvoie un tableau d'amis
+         * @returns {Array}
+         */
+        this.getFriends = function(){
+            var friends = [];
+            var users = Users.getAllUsers();
+            var u = this.user.user;
+            if(u.friends != undefined){
+                Object.keys(u.friends).forEach(function(key,index) {
+                    friends.push(users.users[key]);
+                });
+            }
+            return friends;
+        };
+
+        this.getGroups = function(){
+            var g = [];
+            var groups = Groups.getAllGroups();
+            var u = this.user.user;
+            if(u.groups != undefined){
+                Object.keys(u.groups).forEach(function(key,index) {
+                    g.push(groups.groups[key]);
+                });
+            }
+            return g;
         }
 
-        this.getEvents = function(){
-            return this.events;
-        }
 
         this.logout = function(){
             this.user = {};
-            this.friends = {};
-            this.groups = {};
-            this.events = {};
-        }
+
+
+        };
 
     }
 

@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('app.amis', ['ui.bootstrap']);
+        .module('app.amis', []);
 
 
 })();

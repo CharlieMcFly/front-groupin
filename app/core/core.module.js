@@ -11,7 +11,8 @@
             'ngResource',
             'ngAnimate',
             'ngSanitize',
-            'moment-picker'
+            'moment-picker',
+            'ui.bootstrap'
         ]);
 
 })();

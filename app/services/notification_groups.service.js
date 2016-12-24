@@ -5,16 +5,16 @@
     'use strict';
     angular
         .module('app')
-        .factory('NotifsAmisService', NotifsAmisService);
+        .factory('NotifsGroupsService', NotifsGroupsService);
 
-    NotifsAmisService.$injection = ['$resource'];
+    NotifsGroupsService.$injection = ['$resource'];
 
-    function NotifsAmisService($resource) {
+    function NotifsGroupsService($resource) {
 
         var localhost = "http://localhost:8080/";
         var dev = "https://platine-groupin.herokuapp.com/";
 
-        return $resource(localhost + 'notifications/amis/:uid');
+        return $resource(localhost + 'notifications/groups/:uid');
 
     }
 })();

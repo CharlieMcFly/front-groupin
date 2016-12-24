@@ -13,14 +13,13 @@
     function modalCreateEventController ($uibModalInstance) {
 
         var vm = this;
-        var event = {};
-        
+
         vm.cancel = function(){
             $uibModalInstance.dismiss();
-        }
+        };
 
         vm.creer = function(){
-            event = {
+            var event = {
                 "nom": vm.nomE,
                 "description": vm.descE,
                 "dateDebut": vm.dateD._i,
@@ -31,7 +30,7 @@
                 "photoURL": vm.photoURL
             };
             $uibModalInstance.close(event);
-        }
+        };
 
     }
 })();

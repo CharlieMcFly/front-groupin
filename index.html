@@ -15,8 +15,6 @@
     <ui-view ng-controller="mainController as vm">
     </ui-view>
 
-
-
     <!-- Calendar -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="node_modules/moment/min/moment.min.js"></script>
@@ -58,6 +56,7 @@
     <script src="app/services/user.service.js"></script>
     <script src="app/services/friends.service.js"></script>
     <script src="app/services/notification_amis.service.js"></script>
+    <script src="app/services/notification_groups.service.js"></script>
     <script src="app/services/groups.service.js"></script>
     <script src="app/services/user_groups.service.js"></script>
     <script src="app/services/group_events.service.js"></script>
@@ -106,6 +105,8 @@
 
     <script src="app/group-membres/group-membres.module.js"></script>
     <script src="app/group-membres/group-membres.controller.js"></script>
+
+    <script src="app/partials/modal-add-members.controller.js"></script>
 
     <script src="app/group-votes/group-votes.module.js"></script>
     <script src="app/group-votes/group-votes.controller.js"></script>

@@ -1,21 +1,21 @@
 /**
- * Created by Charlie on 23/11/2016.
+ * Created by charlie on 24/12/16.
  */
 (function () {
     'use strict';
 
     angular
         .module('app')
-        .controller('modalAjoutFriendController', modalAjoutFriendController);
+        .controller('modalAjoutMembreController', modalAjoutMembreController);
 
-    modalAjoutFriendController.$inject = ['Users', 'User', '$uibModalInstance'] ;
+    modalAjoutMembreController.$inject = ['Users', 'User', '$uibModalInstance'] ;
 
-    function modalAjoutFriendController (Users, User, $uibModalInstance) {
+    function modalAjoutMembreController (Users, User, $uibModalInstance) {
 
         var vm = this;
         var user = User.getUser().user;
 
-        vm.users = Users.getAllUsersAddFriends(user);
+        vm.users = Users.getAllUsersAddMembers(user);
 
         var userToAdd = [];
         vm.selectionAmis = function(user){

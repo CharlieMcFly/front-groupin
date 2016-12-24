@@ -8,7 +8,7 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups', 'Events'];
+    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups', 'Events', 'NotifsAmisService'];
 
     function profileController ($state, Config, User, Users, $http, Groups, Events) {
 
@@ -18,7 +18,7 @@
         var user = User.getUser();
         var users = Users.getAllUsers();
         var groups = Groups.getAllGroups();
-        var events = Events.getAllEvents();
+        Events.getAllEvents();
 
         this.uid = user.uid;
 
@@ -31,34 +31,65 @@
         vm.photo = user.photoURL;
 
         vm.notifAmis = [];
-        $http.get("http://localhost:8080/notifications_amis/"+this.uid).then(function(n){
-            var mesNotifs = n.data.notifs;
-            if(mesNotifs != undefined){
-                Object.keys(mesNotifs).forEach(function(key,index) {
-                    vm.notifAmis.push(users.users[key]);
-                });
-            }
-        });
+        vm.notifGroupes = [];
+        notifications(this.uid, vm.notifAmis, vm.notifGroupes);
 
-        vm.addFriends = function(data){
+
+        vm.addFriends = function(u){
             var data = {
-                "uidD" : data,
+                "uidD" : u,
                 "uidR" : this.uid
-            }
-            $http.delete("http://localhost:8080/notifications_amis/"+this.uid+"/"+data);
-            $http.delete("http://localhost:8080/notifications_amis/"+data+"/"+this.uid);
-            $http.post("http://localhost:8080/friends", data);
-            // TODO : Raffraichir la liste des amis
-        }
+            };
+            $http.post("http://localhost:8080/users/friends", data).then(function(n){
+                User.setUser(n);
+            });
+            notifications(this.uid, vm.notifAmis);
+        };
 
         vm.dontAddFriend = function(data){
-            $http.delete("http://localhost:8080/notifications_amis/"+this.uid+"/"+data);
-            // TODO : Raffraichir la liste
-        }
+            $http.delete("http://localhost:8080/notifications/users/"+this.uid+"/friends/" +data);
+            vm.notifAmis = [];
+            notifications(this.uid, vm.notifAmis);
+        };
+
+        vm.joinGroup = function(u){
+            var data = {
+                "idG" : u,
+                "uidR" : this.uid
+            };
+            $http.post("http://localhost:8080/users/groups", data).then(function(n){
+                User.setUser(n);
+            });
+            notifications(this.uid, vm.notifGroupes);
+        };
+
+        vm.dontJoinGroupe = function(u){
+            $http.delete("http://localhost:8080/notifications/users/"+this.uid+"/groups/" +u);
+            vm.notifGroupes = [];
+            notifications(this.uid, null, vm.notifGroupes);
+        };
+
 
         vm.logout = function () {
             authObj.$signOut();
             $state.go('login');
+        };
+
+        function notifications(uid, tabA, tabG){
+            $http.get("http://localhost:8080/notifications/"+uid).then(function(n){
+                var mesNotifsA = n.data.notifsAmis;
+                if(mesNotifsA != undefined){
+                    Object.keys(mesNotifsA).forEach(function(key,index) {
+                        tabA.push(users.users[key]);
+                    });
+                }
+                var mesNotifsG = n.data.notifsGroupes;
+                if(mesNotifsG != undefined){
+                    Object.keys(mesNotifsG).forEach(function(key,index) {
+                        tabG.push(groups.groups[key]);
+                    });
+                }
+            });
         }
 
     }
