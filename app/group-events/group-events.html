@@ -21,6 +21,12 @@
                     <div class="media-right" ng-if="vm.user.uid == event.createur" ng-click="vm.removeEvent(event)">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </div>
+                    <div class="media-bottom">
+                        Participeras-tu à cet évènement ?
+                        <button ng-click="vm.participe(event, true)">OUI</button>
+                        <button ng-click="vm.participe(event, false)">NON</button>
+                    </div>
+
                 </div>
             </li>
         </ul>

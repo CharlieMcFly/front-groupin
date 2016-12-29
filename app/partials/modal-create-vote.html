@@ -1,0 +1,23 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Création d'un vote</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+            <div class="form-group">
+                <label for="question">Question</label>
+                <input type="text" ng-model="vm.question" class="form-control" id="question" placeholder="Question du vote">
+            </div>
+            <div class="form-group" >
+                <label>Choix :</label>
+                <input ng-repeat="choice in vm.choices" type="text" ng-model="choice.choix" class="form-control" placeholder="Entrez un choix"> <br >
+            </div>
+            <div class="form-group">
+                <button ng-click="vm.ajouterChoix()"> Ajouter un choix </button>
+                <button ng-click="vm.supprimerChoix()"> Supprimer un choix </button>
+            </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="vm.creer()" >Créer</button>
+        <button class="btn btn-danger" type="button" ng-click="vm.cancel()">Annuler</button>
+    </div>
+</div>

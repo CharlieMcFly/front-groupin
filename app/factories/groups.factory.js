@@ -7,9 +7,9 @@
         .module('app')
         .service('Groups', Groups);
 
-    Groups.$injection = ['GroupsService', 'Events', 'Users'];
+    Groups.$injection = ['GroupsService', 'Events', 'Users', 'Votes'];
 
-    function Groups(GroupsService, Events, Users){
+    function Groups(GroupsService, Events, Users, Votes){
 
         var groups = {};
         var groupSelect = {};
@@ -22,7 +22,7 @@
 
         this.getEventsGroup = function(){
             var tabEvent = [];
-            var gEvent = this.eventsGroups;
+            var gEvent = this.groupSelect;
             var events = Events.getAllEvents();
             if(gEvent.events != undefined){
                 Object.keys(gEvent.events).forEach(function(key,index) {
@@ -30,6 +30,37 @@
                 });
             }
             return tabEvent;
+        };
+
+        // Permet d'afficher les groupes avec les choix
+        this.getVotesGroup = function(user){
+            var tabVote = [];
+            var gVote = this.groupSelect;
+            var votes = Votes.getAllVotes();
+            if(gVote.votes){
+                Object.keys(gVote.votes).forEach(function(key){
+                    if(votes.votes[key]){
+                        if(votes.votes[key].a_vote){
+                            if(votes.votes[key].a_vote[user.uid])
+                                votes.votes[key].hasAlreadyVote = true;
+                            votes.votes[key].nbVote = Object.keys(votes.votes[key].a_vote).length;
+
+                        }
+                        var choix = [];
+                        Object.keys(votes.votes[key].choix).forEach(function(k){
+                            var c = {
+                                "choix" : k,
+                                "voix" : votes.votes[key].choix[k]
+                            };
+                            choix.push(c);
+                        });
+                        votes.votes[key].choices = choix;
+
+                        tabVote.push(votes.votes[key]);
+                    }
+                });
+            }
+            return tabVote;
         };
 
         this.getMembers = function(user){
@@ -73,8 +104,6 @@
         /* SETTER */
         this.setGroupSelected = function(data){
             this.groupSelect = data;
-            var id = data.id;
-            this.eventsGroups = this.groups.groups[id];
         };
 
 

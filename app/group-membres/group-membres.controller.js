@@ -8,16 +8,24 @@
         .module('app')
         .controller('groupMembresController', groupMembresController);
 
-    groupMembresController.$inject = ['Groups', 'NotifsGroupsService','$uibModal', 'User'];
+    groupMembresController.$inject = ['Groups', 'NotifsGroupsService','$uibModal', 'User', 'NotifsAmisService'];
 
-    function groupMembresController (Groups, NotifsGroupsService,  $uibModal, User) {
+    function groupMembresController (Groups, NotifsGroupsService,  $uibModal, User, NotifsAmisService) {
 
         var vm = this;
-        var user = User.getUser().user;
+        var user = User.getUser();
         var groupS = Groups.getGroupSelected();
 
         vm.user = user;
         vm.membres = Groups.getMembers(user);
+
+        vm.addAmis = function(uid){
+            var data = {
+                "uidD" : user.uid,
+                "uidR" : uid
+            }
+            NotifsAmisService.save(data);
+        };
 
         vm.openAddMembers = function (size) {
             var modalInstance = $uibModal.open({

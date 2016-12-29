@@ -8,9 +8,9 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups', 'Events', 'NotifsAmisService'];
+    profileController.$inject = ['$state','Config', 'User', 'Users', '$http', 'Groups', 'Events', 'NotifsAmisService', 'Votes'];
 
-    function profileController ($state, Config, User, Users, $http, Groups, Events) {
+    function profileController ($state, Config, User, Users, $http, Groups, Events, Votes) {
 
         var vm = this;
 

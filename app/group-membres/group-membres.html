@@ -12,7 +12,7 @@
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 </div>
                 <div class="media-right" ng-if="!membre.isMyFriend && membre.uid == user.uid">
-                    <button> Ajouter amis </button>
+                    <button ng-click="vm.addAmis(membre.uid)"> Ajouter amis </button>
                 </div>
             </div>
         </li>

@@ -1,1 +1,28 @@
-<div> VOTES </div>
+<div ng-controller="groupVotesController as vm" >
+    <ul class="list-group" ng-if="vm.votes.length">
+        <li ng-repeat="vote in vm.votes" class="list-group-item">
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">{{vote.question}}</h4>
+                    <div ng-if="!vote.hasAlreadyVote">
+                        <div ng-repeat="c in vote.choices">
+                            <input type="radio" ng-model="vm.reponse" value="{{c.choix}}">  {{c.choix}}
+                        </div>
+                        <button ng-click="vm.aVote(vote.id)"> Valider </button>
+                    </div>
+                    <div ng-if="vote.hasAlreadyVote">
+                        <div ng-repeat="c in vote.choices">
+                           {{c.choix}} : {{c.voix}} / {{vote.nbVote}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="media-right">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <p ng-if="!vm.votes.length"> Il n'y a aucuns votes dans ce groupe !</p>
+    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-secondary btn-lg btn-block">Créer un vote</button>
+</div>

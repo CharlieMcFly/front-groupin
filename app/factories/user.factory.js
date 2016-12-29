@@ -36,7 +36,7 @@
         this.getFriends = function(){
             var friends = [];
             var users = Users.getAllUsers();
-            var u = this.user.user;
+            var u = this.user;
             if(u.friends != undefined){
                 Object.keys(u.friends).forEach(function(key,index) {
                     friends.push(users.users[key]);
@@ -48,7 +48,7 @@
         this.getGroups = function(){
             var g = [];
             var groups = Groups.getAllGroups();
-            var u = this.user.user;
+            var u = this.user;
             if(u.groups != undefined){
                 Object.keys(u.groups).forEach(function(key,index) {
                     g.push(groups.groups[key]);

@@ -36,19 +36,24 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Notifications</h3>
                 </div>
-                <div class="list-group" ng-repeat="notif in vm.notifAmis">
-                    <a  class="list-group-item">
-                        {{notif.displayName}} vous demande en ami.
-                        <span ng-click="vm.addFriends(notif.uid)" class="glyphicon glyphicon-ok"></span>
-                        <span ng-click="vm.dontAddFriend(notif.uid)" class="glyphicon glyphicon-remove"></span>
-                    </a>
+                <div ng-if="vm.notifGroupes.length || vm.notifAmis.length">
+                    <div class="list-group" ng-repeat="notif in vm.notifAmis">
+                        <a  class="list-group-item">
+                            {{notif.displayName}} vous demande en ami.
+                            <span ng-click="vm.addFriends(notif.uid)" class="glyphicon glyphicon-ok"></span>
+                            <span ng-click="vm.dontAddFriend(notif.uid)" class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                    <div class="list-group" ng-repeat="group in vm.notifGroupes">
+                        <a  class="list-group-item">
+                            On vous propose de rejoindre le groupe : {{group.nom}}
+                            <span ng-click="vm.joinGroup(group.id)" class="glyphicon glyphicon-ok"></span>
+                            <span ng-click="vm.dontJoinGroupe(group.id)" class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
                 </div>
-                <div class="list-group" ng-repeat="group in vm.notifGroupes">
-                    <a  class="list-group-item">
-                        On vous propose de rejoindre le groupe : {{group.nom}}
-                        <span ng-click="vm.joinGroup(group.id)" class="glyphicon glyphicon-ok"></span>
-                        <span ng-click="vm.dontJoinGroupe(group.id)" class="glyphicon glyphicon-remove"></span>
-                    </a>
+                <div ng-if="!vm.notifGroupes.length && !vm.notifAmis.length">
+                    Aucunes notifications
                 </div>
             </div>
         </div>

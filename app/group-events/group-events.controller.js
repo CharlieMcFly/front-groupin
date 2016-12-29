@@ -31,6 +31,21 @@
 
         };
 
+        vm.participe = function(event, rep){
+            var data = {
+                "uid" : user.uid,
+                "event" : event.id,
+                "participe" : rep
+            };
+            $http.post("http://localhost:8080/events/participants", data).then(function(d){
+                Events.setAllEvents(d);
+                User.setUser(d);
+                var groups = Groups.getAllGroups();
+                Groups.setGroupSelected(groups.groups[gSelect.id]);
+                vm.events = Groups.getEventsGroup();
+            });
+        };
+
         vm.removeEvent = function(event){
             // Todo : etes vous sur ?
             $http.delete("http://localhost:8080/events/"+event.id+"/groups/"+gSelect.id+"/users/"+user.uid).then(function(data){

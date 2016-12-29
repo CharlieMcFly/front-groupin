@@ -13,8 +13,9 @@
     function modalAjoutFriendController (Users, User, $uibModalInstance) {
 
         var vm = this;
-        var user = User.getUser().user;
+        var user = User.getUser();
 
+        // renvoie un tableau avec tous les utilisateurs nous meme et nos amis
         vm.users = Users.getAllUsersAddFriends(user);
 
         var userToAdd = [];
