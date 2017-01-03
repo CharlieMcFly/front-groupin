@@ -1,24 +1,23 @@
-<link rel="stylesheet" href="../../style/profile.css">
-
 <div ng-controller="profileController as vm">
-    <header id="entete" >
-        <div class="row">
-            <div class="center">
-                <span id="titreG" class="titre">GROUPIN</span>
-                <br>
-                <span class="titre" ><i>"Le plus important est de partager de bons moments avec les gens qu'on aime"</i></span>
+<nav class="navbar navbar-danger navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div style="margin-bottom: 15px;" class="media">
+                <div class="media-left">
+                    <img class="media-object img-circle" alt="64x64" style="width: 64px; height: 64px;" ng-src="{{vm.photo}}">
+                </div>
+                <div style="color:white;" class="media-body">
+                    <h4>{{vm.name}}</h4>
+                </div>
             </div>
         </div>
-    </header>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div class="navbar-brand-img">
-                    <img width="64px" height="64px" ng-src="{{vm.photo}}"/>
-                    <a>{{vm.name}}</a>
-                </div>
-
-            </div>
+        <div class="collapse navbar-collapse navbar-ex2-collapse">
             <ul class="nav navbar-nav">
                 <li><a ui-sref="profile">Accueil</a></li>
                 <li><a ui-sref=".groups">Groupes</a></li>
@@ -26,11 +25,12 @@
                 <li><a ui-sref=".amis">Amis</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="" ng-click="vm.logout()">Se déconnecter</a></li>
+                <li><a href="#" class="navbar-link" ng-click="vm.logout()">[se déconnecter]</a></li>
             </ul>
         </div>
-    </nav>
-<div class="container" ui-view>
+    </div>
+</nav>
+<div style="padding-top: 155px;" ui-view>
     <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">

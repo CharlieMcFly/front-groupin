@@ -1,0 +1,18 @@
+.fixedbutton-left {
+    bottom: 0;
+    height: 60px;
+    left: 0;
+    position: fixed;
+    width: 25%;
+}
+
+.fixedbutton-left:hover {
+    background: #f0ad4e;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.doigt-right:hover {
+    color : #f0ad4e;
+}
+

@@ -1,32 +1,38 @@
-<div class="container" ng-controller="groupsController as vm">
-    <h1>Mes Groupes</h1>
-    <hr >
-    <div class="col-md-4">
+<link href="../../style/groups.css" rel="stylesheet">
+<div ng-controller="groupsController as vm">
+    <!-- GROUPES -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Groupes</h3>
             </div>
-            <ul class="list-group" ng-if="vm.groups.length">
-                <li class="list-group-item" ng-repeat="group in vm.groups" ng-click="vm.afficheGroupe(group)">
+            <div class="list-group" ng-if="vm.groups.length">
+                <div href="" class="list-group-item" ng-repeat="group in vm.groups">
                     <div class="media">
                         <div class="media-left">
                             <a ng-if="group.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
                             <a ng-if="!group.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" src="http://placehold.it/64x64&text=img-circle"></a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{group.nom}}</h4>
+                            <h4 class="text-uppercase">{{group.nom}}</h4>
+                        </div>
+                        <div class="media-right">
+                            <a href="" class="doigt-right" ng-click="vm.afficheGroupe(group)"><i class="icon icon-hand-o-right icon-4x"></i></a>
                         </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
             <p ng-if="!vm.groups.length">Aucun groupe !</p>
         </div>
-        <button type="button" ng-click="vm.open()" class="btn btn-secondary btn-lg btn-block">Créer un groupe</button>
+        <button type="button" ng-click="vm.open()" class="btn btn-lg btn-primary btn-block">Créer un groupe</button>
     </div>
-    <div class="col-md-8" ng-if="vm.affiche">
-        <h1> {{vm.nomG}} </h1>
-        <button ng-click="vm.quitGroupe()">Quitter groupe</button>
-        <ul class="nav nav-tabs">
+    <!-- MENUS GROUPES -->
+    <div class="col-lg-18" ng-if="vm.affiche">
+        <div class="row">
+            <h1 class="text-uppercase col"> {{vm.nomG}} </h1>
+            <a href="" class="col" ng-click="vm.quitGroupe()"><i class="icon icon-sign-out icon-fw icon-2x"></i></a>
+        </div>
+        <ul class="nav nav-pills nav-justified nav-warning">
             <li><a ui-sref=".events">Evenements</a></li>
             <li><a ui-sref=".membres">Membres</a></li>
             <li><a ui-sref=".votes">Votes</a></li>
