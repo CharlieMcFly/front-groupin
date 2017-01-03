@@ -13,6 +13,6 @@
     function groupPhotoController () {
         var vm = this;
 
-        vm.hello = "hello";
+        vm.photo = [];
     }
 })();

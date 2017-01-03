@@ -58,9 +58,7 @@
             Groups.setAllGroups(data);
             var g = Groups.getAllGroups().groups[groupS.id];
             Groups.setGroupSelected(g);
-
             vm.votes = Groups.getVotesGroup(user);
-            console.log(vm.votes);
         }
 
     }

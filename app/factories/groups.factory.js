@@ -7,9 +7,9 @@
         .module('app')
         .service('Groups', Groups);
 
-    Groups.$injection = ['GroupsService', 'Events', 'Users', 'Votes'];
+    Groups.$injection = ['GroupsService', 'Events', 'Users', 'Votes', 'Chats'];
 
-    function Groups(GroupsService, Events, Users, Votes){
+    function Groups(GroupsService, Events, Users, Votes, Chats){
 
         var groups = {};
         var groupSelect = {};
@@ -88,7 +88,24 @@
                 }
             });
             return membres;
-        }
+        };
+
+        this.getMessagesGroups = function(){
+          var msgs = [];
+          var groupsS = this.groupSelect;
+          var users = Users.getAllUsers();
+          var messages = Chats.getAllMessages();
+          if(groupsS.messages){
+              Object.keys(groupsS.messages).forEach(function(key){
+                  var u = messages.messages[key].auteur;
+                  var user = users.users[u];
+                  messages.messages[key].auteur = user;
+                  msgs.push(messages.messages[key]);
+              });
+          }
+          return msgs;
+
+        };
 
         this.getAllGroups = function(){
             if(this.groups == undefined)

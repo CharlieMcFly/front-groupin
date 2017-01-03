@@ -1,1 +1,32 @@
-<div> CHAT </div>
+<div ng-controller="groupChatController as vm">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <ul class="chat">
+                <li ng-repeat="message in vm.messages">
+                    <span class="chat-img pull-left" >
+                        <img ng-src="{{message.auteur.photoURL}}" alt="User Avatar" class="img-circle" style="width: 64px; height: 64px;"/>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <div class="header">
+                            <strong class="primary-font">{{message.auteur.displayName}}</strong>
+                                <small class="pull-right text-muted">
+                            <span class="glyphicon glyphicon-time"></span>{{message.date}}</small>
+                        </div>
+                        <p>
+                            {{message.message}}
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <div class="input-group">
+                <input id="btn-input" ng-model="vm.msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                <span class="input-group-btn">
+                <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="vm.envoyerMsg()">
+                    Envoyer</button>
+            </span>
+            </div>
+        </div>
+    </div>
+</div>

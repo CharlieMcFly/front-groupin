@@ -27,7 +27,7 @@
             NotifsAmisService.save(data);
         };
 
-        vm.openAddMembers = function (size) {
+        vm.openAddMembers = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/partials/modal-add-members.html',

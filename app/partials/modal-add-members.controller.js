@@ -13,7 +13,7 @@
     function modalAjoutMembreController (Users, User, $uibModalInstance) {
 
         var vm = this;
-        var user = User.getUser().user;
+        var user = User.getUser();
 
         vm.users = Users.getAllUsersAddMembers(user);
 

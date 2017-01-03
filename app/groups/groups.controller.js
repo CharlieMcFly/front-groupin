@@ -8,13 +8,14 @@
         .module('app')
         .controller('groupsController', groupsController);
 
-    groupsController.$inject = ['$uibModal', 'User','Groups', 'GroupsService', '$http', '$state', 'Votes'];
+    groupsController.$inject = ['$uibModal', 'User','Groups', '$http', '$state', 'Votes', 'Chats'];
 
-    function groupsController ($uibModal, User, Groups, GroupsService, $http, $state, Votes) {
+    function groupsController ($uibModal, User, Groups, $http, $state, Votes, Chats) {
 
         var vm = this;
         var user = User.getUser();
         var votes = Votes.getAllVotes();
+        var chats = Chats.getAllMessages();
 
 
         vm.affiche = false;
