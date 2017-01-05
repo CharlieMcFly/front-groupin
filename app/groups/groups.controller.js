@@ -28,13 +28,16 @@
 
         // DELETE USER GROUP
         vm.quitGroupe = function(){
-            var g = Groups.getGroupSelected();
-            $http.delete( mode.dev +"users/"+user.uid+"/groups/"+g.id).then(function(data){
-                vm.affiche = false;
-                User.setUser(data);
-                vm.groups = data.data.groups;
-                vm.messageOK = "Vous avez quitté le groupe";
-            });
+            var r = confirm("Êtes vous sûr de vouloir quitter le groupe ?");
+            if (r == true) {
+                var g = Groups.getGroupSelected();
+                $http.delete(mode.dev + "users/" + user.uid + "/groups/" + g.id).then(function (data) {
+                    vm.affiche = false;
+                    User.setUser(data);
+                    vm.groups = data.data.groups;
+                    vm.messageOK = "Vous avez quitté le groupe";
+                });
+            }
         };
 
         // REMOVE ALERT
@@ -42,6 +45,7 @@
             vm.messageOK = null;
         };
 
+        // DISPLAY GROUPE
         vm.afficheGroupe = function(group){
             $state.go('profile.groups');
             vm.affiche = true;

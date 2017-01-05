@@ -1,10 +1,15 @@
-<link href="../../node_modules/angular-moment-picker/src/angular-moment-picker.css" rel="stylesheet">
+<link href="../../node_modules/angular-moment-picker/dist/angular-moment-picker.css" rel="stylesheet">
 
 <div>
     <div class="modal-header">
         <h3 class="modal-title" id="modal-title">Création d'event</h3>
     </div>
     <div class="modal-body" id="modal-body">
+            <div ng-if="vm.messageKO" class="alert alert-danger alert-dismissable fade in">
+                <i class="icon icon-times-circle icon-lg"></i>
+                <strong>Erreur !</strong> {{vm.messageKO}}
+                <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
+            </div>
             <div ng-if="!vm.photoURL" class="form-group" style="text-align: center">
                 <img src="http://placehold.it/150x150&text=img-circle" alt="" class="img-circle" style="text-align: center">
             </div>
@@ -17,11 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="DescriptionGroupe">Description</label>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <textarea id="DescriptionGroupe"  ng-model="vm.descE" class="form-control" placeholder="Description du groupe" rows="4"></textarea>
-                    </div>
-                </div>
+                <textarea id="DescriptionGroupe"  ng-model="vm.descE" class="form-control" placeholder="Description du groupe" rows="4"></textarea>
             </div>
             <div class="form-group">
                 <label for="URLPhotoGroupe">URL de la photo</label>
@@ -37,16 +38,22 @@
                 <input class="form-control" ng-model="vm.dateF" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateF" id="dateF">
             </div>
             <div class="form-group">
-                <label for="themeEvent">Thème de l'évent</label>
-                <input type="text" ng-model="vm.theme" class="form-control" id="themeEvent" placeholder="Carnaval">
+                <label for="themeEvent">
+                    <input type="checkbox" ng-model="haveTheme"> Thème de l'évènement
+                </label>
+                <input type="text" ng-show="haveTheme" ng-model="vm.theme" class="form-control" id="themeEvent" placeholder="Carnaval">
             </div>
             <div class="form-group">
-                <label for="prixEvent">Prix de l'évent</label>
-                <input type="text" ng-model="vm.prix" class="form-control" id="prixEvent" placeholder="10 €">
+                <label for="prixEvent">
+                    <input type="checkbox" ng-model="havePrix"> Prix de l'évènement
+                </label>
+                <input type="text" ng-show="havePrix" ng-model="vm.prix" class="form-control" id="prixEvent" placeholder="10 €">
             </div>
             <div class="form-group">
-                <label for="objEvent">Chose à ramener</label>
-                <input type="text" ng-model="vm.obj" class="form-control" id="objEvent" placeholder="une teille">
+                <label for="objEvent">
+                    <input type="checkbox" ng-model="haveObj"> Objet à ramener pour l'évènement
+                </label>
+                <input type="text" ng-show="haveObj" ng-model="vm.obj" class="form-control" id="objEvent" placeholder="une bouteille de whisky">
             </div>
 
     </div>

@@ -11,8 +11,6 @@
             'app.profile',
             'app.amis',
             'app.events',
-            'app.events-votes',
-            'app.events-event',
             'app.groups',
             'app.group-events',
             'app.group-membres',

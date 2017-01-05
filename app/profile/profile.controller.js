@@ -33,8 +33,11 @@
         vm.photo = user.photoURL;
 
         vm.logout = function () {
-            authObj.$signOut();
-            $state.go('login');
+            var r = confirm("Êtes vous sûr de vouloir vous déconnecter ?");
+            if (r == true) {
+                authObj.$signOut();
+                $state.go('login');
+            }
         };
 
         $state.go("profile.groups");

@@ -15,48 +15,64 @@
         var vm = this;
         var user = User.getUser();
         var gSelect = Groups.getGroupSelected();
+        vm.user = user;
 
+        // GET EVENTS DU GROUP
         $http.get(mode.dev + "events/users/" + user.uid+"/groups/"+gSelect.id).then(function(d){
             vm.events = d.data.events;
         });
 
-        vm.user = user;
-
+        // DISPLAY EVENT
         vm.showEvent = function(event){
             if(event.show == undefined || !event.show){
                 event.show = true;
-                event.users = Events.getParticipants(event);
             }
             else{
                 event.show = false;
             }
-
         };
 
+        // ADD OR REMOVE PARTICIPANTS
         vm.participe = function(event, rep){
             var data = {
                 "uid" : user.uid,
                 "event" : event.id,
+                "group" : gSelect.id,
                 "participe" : rep
             };
-            $http.post("http://localhost:8080/events/participants", data).then(function(d){
-                Events.setAllEvents(d);
+            $http.post(mode.dev + "events/participants", data).then(function(d){
                 User.setUser(d);
-                var groups = Groups.getAllGroups();
-                Groups.setGroupSelected(groups.groups[gSelect.id]);
-                vm.events = Groups.getEventsGroup();
+                vm.events = d.data.events;
             });
         };
 
+        vm.edit_participation = function(event){
+            if(event.edit == undefined || !event.edit){
+                event.edit = true;
+            }
+            else{
+                event.edit = false;
+            }
+        };
+
+        // REMOVE EVENT
         vm.removeEvent = function(event){
-            // Todo : etes vous sur ?
-            $http.delete("http://localhost:8080/events/"+event.id+"/groups/"+gSelect.id+"/users/"+user.uid).then(function(data){
-                refreshData(data);
-            });
+            if(confirm("Êtes vous sûr de supprimer l'évènement du groupe ?")){
+                $http.delete(mode.dev + "events/"+event.id+"/groups/"+gSelect.id+"/users/"+user.uid).then(function(data){
+                    User.setUser(data);
+                    vm.events = data.data.events;
+                });
+                vm.messageOK_E = "L'évènement a été correctement supprimé";
+            }
         };
 
+        // REMOVE ALERT
+        vm.dismiss = function(){
+            vm.messageOK_E = null;
+        };
 
-        vm.open = function (size) {
+        // CREATE EVENT
+        vm.open = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/partials/modal-create-event.html',
@@ -65,25 +81,15 @@
             });
 
             modalInstance.result.then(function (event) {
-
-
                 event['userId'] = user.uid;
                 event['groupId'] = gSelect.id;
-                $http.post("http://localhost:8080/events", event).then(function(data){
-                    refreshData(data);
+                $http.post(mode.dev + "events", event).then(function(data){
+                    User.setUser(data);
+                    vm.events = data.data.events;
+                    vm.messageOK_E = "L'évènement " + event.nom + " a bien été créé";
                 });
-
             });
         };
-
-        function refreshData(data){
-            Events.setAllEvents(data);
-            Groups.setAllGroups(data);
-            User.setUser(data);
-            var groups = Groups.getAllGroups();
-            Groups.setGroupSelected(groups.groups[gSelect.id]);
-            vm.events = Groups.getEventsGroup();
-        }
 
 
     }

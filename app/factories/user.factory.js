@@ -31,7 +31,6 @@
 
         this.setUser = function(data){
             this.user = data.data;
-            console.log(Object.keys(this.user));
         };
 
         /**
