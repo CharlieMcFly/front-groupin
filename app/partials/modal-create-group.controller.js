@@ -17,15 +17,22 @@
 
         vm.cancel = function(){
             $uibModalInstance.dismiss();
-        }
+        };
+
+        vm.dismiss = function(){
+            vm.messageKO = null;
+        };
 
         vm.creer = function(){
             group = {
                 "nom" : vm.nom,
                 "description" : vm.description,
                 "photoURL" : vm.photoURL
-            }
-            $uibModalInstance.close(group);
+            };
+            if(vm.nom && vm.description && vm.photoURL)
+                $uibModalInstance.close(group);
+            else
+                vm.messageKO = "Tous les champs doivents être remplis !";
         }
 
     }

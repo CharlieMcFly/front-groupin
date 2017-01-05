@@ -16,7 +16,12 @@
 
         this.login = function(data){
             // Creation de l'utilisateur dans la db
-            this.user = UserService.save(data.providerData[0]);
+            var my_data = data.providerData[0];
+            if(my_data.email === my_data.uid){
+                var uid = data.uid;
+                my_data['uid_mail'] = uid;
+            }
+            this.user = UserService.save(my_data);
             return this.user;
         };
 

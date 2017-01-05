@@ -16,12 +16,14 @@
 
         var authObj = Config.auth;
         var user = User.getUser();
-        var users = Users.getAllUsers();
+  /*      var users = Users.getAllUsers();
         var groups = Groups.getAllGroups();
-        Events.getAllEvents();
+        Events.getAllEvents();*/
 
         this.uid = user.uid;
 
+        if(user.uid === user.email)
+            this.uid = user.uid_mail;
 
         if(user.displayName == undefined)
             vm.name = user.email;
@@ -30,6 +32,14 @@
 
         vm.photo = user.photoURL;
 
+        vm.logout = function () {
+            authObj.$signOut();
+            $state.go('login');
+        };
+
+        $state.go("profile.groups");
+
+        /*
         vm.notifAmis = [];
         vm.notifGroupes = [];
         notifications(this.uid, vm.notifAmis, vm.notifGroupes);
@@ -70,10 +80,9 @@
         };
 
 
-        vm.logout = function () {
-            authObj.$signOut();
-            $state.go('login');
-        };
+
+
+        $state.go('profile.groups');
 
         function notifications(uid, tabA, tabG){
             $http.get("http://localhost:8080/notifications/"+uid).then(function(n){
@@ -90,7 +99,7 @@
                     });
                 }
             });
-        }
+        }*/
 
     }
 })();

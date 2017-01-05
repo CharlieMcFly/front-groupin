@@ -2,6 +2,11 @@
 <div ng-controller="groupsController as vm">
     <!-- GROUPES -->
     <div class="col-lg-6">
+        <div ng-if="vm.messageOK" class="alert alert-success alert-dismissable fade in">
+            <i class="icon icon-check-circle icon-lg"></i>
+            <strong>Succès !</strong> {{vm.messageOK}}
+            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Groupes</h3>
@@ -10,8 +15,7 @@
                 <div href="" class="list-group-item" ng-repeat="group in vm.groups">
                     <div class="media">
                         <div class="media-left">
-                            <a ng-if="group.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
-                            <a ng-if="!group.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" src="http://placehold.it/64x64&text=img-circle"></a>
+                            <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
                         </div>
                         <div class="media-body">
                             <h4 class="text-uppercase">{{group.nom}}</h4>
@@ -28,9 +32,13 @@
     </div>
     <!-- MENUS GROUPES -->
     <div class="col-lg-18" ng-if="vm.affiche">
-        <div class="row">
-            <h1 class="text-uppercase col"> {{vm.nomG}} </h1>
-            <a href="" class="col" ng-click="vm.quitGroupe()"><i class="icon icon-sign-out icon-fw icon-2x"></i></a>
+        <div class="media">
+            <div class="media-body">
+                <h1 class="text-uppercase">{{vm.nomG}}</h1>
+            </div>
+            <div class="media-right" style="vertical-align: middle;">
+                <a href="" class="doigt-right" ng-click="vm.quitGroupe()"><i class="icon icon-sign-out icon-fw icon-2x"></i></a>
+            </div>
         </div>
         <ul class="nav nav-pills nav-justified nav-warning">
             <li><a ui-sref=".events">Evenements</a></li>
@@ -40,9 +48,13 @@
             <li><a ui-sref=".chat">Chat</a></li>
             <li><a ui-sref=".photos">Photos</a></li>
         </ul>
-        <div ui-view>
-            <p> {{vm.descG}} </p>
+        <div  ui-view>
+            <div class="jumbotron">
+                <div class="container">
+                    <h2>{{vm.nomG}}</h2>
+                    <p> {{vm.descG}} </p>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>

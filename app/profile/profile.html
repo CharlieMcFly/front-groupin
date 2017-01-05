@@ -1,3 +1,5 @@
+<link href="../../style/profile.css" rel="stylesheet">
+
 <div ng-controller="profileController as vm">
 <nav class="navbar navbar-danger navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -8,29 +10,30 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div style="margin-bottom: 15px;" class="media">
-                <div class="media-left">
-                    <img class="media-object img-circle" alt="64x64" style="width: 64px; height: 64px;" ng-src="{{vm.photo}}">
-                </div>
-                <div style="color:white;" class="media-body">
-                    <h4>{{vm.name}}</h4>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex2-collapse" style="padding-bottom: 5px; padding-top: 5px;">
+            <div class="nav navbar-nav">
+                <div class="media">
+                    <div class="media-left">
+                        <img ng-if="vm.photo" class="media-object img-circle" alt="64x64" style="width: 64px; height: 64px;" ng-src="{{vm.photo}}">
+                        <img ng-if="!vm.photo" class="media-object img-circle" alt="64x64" style="width: 64px; height: 64px;" src="http://placehold.it/64x64&text=img-circle">
+                    </div>
+                    <div style="color:white; width: 75%;" class="media-body">
+                        <h4>{{vm.name}}</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex2-collapse">
-            <ul class="nav navbar-nav">
-                <li><a ui-sref="profile">Accueil</a></li>
-                <li><a ui-sref=".groups">Groupes</a></li>
-                <li><a ui-sref=".events">Evènements</a></li>
-                <li><a ui-sref=".amis">Amis</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="navbar-link" ng-click="vm.logout()">[se déconnecter]</a></li>
+            <ul class="nav navbar-nav navbar-right" style="margin-top: 8px;">
+                <li><a ui-sref="profile"><span class="icon icon-asterisk icon-lg"></span></a></li>
+                <li><a ui-sref=".groups"><span class="icon icon-users icon-lg"></span></a></li>
+                <li><a ui-sref=".events"><span class="icon icon-calendar icon-lg"></span></a></li>
+                <li><a ui-sref=".amis"><span class="icon icon-user icon-lg"></span></a></li>
+                <li><a href="" class="navbar-link" ng-click="vm.logout()"><span class="icon icon-sign-out icon-lg"></span></a></li>
             </ul>
         </div>
     </div>
 </nav>
-<div style="padding-top: 155px;" ui-view>
+<div style="padding-top: 85px;" ui-view>
     <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">

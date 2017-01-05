@@ -8,17 +8,19 @@
         .module('app')
         .controller('groupEventController', groupEventController);
 
-    groupEventController.$inject = ['$uibModal', 'User', 'Groups', 'Events', '$http'];
+    groupEventController.$inject = ['$uibModal', 'User', 'Groups', 'Events', '$http', 'mode'];
 
-    function groupEventController ($uibModal, User, Groups, Events, $http) {
+    function groupEventController ($uibModal, User, Groups, Events, $http, mode) {
 
         var vm = this;
-        var user = User.getUser().user;
+        var user = User.getUser();
         var gSelect = Groups.getGroupSelected();
 
-        vm.user = user;
+        $http.get(mode.dev + "events/users/" + user.uid+"/groups/"+gSelect.id).then(function(d){
+            vm.events = d.data.events;
+        });
 
-        vm.events = Groups.getEventsGroup();
+        vm.user = user;
 
         vm.showEvent = function(event){
             if(event.show == undefined || !event.show){

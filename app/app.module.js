@@ -21,5 +21,9 @@
             'app.group-chat',
             'app.group-photos'
 
-        ]);
+        ])
+        .constant("mode", {
+                "dev" : "http://localhost:8080/",
+                "prod" : "https://platine-groupin.herokuapp.com/"
+        });
 })();
