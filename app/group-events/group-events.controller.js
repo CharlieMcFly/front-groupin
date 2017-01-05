@@ -8,9 +8,9 @@
         .module('app')
         .controller('groupEventController', groupEventController);
 
-    groupEventController.$inject = ['$uibModal', 'User', 'Groups', 'Events', '$http', 'mode'];
+    groupEventController.$inject = ['$uibModal', 'User', 'Groups', '$http', 'mode'];
 
-    function groupEventController ($uibModal, User, Groups, Events, $http, mode) {
+    function groupEventController ($uibModal, User, Groups, $http, mode) {
 
         var vm = this;
         var user = User.getUser();
@@ -46,6 +46,7 @@
             });
         };
 
+        // EDIT PARTICIPATION
         vm.edit_participation = function(event){
             if(event.edit == undefined || !event.edit){
                 event.edit = true;

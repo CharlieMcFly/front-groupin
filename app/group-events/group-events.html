@@ -32,17 +32,17 @@
                     <div class="media-right" ng-if="vm.user.uid == event.createur" ng-click="vm.removeEvent(event)" style="vertical-align: middle;">
                         <a href="" class="doigt-right" ><span class="icon icon-trash-o icon-2x" aria-hidden="true"></span></a>
                     </div>
-                    <div class="media-bottom" ng-if="!event.participants[vm.user.uid] || event.edit">
+                    <div class="media-bottom" ng-if="!event.participants[vm.user.uid] || event.edit" style="margin-top: 10px;">
                         Participeras-tu à cet évènement ?
                         <button ng-click="vm.participe(event, true)">OUI</button>
                         <button ng-click="vm.participe(event, false)">NON</button>
                     </div>
-                    <div class="media-bottom" ng-if="event.participants[vm.user.uid]">
+                    <div class="media-bottom" ng-if="event.participants[vm.user.uid]" style="margin-top: 10px;">
                         Tu participeras à cet évènement ! <a href="" ng-click="vm.edit_participation(event)" ><span class="icon icon-edit icon-lg"></span></a>
                     </div>
                     <div class="media-bottom" style="text-align: center;" >
-                        <a ng-if="!event.show" ng-click="vm.showEvent(event)" href="" class="doigt-right" ><span class="icon icon-chevron-down icon-2x" aria-hidden="true"></span></a>
-                        <a ng-if="event.show" ng-click="vm.showEvent(event)" href="" class="doigt-right" ><span class="icon icon-chevron-up icon-2x" aria-hidden="true"></span></a>
+                        <a ng-if="!event.show" ng-click="vm.showEvent(event)" href="" class="doigt-right" ><span class="icon icon-chevron-down icon-lg" aria-hidden="true"></span></a>
+                        <a ng-if="event.show" ng-click="vm.showEvent(event)" href="" class="doigt-right" ><span class="icon icon-chevron-up icon-lg" aria-hidden="true"></span></a>
                     </div>
                 </div>
             </li>

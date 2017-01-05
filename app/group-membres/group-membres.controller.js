@@ -19,14 +19,16 @@
         vm.user = user;
         vm.membres = Groups.getMembers(user);
 
+        // ADD AMIS
         vm.addAmis = function(uid){
             var data = {
                 "uidD" : user.uid,
                 "uidR" : uid
-            }
+            };
             NotifsAmisService.save(data);
         };
 
+        // ADDMEMBRES
         vm.openAddMembers = function () {
             var modalInstance = $uibModal.open({
                 animation: true,

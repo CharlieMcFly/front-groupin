@@ -1,22 +1,22 @@
 <div ng-controller="groupMembresController as vm" >
     <ul class="list-group" ng-if="vm.membres.length">
-        <li class="list-group-item" ng-repeat="membre in vm.membres | filter : search | orderBy: 'name'">
+        <li class="list-group-item" ng-repeat="membre in vm.membres | orderBy: 'name'">
             <div class="media">
                 <div class="media-left">
-                    <a><img class="media-object" style="width: 64px; height: 64px;" ng-src="{{membre.photoURL}}"></a>
+                    <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{membre.photoURL}}"></a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">{{membre.displayName}}</h4>
+                    <h4>{{membre.displayName}}</h4>
                 </div>
-                <div class="media-right" ng-if="membre.isMyFriend">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="media-right" ng-if="membre.isMyFriend" style="vertical-align: middle">
+                    <span class="icon icon-user icon-2x" aria-hidden="true"></span>
                 </div>
-                <div class="media-right" ng-if="!membre.isMyFriend && membre.uid == user.uid">
-                    <button ng-click="vm.addAmis(membre.uid)"> Ajouter amis </button>
+                <div class="media-right" ng-if="!membre.isMyFriend && membre.uid == vm.user.uid" style="vertical-align: middle">
+                    <a href="" class="doigt-right" ng-click="vm.addAmis(membre.uid)"><span class="icon icon-user-plus icon-2x"></span></a>
                 </div>
             </div>
         </li>
     </ul>
     <p ng-if="!vm.membres.length"> Il n'y a aucun membre dans ce groupe !</p>
-    <button type="button" ng-click="vm.openAddMembers()" class="btn btn-secondary btn-lg btn-block">Ajouter des membres</button>
+    <button type="button" ng-click="vm.openAddMembers()" class="btn btn-primary btn-lg btn-block">Ajouter des membres</button>
 </div>

@@ -16,8 +16,8 @@
 
         var authObj = Config.auth;
         var user = User.getUser();
-  /*      var users = Users.getAllUsers();
-        var groups = Groups.getAllGroups();
+        var users = Users.getAllUsers();
+        /*     var groups = Groups.getAllGroups();
         Events.getAllEvents();*/
 
         this.uid = user.uid;
