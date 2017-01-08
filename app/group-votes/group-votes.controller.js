@@ -8,17 +8,18 @@
         .module('app')
         .controller('groupVotesController', groupVotesController);
 
-    groupVotesController.$inject = ['$uibModal', 'User', 'Groups', 'Votes', '$http', '$state'];
+    groupVotesController.$inject = ['$uibModal', 'User', 'Groups', 'Votes', '$http', '$state', 'mode'];
 
-    function groupVotesController ($uibModal, User, Groups, Votes, $http, $state) {
+    function groupVotesController ($uibModal, User, Groups, Votes, $http, $state, mode) {
 
         var vm = this;
         var user = User.getUser();
-        var votes = Votes.getAllVotes();
         var groupS = Groups.getGroupSelected();
 
-
-        vm.votes = Groups.getVotesGroup(user);
+        // GET ALL VOTES DU GROUPE
+        $http.get(mode.dev + "votes/users/"+user.uid+"/groups/"+groupS.id).then(function(data){
+            vm.votes = data.data.votes;
+        });
 
         vm.aVote = function(vote){
             if(vm.reponse){
