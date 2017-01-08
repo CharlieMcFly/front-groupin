@@ -1,4 +1,9 @@
 <div ng-controller="groupMembresController as vm" >
+    <div ng-if="vm.messageOK_M" class="alert alert-success alert-dismissable fade in">
+        <i class="icon icon-check-circle icon-lg"></i>
+        <strong>Succès !</strong> {{vm.messageOK_M}}
+        <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+    </div>
     <ul class="list-group" ng-if="vm.membres.length">
         <li class="list-group-item" ng-repeat="membre in vm.membres | orderBy: 'name'">
             <div class="media">
@@ -11,8 +16,8 @@
                 <div class="media-right" ng-if="membre.isMyFriend" style="vertical-align: middle">
                     <span class="icon icon-user icon-2x" aria-hidden="true"></span>
                 </div>
-                <div class="media-right" ng-if="!membre.isMyFriend && membre.uid == vm.user.uid" style="vertical-align: middle">
-                    <a href="" class="doigt-right" ng-click="vm.addAmis(membre.uid)"><span class="icon icon-user-plus icon-2x"></span></a>
+                <div class="media-right" ng-if="!membre.isMyFriend && membre.uid != vm.user.uid" style="vertical-align: middle">
+                    <a href="" class="doigt-right" ng-click="vm.addAmis(membre)"><span class="icon icon-user-plus icon-2x"></span></a>
                 </div>
             </div>
         </li>

@@ -8,14 +8,15 @@
         .module('app')
         .controller('modalAjoutMembreController', modalAjoutMembreController);
 
-    modalAjoutMembreController.$inject = ['Users', 'User', '$uibModalInstance'] ;
+    modalAjoutMembreController.$inject = ['Users', 'User', '$uibModalInstance', 'Groups'] ;
 
-    function modalAjoutMembreController (Users, User, $uibModalInstance) {
+    function modalAjoutMembreController (Users, User, $uibModalInstance, Groups) {
 
         var vm = this;
         var user = User.getUser();
+        var groupS = Groups.getGroupSelected();
 
-        vm.users = Users.getAllUsersAddMembers(user);
+        vm.users = Users.getAllUsersAddMembers(user, groupS);
 
         var userToAdd = [];
         vm.selectionAmis = function(user){

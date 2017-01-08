@@ -1,7 +1,7 @@
 <div ng-controller="groupEventController as vm">
         <div ng-if="vm.messageOK_E" class="alert alert-success alert-dismissable fade in">
             <i class="icon icon-check-circle icon-lg"></i>
-            <strong>Succès !</strong> {{vm.messageOK}}
+            <strong>Succès !</strong> {{vm.messageOK_E}}
             <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
         </div>
         <ul class="list-group" ng-if="vm.events.length">

@@ -36,29 +36,32 @@
             return tabUser;
         };
 
-        this.getAllUsersAddMembers = function(user){
+        this.getAllUsersAddMembers = function(user, groupS){
             var users = this.users;
             var tabUser = [];
             if(users.users != undefined){
                 Object.keys(users.users).forEach(function(key) {
-                    // Si amis
-                    if(user.friends != undefined) {
-                        // si c'est un ami du user alors property specifique
-                        if (user.friends[key] != undefined && key != user.uid) {
-                            var f = users.users[key];
-                            f.isMyFriend = true;
-                            tabUser.push(f);
+                    // Si l'user n'est pas membre
+                    if(!groupS.membres[key]){
+                        // Si amis
+                        if(user.friends != undefined) {
+                            // si c'est un ami du user alors property specifique
+                            if (user.friends[key] != undefined && key != user.uid) {
+                                var f = users.users[key];
+                                f.isMyFriend = true;
+                                tabUser.push(f);
+                            }
+                            // sinon on l'ajout
+                            else {
+                                if (key != user.uid)
+                                    tabUser.push(users.users[key]);
+                            }
                         }
-                        // sinon on l'ajout
+                        // Si pas d'amis ajouter d'office
                         else {
                             if (key != user.uid)
                                 tabUser.push(users.users[key]);
                         }
-                    }
-                    // Si pas d'amis ajouter d'office
-                    else {
-                        if (key != user.uid)
-                            tabUser.push(users.users[key]);
                     }
                 });
             }

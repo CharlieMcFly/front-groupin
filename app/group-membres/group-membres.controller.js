@@ -18,14 +18,26 @@
 
         vm.user = user;
         vm.membres = Groups.getMembers(user);
+        console.log(vm.membres);
 
         // ADD AMIS
-        vm.addAmis = function(uid){
+        vm.addAmis = function(u){
             var data = {
                 "uidD" : user.uid,
-                "uidR" : uid
+                "uidR" : u.uid
             };
             NotifsAmisService.save(data);
+            if(u.displayName)
+                vm.messageOK_M = "La demande d'ajout d'amis e été envoyé à "+u.displayName;
+            else
+                vm.messageOK_M = "La demande d'ajout d'amis e été envoyé à "+u.email;
+
+
+        };
+
+        // REMOCE ALERT
+        vm.dismiss = function(){
+            vm.messageOK_M = null;
         };
 
         // ADDMEMBRES
@@ -42,9 +54,11 @@
                     var data = {
                         "idG" : groupS.id,
                         "uidR" : entry.uid
-                    }
-                    NotifsGroupsService.save(data);
+                    };
+                    if(!groupS.membres[entry.uid])
+                        NotifsGroupsService.save(data);
                 });
+                vm.messageOK_M = "La proposition pour rejoindre le groupe a été envoyé à "+ users.length + " personnes"
             });
         };
 

@@ -83,8 +83,7 @@
                 }
                 // Si pas d'amis ajouter d'office
                 else {
-                    if (key != user.uid)
-                        membres.push(users.users[key]);
+                    membres.push(users.users[key]);
                 }
             });
             return membres;
