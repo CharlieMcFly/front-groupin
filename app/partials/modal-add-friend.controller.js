@@ -29,15 +29,16 @@
                 var pos = userToAdd.indexOf(user);
                 userToAdd.splice(pos,1);
             }
-        }
+        };
 
         vm.cancel = function(){
             $uibModalInstance.dismiss();
-        }
+        };
 
         vm.ajouter = function(){
             $uibModalInstance.close(userToAdd);
-        }
+            userToAdd = [];
+        };
 
     }
 })();

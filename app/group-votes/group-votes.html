@@ -9,18 +9,17 @@
             <div class="media">
                 <div class="media-body">
                     <h4 class="media-heading">{{vote.question}}</h4>
-                    <div ng-if="!vote.a_vote[vm.user.uid]">
+                    <div ng-if="!vote.hasalreadyvote">
                         <div ng-repeat="c in vote.choix">
-                            <input type="radio" ng-model="vm.reponse" value="{{c}}">  {{c}}
+                            <input type="radio" ng-model="vm.reponse" value="{{c.choix}}">  {{c.choix}}
                         </div>
                         <button ng-click="vm.aVote(vote.id)"> Valider </button>
                     </div>
-                    <div ng-if="vote.a_vote[vm.user.uid]">
+                    <div ng-if="vote.hasalreadyvote">
                         <div ng-repeat="c in vote.choix">
                            {{c.choix}} : {{c.pourcentage}} %
                         </div>
                     </div>
-
                 </div>
                 <div class="media-right" ng-if="vm.user.uid == vote.createur" ng-click="vm.removeVote(vote)" style="vertical-align: middle;">
                     <a href="" class="doigt-right" ><span class="icon icon-trash-o icon-2x" aria-hidden="true"></span></a>

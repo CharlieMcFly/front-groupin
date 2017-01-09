@@ -7,17 +7,23 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             <input type="text" class="form-control" ng-model="search" placeholder="Recherche">
         </div>
-        <div ng-if="!vm.users" > Aucun Résultat </div>
-        <div ng-if="vm.users"  ng-repeat="user in vm.users | filter:search " ng-click="vm.selectionAmis(user)">
+        <div ng-if="!vm.users" style="margin-top: 10px;"> Aucun Résultat </div>
+        <div ng-if="vm.users"  style="margin-top: 10px;" ng-repeat="user in vm.users | filter:search " >
             <div class="media" >
                 <div class="media-left">
-                    <a><img class="media-object" style="width: 64px; height: 64px;" ng-src="{{user.photoURL}}" /></a>
+                    <a ng-if="user.photoURL"> <img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{user.photoURL}}" /></a>
+                    <a ng-if="!user.photoURL"><img class="media-object img-circle" style="width: 64px; height: 64px;" src="http://placehold.it/64x64&text=img-circle" /></a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">{{user.displayName}}</h4>
+                    <h4 class="media-heading" ng-if="user.displayName">{{user.displayName}}</h4>
+                    <h4 class="media-heading" ng-if="!user.displayName">{{user.email}}</h4>
+
                 </div>
-                <div class="media-right" ng-if="user.isSelected">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <div class="media-right" ng-if="user.isSelected" ng-click="vm.selectionAmis(user)" style="vertical-align: middle;">
+                    <a href="" class="doigt-right"><span class="icon icon-check-square-o icon-2x" aria-hidden="true"></span></a>
+                </div>
+                <div class="media-right" ng-if="!user.isSelected" ng-click="vm.selectionAmis(user)" style="vertical-align: middle;">
+                    <a href="" class="doigt-right"²><span class="icon icon-square-o icon-2x" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>

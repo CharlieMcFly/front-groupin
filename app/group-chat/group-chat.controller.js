@@ -17,7 +17,6 @@
 
         // GET MSG FROM GROUP
         $http.get(mode.dev + "chats/users/"+user.uid+"/groups/" +group.id).then(function(data){
-            User.setUser(data);
             vm.messages = data.data.messages;
         });
 
@@ -39,6 +38,7 @@
                     User.setUser(data);
                     vm.messages = data.data.messages;
                     vm.messageOK_M  = "Votre message a été correctement envoyé";
+                    vm.msg = null;
                 });
             }else{
                 vm.messageKO_M = "Vous devez entrer un message avant de l'envoyer";

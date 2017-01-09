@@ -37,6 +37,7 @@
 
         vm.ajouter = function(){
             $uibModalInstance.close(userToAdd);
+            userToAdd = [];
         }
 
     }

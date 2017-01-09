@@ -8,19 +8,23 @@
         .module('app')
         .controller('amisController', amisController);
 
-    amisController.$inject = ['$uibModal', 'User', 'Users', 'NotifsAmisService'];
+    amisController.$inject = ['$uibModal', 'User', 'NotifsAmisService'];
 
-    function amisController ($uibModal, User, Users, NotifsAmisService) {
+    function amisController ($uibModal, User, NotifsAmisService) {
 
         var vm = this;
 
-        var user = User.getUser().user;
+        var user = User.getUser();
 
         // Affichage des amis
         vm.friends = User.getFriends();
 
+        vm.dismiss = function(){
+            vm.messageOK = null;
+        };
+
         // Ouvre la fenetre d'ajout d'amis
-        vm.openAjoutFriends = function (size) {
+        vm.openAjoutFriends = function () {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/partials/modal-add-friend.html',
@@ -36,6 +40,8 @@
                     }
                     NotifsAmisService.save(data);
                 });
+                vm.messageOK = "Une notification a été envoyé à chaque personne sélectionnée";
+
             });
         };
     }

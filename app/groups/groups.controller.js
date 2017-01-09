@@ -15,6 +15,9 @@
         var vm = this;
         var user = User.getUser();
 
+        if(user.uid_mail)
+            user.uid = user.uid_mail;
+
         // GET USER
         $http.get( mode.dev + "users/"+user.uid).then(function(d){
             user = d.data.user;

@@ -7,12 +7,11 @@
         .module('app')
         .service('User', User);
 
-    User.$injection = ['UserService', 'Users', 'NotifsAmisService', 'Groups'];
+    User.$injection = ['UserService', 'Users'];
 
-    function User(UserService, Users, NotifsAmisService, Groups){
+    function User(UserService, Users){
 
         var user = {};
-        var notifsAmis = {};
 
         this.login = function(data){
             // Creation de l'utilisateur dans la db
@@ -48,19 +47,6 @@
             }
             return friends;
         };
-
-        this.getGroups = function(){
-            var g = [];
-            var groups = Groups.getAllGroups();
-            var u = this.user;
-            if(u.groups != undefined){
-                Object.keys(u.groups).forEach(function(key,index) {
-                    g.push(groups.groups[key]);
-                });
-            }
-            return g;
-        }
-
 
         this.logout = function(){
             this.user = {};

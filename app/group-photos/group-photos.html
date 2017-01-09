@@ -1,12 +1,23 @@
 <div ng-controller="groupPhotoController as vm">
-<div class="container">
-        <div class='list-group gallery'>
-            <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3' ng-repeat="photo in vm.photos">
-                <a class="fancybox thumbnail" rel="ligthbox" href="{{photo.url}}">
-                    <img class="img-responsive" alt="" ng-src="{{photo.url}}" />
+        <div ng-if="vm.messageOK_P" class="alert alert-success alert-dismissable fade in">
+            <i class="icon icon-check-circle icon-lg"></i>
+            <strong>Succès !</strong> {{vm.messageOK_P}}
+            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+        </div>
+        <div ng-if="vm.messageKO_P" class="alert alert-danger alert-dismissable fade in">
+            <i class="icon icon-times-circle icon-lg"></i>
+            <strong>Erreur !</strong> {{vm.messageKO_P}}
+            <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
+        </div>
+        <ul class="list-group" ng-if="vm.photos.length">
+            <li class="list-group-item col-xs-6 col-sm-6" ng-repeat="photo in vm.photos">
+                <a href="{{photo}}">
+                    <img ng-src="{{photo}}" style="width: 50%">
                 </a>
-            </div> <!-- col-6 / end -->
+            </li>
+        </ul>
+        <p ng-if="!vm.photos.length"> Aucunes photos dans ce groupe ! </p>
 
-        </div> <!-- list-group / end -->
-</div>
+        <input  ng-model="vm.img" class="form-control" placeholder="URL de la photo">
+        <button type="button" ng-click="vm.ajouterPhoto()" class="btn btn-primary btn-lg btn-block">Ajouter une photo</button>
 </div>
