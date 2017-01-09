@@ -18,7 +18,6 @@
 
         vm.user = user;
         vm.membres = Groups.getMembers(user);
-        console.log(vm.membres);
 
         // ADD AMIS
         vm.addAmis = function(u){

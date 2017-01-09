@@ -20,6 +20,9 @@
             vm.choices.push({"choix": ""});
         };
 
+        vm.dismiss = function(){
+          vm.messageKO_V = null;
+        };
 
         vm.supprimerChoix = function(){
             vm.choices.pop();
@@ -30,12 +33,19 @@
         };
 
         vm.creer = function(){
-            vote = {
-                "question" : vm.question,
-                "choix" : vm.choices
-            };
-            if(vm.choices.length >= 2 )
-                $uibModalInstance.close(vote);
+            if(vm.question){
+                vote = {
+                    "question" : vm.question,
+                    "choix" : vm.choices
+                };
+                if(vm.choices.length >= 2 ){
+                    $uibModalInstance.close(vote);
+                }else{
+                    vm.messageKO_V = "Il faut au moins 2 choix pour le vote";
+                }
+            }else{
+                vm.messageKO_V = "Il faut une question pour créer un vote";
+            }
         }
 
     }

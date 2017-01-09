@@ -1,28 +1,33 @@
 <div ng-controller="groupVotesController as vm" >
+    <div ng-if="vm.messageOK_V" class="alert alert-success alert-dismissable fade in">
+        <i class="icon icon-check-circle icon-lg"></i>
+        <strong>Succès !</strong> {{vm.messageOK_V}}
+        <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+    </div>
     <ul class="list-group" ng-if="vm.votes.length">
         <li ng-repeat="vote in vm.votes" class="list-group-item">
             <div class="media">
                 <div class="media-body">
                     <h4 class="media-heading">{{vote.question}}</h4>
-                    <div ng-if="!vote.hasAlreadyVote">
-                        <div ng-repeat="c in vote.choices">
-                            <input type="radio" ng-model="vm.reponse" value="{{c.choix}}">  {{c.choix}}
+                    <div ng-if="!vote.a_vote[vm.user.uid]">
+                        <div ng-repeat="c in vote.choix">
+                            <input type="radio" ng-model="vm.reponse" value="{{c}}">  {{c}}
                         </div>
                         <button ng-click="vm.aVote(vote.id)"> Valider </button>
                     </div>
-                    <div ng-if="vote.hasAlreadyVote">
-                        <div ng-repeat="c in vote.choices">
-                           {{c.choix}} : {{c.voix}} / {{vote.nbVote}}
+                    <div ng-if="vote.a_vote[vm.user.uid]">
+                        <div ng-repeat="c in vote.choix">
+                           {{c.choix}} : {{c.pourcentage}} %
                         </div>
                     </div>
 
                 </div>
-                <div class="media-right">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <div class="media-right" ng-if="vm.user.uid == vote.createur" ng-click="vm.removeVote(vote)" style="vertical-align: middle;">
+                    <a href="" class="doigt-right" ><span class="icon icon-trash-o icon-2x" aria-hidden="true"></span></a>
                 </div>
             </div>
         </li>
     </ul>
     <p ng-if="!vm.votes.length"> Il n'y a aucuns votes dans ce groupe !</p>
-    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-secondary btn-lg btn-block">Créer un vote</button>
+    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-primary btn-lg btn-block">Créer un vote</button>
 </div>
