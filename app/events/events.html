@@ -2,23 +2,42 @@
 <!-- jquery, moment, and angular have to get included before fullcalendar -->
 
 
-<div class="container" ng-controller="eventsController as vm">
-    <h1>Mes Evènements</h1>
-    <hr >
-    <div class="row">
-        <div class="col-md-8" >
-            <div ui-calendar ng-model="vm.eventSources">
-            </div>
+<div ng-controller="eventsController as vm">
+
+
+    <div class="col-md-16" >
+        <div ng-model="vm.eventSources" calendar="myCalendar1" ui-calendar="vm.uiConfig.calendar">
         </div>
-        <div class="col-md-4" >
-            <ul class="nav nav-tabs">
-                <li><a ui-sref=".event">Event</a></li>
-                <li><a ui-sref=".votes">Vote</a></li>
-            </ul>
-            <div ui-view>
-                No event sélected
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-secondary " ng-if="vm.affiche">
+            <div class="panel-body">
+                <div class="page-header" style="text-align: center">
+                    <img ng-src="{{vm.event.photoURL}}" alt="" class="img-circle" style="height: 150px; width: 150px">
+                    <h3><strong>{{vm.event.nom}}</strong></h3>
+                </div>
+                <p>{{vm.event.description}}</p>
+                <hr>
+                <p>Début : <span>{{vm.event.dateDebut | date:"dd/MM/yyyy 'à' hh:mma"}}</span></p>
+                <p>Fin : <span>{{vm.event.dateFin | date:"dd/MM/yyyy 'à' hh:mma"}}</span></p>
+                <hr>
+                <p ng-if="vm.event.prix">Prix : {{vm.event.prix}}</p>
+                <p ng-if="!vm.event.prix"><strong>GRATUIT</strong></p>
+                <p ng-if="vm.event.obj">Objet à ramener : {{vm.event.obj}}</p>
+                <p ng-if="vm.event.theme">Theme : {{vm.event.theme}}</p>
+                <hr >
+                <div ng-if="vm.event.participants">
+                <h4>Participants </h4>
+                <div class="media" ng-repeat="participant in vm.event.participants">
+                    <div class="media-left">
+                        <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{participant.photoURL}}"></a>
+                    </div>
+                    <div class="media-body">
+                        {{participant.displayName}}
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>

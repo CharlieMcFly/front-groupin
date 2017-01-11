@@ -29,7 +29,16 @@
         };
 
         this.setUser = function(data){
-            this.user = data.data;
+            if(data){
+                if(data.data){
+                    if(data.data.user)
+                        this.user =data.data.user;
+                    else
+                        this.user = data.data;
+                }else{
+                    this.user = data;
+                }
+            }
         };
 
         /**

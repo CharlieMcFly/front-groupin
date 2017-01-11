@@ -9,13 +9,11 @@
             <strong>Erreur !</strong> {{vm.messageKO_P}}
             <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
         </div>
-        <ul class="list-group" ng-if="vm.photos.length">
-            <li class="list-group-item col-xs-6 col-sm-6" ng-repeat="photo in vm.photos">
-                <a href="{{photo}}">
-                    <img ng-src="{{photo}}" style="width: 50%">
-                </a>
-            </li>
-        </ul>
+        <div ng-if="vm.photos.length" >
+            <a class="thumbnail" href="{{photo}}" ng-repeat="photo in vm.photos">
+                <img ng-src="{{photo}}" style="width:15%"alt="">
+            </a>
+        </div>
         <p ng-if="!vm.photos.length"> Aucunes photos dans ce groupe ! </p>
 
         <input  ng-model="vm.img" class="form-control" placeholder="URL de la photo">

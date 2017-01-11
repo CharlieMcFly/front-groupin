@@ -8,105 +8,49 @@
         .module('app')
         .controller('eventsController', eventsController);
 
-    eventsController.$inject = ['$compile', 'uiCalendarConfig'];
+    eventsController.$inject = ['$compile', 'uiCalendarConfig', 'User','$http','mode'];
 
-    function eventsController ($compile,uiCalendarConfig) {
+    function eventsController ($compile,uiCalendarConfig, User, $http, mode) {
         var vm = this;
+        var user = User.getUser();
 
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-
-        /* event source that pulls from google.com */
-        vm.eventSource = {};
+        vm.events = [];
 
         /* event source that contains custom events on the scope */
-        vm.events = [
+        $http.get(mode.dev + "events/users/"+user.uid).then(function(data){
+            angular.copy(data.data, vm.events);
+        });
 
-        ];
-        /* event source that calls a function on every view switch */
-        vm.eventsF = function (start, end, timezone, callback) {
-            var s = new Date(start).getTime() / 1000;
-            var e = new Date(end).getTime() / 1000;
-            var m = new Date(start).getMonth();
-            var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-            callback(events);
-        };
-
-        vm.calEventsExt = {
-            color: '#f00',
-            textColor: 'yellow',
-            events: [
-                {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-            ]
-        };
-        /* alert on eventClick */
-        vm.alertOnEventClick = function( date, jsEvent, view){
-            vm.alertMessage = (date.title + ' was clicked ');
-        };
-        /* alert on Drop */
-        vm.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-            vm.alertMessage = ('Event Droped to make dayDelta ' + delta);
-        };
-        /* alert on Resize */
-        vm.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-            vm.alertMessage = ('Event Resized to make dayDelta ' + delta);
-        };
-        /* add and removes an event source of choice */
-        vm.addRemoveEventSource = function(sources,source) {
-            var canAdd = 0;
-            angular.forEach(sources,function(value, key){
-                if(sources[key] === source){
-                    sources.splice(key,1);
-                    canAdd = 1;
-                }
-            });
-            if(canAdd === 0){
-                sources.push(source);
-            }
-        };
-        /* add custom event*/
-        vm.addEvent = function() {
-            vm.events.push({
-                title: 'Open Sesame',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                className: ['openSesame']
-            });
-        };
-        /* remove event */
-        vm.remove = function(index) {
-            vm.events.splice(index,1);
-        };
-        /* Change View */
+        /* Change View Day Week Month */
         vm.changeView = function(view,calendar) {
             uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
         };
-        /* Change View */
-        vm.renderCalender = function(calendar) {
-            if(uiCalendarConfig.calendars[calendar]){
-                uiCalendarConfig.calendars[calendar].fullCalendar('render');
-            }
+
+
+        /* alert on eventClick */
+        vm.alertOnEventClick = function( date, jsEvent, view){
+            $http.get(mode.dev + "events/" +date.id).then(function(data){
+                console.log(data.data);
+                vm.event = data.data;
+                vm.affiche = true;
+            });
         };
-        /* Render Tooltip */
-        vm.eventRender = function( event, element, view ) {
-            element.attr({'tooltip': event.title,
-                'tooltip-append-to-body': true});
-            $compile(element)(vm);
-        };
+
         /* config object */
         vm.uiConfig = {
             calendar:{
-                height: 450,
-                editable: true,
+                height: 700,
+                editable: false,
                 header:{
-                    left: 'title',
-                    center: '',
-                    right: 'aujourd\'hui prev,next'
+                    left: 'month basicWeek basicDay agendaWeek agendaDay',
+                    center: 'title',
+                    right: 'today prev,next'
                 },
+                dayNames : ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Dimanche"],
+                dayNamesShort : ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+                monthNames : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
+                    'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthNamesShort : ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
                 eventClick: vm.alertOnEventClick,
                 eventDrop: vm.alertOnDrop,
                 eventResize: vm.alertOnResize,
@@ -114,20 +58,8 @@
             }
         };
 
-        vm.changeLang = function() {
-            if(vm.changeTo === 'Hungarian'){
-                vm.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-                vm.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-                vm.changeTo= 'English';
-            } else {
-                vm.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                vm.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                vm.changeTo = 'Hungarian';
-            }
-        };
         /* event sources array*/
-        vm.eventSources = [vm.events, vm.eventSource, vm.eventsF];
-        vm.eventSources2 = [vm.calEventsExt, vm.eventsF, vm.events];
+        vm.eventSources = [vm.events];
 
     }
 })();

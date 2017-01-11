@@ -21,6 +21,7 @@
             vm.notifsGroupes = data.data.notifsGroupes;
         });
 
+        //ADD FRIEND
         vm.addFriends = function(u){
             var friend = {
                 "uidD" : u,
@@ -34,6 +35,7 @@
             });
         };
 
+        // REMOVE NOTIF
         vm.dontAddFriend = function(friend){
             $http.delete(mode.dev + "notifications/users/"+user.uid+"/friends/" +friend).then(function(data){
                 User.setUser(data);
@@ -42,6 +44,31 @@
                 vm.messageOK = "La notification a été supprimée";
             });
         };
+
+        // JOIN GROUP
+        vm.joinGroup = function(u){
+            var group = {
+                "idG" : u,
+                "uidR" : user.uid
+            };
+            $http.post(mode.dev + "users/groups", group).then(function(data){
+                console.log(data);
+                User.setUser(data);
+                vm.notifsAmis = data.data.notifsAmis;
+                vm.notifsGroupes = data.data.notifsGroupes;
+                vm.messageOK = "La notification a été supprimée";
+            });
+        };
+
+        vm.dontJoinGroupe = function(u){
+            $http.delete(mode.dev + "notifications/users/"+user.uid+"/groups/" +u).then(function(data){
+                User.setUser(data);
+                vm.notifsAmis = data.data.notifsAmis;
+                vm.notifsGroupes = data.data.notifsGroupes;
+                vm.messageOK = "La notification a été supprimée";
+            });
+        };
+
 
 
         vm.cancel = function(){
