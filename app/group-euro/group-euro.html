@@ -1,1 +1,50 @@
-<div> EURO </div>
+<div ng-controller="groupEuroController as vm">
+
+    <table class="table" ng-if="vm.depenses.lenght">
+        <caption class="text-center">Dépenses</caption>
+        <thead>
+        <tr>
+            <th>Quoi?</th>
+            <th>Par Qui?</th>
+            <th>Pour Qui?</th>
+            <th>Combien?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <caption class="text-center">Balance</caption>
+        <thead>
+        <tr>
+            <th>Qui?</th>
+            <th>Combien?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in vm.balances">
+            <th style="width: 50%;">
+                <div class="media">
+                    <div class="media-left">
+                        <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{user.photoURL}}"></a>
+                    </div>
+                    <div class="media-body">
+                        <h4 >{{user.displayName}}</h4>
+                    </div>
+                </div>
+            </th>
+            <th ng-if="user.balance == 0">{{user.balance}}€</th>
+            <th class="text-success" ng-if="user.balance < 0">{{user.balance}}€</th>
+            <th class="text-danger" ng-if="user.balance > 0">{{user.balance}}€</th>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" ng-click="vm.openAddBill()" class="btn btn-lg btn-primary btn-block">Ajouter une dépense</button>
+
+</div>

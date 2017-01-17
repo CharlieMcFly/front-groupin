@@ -67,10 +67,11 @@
 
             modalInstance.result.then(function (group) {
                 group['uid'] = user.uid;
-                $http.post("http://localhost:8080/groups", group).then(function(data){
+                group['email'] = user.email;
+                $http.post(mode.dev + "groups", group).then(function(data){
                     User.setUser(data);
                     vm.groups = data.data.groups;
-                    vm.messageOK = "Le groupe "+group.nom+" a bien été créé."
+                    vm.messageOK = "Le groupe "+group.nom+" a bien été créé.";
                 });
             });
         };
