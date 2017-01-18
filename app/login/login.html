@@ -1,50 +1,50 @@
-<!--
 <link rel="stylesheet" href="style/login.css">
+<!--
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 -->
-<div class="container" ng-controller="loginController as vm">
-    <div class="login" >
-        <div class="omb_login">
-            <div class="logo">
-                <!--<img src="../../style/logo.png">-->
-            </div>
-            <br>
-            <div class="social-buttons">
-                <a class="btn btn-block btn-social btn-google-plus"
-                   ng-click="vm.googleLogin()">
-                    <i class="fa fa-google-plus"></i>
-                    <span>Google+</span>
-                </a>
-                <a class="btn btn-block btn-social btn-facebook"
-                   ng-click="vm.facebookLogin()">
-                    <i class="fa fa-facebook"></i>
-                    <span>Facebook</span>
-                </a>
-            </div>
+<div ng-controller="loginController as vm">
+        <img id="logo"  src="../../style/gilogocenter.png">
+        <div class="login" >
 
-            <div class="row omb_loginOr">
-                <div class="col-xs-12 col-sm-12">
-                    <hr class="omb_hrOr">
-                    <span class="omb_spanOr">ou</span>
-                </div>
-            </div>
-            <form>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="email" ng-model="vm.email" required class="form-control" name="username" placeholder="Email">
-                </div>
-                <span class="help-block"></span>
+            <div class="btn_login">
 
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input  type="password" ng-model="vm.password" required class="form-control" name="password" placeholder="Mot de passe">
-                </div>
-                <br >
-                <button class="btn btn-block btn-github"
-                        ng-click="vm.signIn()" >
-                    <span>Continuer avec l'email</span>
-                </button>
-            </form>
+                <a class="log">
+                   <span class="icon-stack icon-2x" ng-click="vm.googleLogin()" style="position: fixed; top: 50%; left: 50%; margin: -120px 0px 0px -110px;">
+                          <i class="icon icon-circle icon-stack-2x icon-log" style="color: rgb(204, 109, 141);"></i>
+                          <i class="icon icon-google-plus icon-stack-1x icon-inverse"></i>
+                    </span>
+                </a>
+                <a class="log">
+                    <span class="icon-stack icon-2x" ng-click="vm.facebookLogin()" style="position: fixed; top: 50%; left: 50%; margin: -120px 0px 0px 50px;">
+                      <i class="icon icon-circle icon-stack-2x" style="color: rgb(17, 84, 113);"></i>
+                      <i class="icon  icon-facebook icon-stack-1x icon-inverse"></i>
+                    </span>
+                </a>
+
+            </div>
+            <div class="email">
+                <form>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon icon-user"></i></span>
+                        <input type="email" ng-model="vm.email" required class="form-control" name="username" placeholder="Email">
+                    </div>
+                    <span class="help-block"></span>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon icon-lock"></i></span>
+                        <input  type="password" ng-model="vm.password" required class="form-control" name="password" placeholder="Mot de passe">
+                    </div>
+                    <br >
+                    <a class="log">
+                       <span class="icon-stack icon-2x" ng-click="vm.signIn()"  style="position: fixed; top: 50%; left: 50%; margin: 70px 0px 0px -30px;">
+                          <i class="icon icon-circle icon-stack-2x" style="color: rgb(234, 207, 106);"></i>
+                          <i class="icon icon-check icon-stack-1x icon-inverse "></i>
+                        </span>
+                    </a>
+
+                </form>
+            </div>
         </div>
-    </div>
+
+
 </div>

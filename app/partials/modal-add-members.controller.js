@@ -16,7 +16,7 @@
         var user = User.getUser();
         var groupS = Groups.getGroupSelected();
 
-        vm.users = Users.getAllUsersAddMembers(user, groupS);
+        vm.users = User.getFriends();
 
         var userToAdd = [];
         vm.selectionAmis = function(user){

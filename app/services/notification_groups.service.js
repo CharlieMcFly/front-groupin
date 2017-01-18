@@ -14,7 +14,7 @@
         var localhost = "http://localhost:8080/";
         var dev = "https://platine-groupin.herokuapp.com/";
 
-        return $resource(dev + 'notifications/groups/:uid');
+        return $resource(localhost + 'notifications/groups/:uid');
 
     }
 })();
