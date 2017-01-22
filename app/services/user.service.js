@@ -7,14 +7,11 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$injection = ['$resource'];
+    UserService.$injection = ['$resource', 'mode'];
 
-    function UserService($resource) {
+    function UserService($resource, mode){
 
-        var localhost = "http://localhost:8080/";
-        var dev = "https://platine-groupin.herokuapp.com/";
-
-        return $resource(dev + 'users/:uid');
+        return $resource(mode.dev + 'users/:uid');
 
     }
 })();

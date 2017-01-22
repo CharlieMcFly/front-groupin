@@ -18,6 +18,10 @@
         // GET MSG FROM GROUP
         $http.get(mode.dev + "chats/users/"+user.uid+"/groups/" +group.id).then(function(data){
             vm.messages = data.data.messages;
+            if(vm.messages.length)
+                vm.hasMsg = true;
+            else
+                vm.hasNoMsg = true;
         });
 
         // REMOVE ALERT

@@ -20,6 +20,10 @@
         // GET EVENTS DU GROUP
         $http.get(mode.dev + "events/users/" + user.uid+"/groups/"+gSelect.id).then(function(d){
             vm.events = d.data.events;
+            if(vm.events.length)
+                vm.hasEvent = true;
+            else
+                vm.hasNoEvent = true;
         });
 
         // DISPLAY EVENT

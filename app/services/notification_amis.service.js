@@ -7,14 +7,11 @@
         .module('app')
         .factory('NotifsAmisService', NotifsAmisService);
 
-    NotifsAmisService.$injection = ['$resource'];
+    NotifsAmisService.$injection = ['$resource', 'mode'];
 
-    function NotifsAmisService($resource) {
+    function NotifsAmisService($resource, mode) {
 
-        var localhost = "http://localhost:8080/";
-        var dev = "https://platine-groupin.herokuapp.com/";
-
-        return $resource(dev + 'notifications/amis/');
+        return $resource(mode.dev + 'notifications/amis/');
 
     }
 })();

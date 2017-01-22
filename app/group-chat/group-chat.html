@@ -9,7 +9,7 @@
         <strong>Erreur !</strong> {{vm.messageKO_M}}
         <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
     </div>
-    <ul class="list-group" ng-if="vm.messages.length">
+    <ul class="list-group" ng-show="vm.hasMsg">
         <li class="list-group-item" ng-repeat="message in vm.messages ">
             <div class="media">
                 <div class="media-left">
@@ -30,7 +30,12 @@
             </div>
         </li>
     </ul>
-    <p ng-if="!vm.messages.length"> Il n'y a aucun message dans ce groupe !</p>
+    <p ng-if="!vm.hasMsg && !vm.hasNoMsg" style="text-align: center">
+        <img class="logo-loading" src="../../style/gilogocenter.png"/>
+    </p>
+    <p ng-show="vm.hasNoMsg" style="text-align: center">
+        Il n'y a aucun message dans ce groupe !
+    </p>
 
     <textarea  ng-model="vm.msg" class="form-control" placeholder="Tapes ton message " rows="2"></textarea>
     <button type="button" ng-click="vm.envoyerMsg()" class="btn btn-primary btn-lg btn-block">Envoyer un message</button>

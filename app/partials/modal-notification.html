@@ -9,7 +9,7 @@
             <strong>Succès !</strong> {{vm.messageOK}}
             <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
         </div>
-        <div ng-if="vm.notifsGroupes.length || vm.notifsAmis.length">
+        <div ng-if="vm.hasNotifs">
             <div class="list-group" ng-repeat="notif in vm.notifsAmis">
                 <div class=" list-group-item media">
                     <div class="media-left">
@@ -64,9 +64,12 @@
                 </div>
             </div>
         </div>
-        <div ng-if="!vm.notifsGroupes.length && !vm.notifsAmis.length">
-            Aucunes notifications
-        </div>
+        <p ng-if="!vm.hasNotifs && !vm.hasNoNotifs" style="text-align: center">
+            <img class="logo-loading" src="../../style/gilogocenter.png"/>
+        </p>
+        <p ng-show="vm.hasNoNotifs" style="text-align: center">
+            Vous n'avez aucunes notifications !
+        </p>
     </div>
     <div class="modal-footer">
         <button class="btn btn-success" type="button" ng-click="vm.cancel()" >OK</button>

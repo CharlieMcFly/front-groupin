@@ -9,10 +9,18 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Groupes</h3>
+                <h3 class="panel-title">
+                    <div class="pull-left">Groupes</div>
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-xs btn-code" ng-click="vm.reloadGroups()">
+                            <i class="icon icon-refresh icon-light"></i>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </h3>
             </div>
-            <div class="list-group" ng-if="vm.groups.length">
-                <div href="" class="list-group-item" ng-repeat="group in vm.groups">
+            <div class="list-group" ng-show="vm.hasGroup">
+                <div class="list-group-item" ng-repeat="group in vm.groups">
                     <div class="media">
                         <div class="media-left">
                             <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
@@ -26,7 +34,12 @@
                     </div>
                 </div>
             </div>
-            <p ng-if="!vm.groups.length">Aucun groupe !</p>
+            <p ng-if="!vm.hasGroup && !vm.hasNoGroup" style="text-align: center">
+                <img class="logo-loading" src="../../style/gilogocenter.png"/>
+            </p>
+            <p ng-show="vm.hasNoGroup" style="text-align: center">
+                Vous n'avez aucun groupe d'amis !
+            </p>
         </div>
         <button type="button" ng-click="vm.open()" class="btn btn-lg btn-primary btn-block">Créer un groupe</button>
     </div>

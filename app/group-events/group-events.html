@@ -4,7 +4,7 @@
             <strong>Succès !</strong> {{vm.messageOK_E}}
             <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
         </div>
-        <ul class="list-group" ng-if="vm.events.length">
+        <ul class="list-group" ng-show="vm.hasEvent">
             <li class="list-group-item" ng-repeat="event in vm.events" >
                 <div class="media" >
                     <div class="media-left">
@@ -12,13 +12,13 @@
                     </div>
                     <div class="media-body" >
                         <div class="row">
-                            <h4 class="text-uppercase col-md-5" >{{event.nom}}</h4>
-                            <div class="col-md-5">
-                                <p> Début : {{event.dateDebut}}</p>
-                                <p> Fin : {{event.dateFin}}</p>
+                            <h4 class="text-uppercase col-md-8" >{{event.nom}}</h4>
+                            <div class="col-md-8">
+                                <p> Début : <span>{{event.dateDebut | date:"dd/MM/yyyy 'à' hh:mma"}}</span></p>
+                                <p> Fin : <span>{{event.dateFin | date:"dd/MM/yyyy 'à' hh:mma"}}</span></p>
                             </div>
-                            <h5 style="float:right" ng-if="!event.prix" class="text-uppercase col-md-5" ><strong>GRATUIT</strong></h5>
-                            <h5 style="float:right" ng-if="event.prix" class="text-uppercase col-md-5" ><strong>{{event.prix}} €</strong></h5>
+                            <h5 style="text-align: center" ng-if="!event.prix" class="text-uppercase col-md-8" ><strong>GRATUIT</strong></h5>
+                            <h5 style="text-align: center" ng-if="event.prix" class="text-uppercase col-md-8" ><strong>{{event.prix}} €</strong></h5>
                         </div>
                         <div ng-if="event.show">
                             <hr >
@@ -27,6 +27,20 @@
                                 <p ng-if="event.obj">Ne pas oublier d'apporter : {{event.obj}}</p>
                                 <p ng-if="event.theme">Le thème de la soirée sera : {{event.theme}}</p>
                             </blockquote>
+                            <hr >
+                            <h4>Participants</h4>
+                            <ul class="list-group">
+                                <li ng-repeat="u in event.participantsValues" class="col-md-8">
+                                    <div class="media">
+                                    <div class="media-left">
+                                        <a><img class="media-object img-circle" style="width: 32px; height: 32px;" ng-src="{{u.photoURL}}"></a>
+                                    </div>
+                                    <div class="media-body">
+                                        {{u.displayName}}
+                                    </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="media-right" ng-if="vm.user.uid == event.createur" ng-click="vm.removeEvent(event)" style="vertical-align: middle;">
@@ -47,6 +61,11 @@
                 </div>
             </li>
         </ul>
-        <p ng-if="!vm.events.length">Aucun évènements !</p>
+        <p ng-if="!vm.hasEvent && !vm.hasNoEvent" style="text-align: center">
+            <img class="logo-loading" src="../../style/gilogocenter.png"/>
+        </p>
+        <p ng-show="vm.hasNoEvent" style="text-align: center">
+            Il n'y a aucun évènement dans ce groupe !
+        </p>
     <button type="button" ng-click="vm.open()" class="btn btn-primary btn-lg btn-block">Créer un évènement</button>
 </div>

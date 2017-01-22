@@ -20,6 +20,10 @@
         // GET ALL VOTES DU GROUPE
         $http.get(mode.dev + "votes/users/"+user.uid+"/groups/"+groupS.id).then(function(data){
             vm.votes = data.data.votes;
+            if(vm.votes.length)
+                vm.hasVote = true;
+            else
+                vm.hasNoVote = true;
         });
 
         // CREATE VOTE

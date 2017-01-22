@@ -7,14 +7,11 @@
         .module('app')
         .factory('NotifsGroupsService', NotifsGroupsService);
 
-    NotifsGroupsService.$injection = ['$resource'];
+    NotifsGroupsService.$injection = ['$resource', 'mode'];
 
-    function NotifsGroupsService($resource) {
+    function NotifsGroupsService($resource, mode) {
 
-        var localhost = "http://localhost:8080/";
-        var dev = "https://platine-groupin.herokuapp.com/";
-
-        return $resource(dev + 'notifications/groups/:uid');
+        return $resource(mode.dev + 'notifications/groups/:uid');
 
     }
 })();

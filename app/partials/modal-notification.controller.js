@@ -19,6 +19,10 @@
         $http.get(mode.dev + "notifications/"+user.uid).then(function(data){
             vm.notifsAmis = data.data.notifsAmis;
             vm.notifsGroupes = data.data.notifsGroupes;
+            if(vm.notifsAmis.length || vm.notifsGroupes.length)
+                vm.hasNotifs = true;
+            else
+                vm.hasNoNotifs = true;
         });
 
         //ADD FRIEND

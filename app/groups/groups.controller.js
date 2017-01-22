@@ -27,6 +27,10 @@
         $http.get( mode.dev + "groups/"+user.uid).then(function(d){
             vm.groups = d.data.groups;
             vm.affiche = false;
+            if(vm.groups.length)
+                vm.hasGroup = true;
+            else
+                vm.hasNoGroup = true;
         });
 
         // DELETE USER GROUP
@@ -41,6 +45,14 @@
                     vm.messageOK = "Vous avez quitté le groupe";
                 });
             }
+        };
+
+        // RELOAD GROUPS
+        vm.reloadGroups = function(){
+            $http.get( mode.dev + "groups/"+user.uid).then(function(d){
+                vm.groups = d.data.groups;
+                vm.affiche = false;
+            });
         };
 
         // REMOVE ALERT
