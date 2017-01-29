@@ -36,7 +36,8 @@
             if(vm.question){
                 vote = {
                     "question" : vm.question,
-                    "choix" : vm.choices
+                    "choix" : vm.choices,
+                    "qcm" : vm.qcm
                 };
                 if(vm.choices.length >= 2 ){
                     $uibModalInstance.close(vote);

@@ -28,6 +28,8 @@
 
         // CREATE VOTE
         vm.openCreateVote = function(){
+            vm.hasVote = false;
+            vm.hasNoVote = false;
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -43,6 +45,10 @@
                     User.setUser(data);
                     vm.votes = data.data.votes;
                     vm.messageOK_V = "Le vote a été correctement créé";
+                    if(vm.votes.length)
+                        vm.hasVote = true;
+                    else
+                        vm.hasNoVote = true;
                 });
 
             });
@@ -55,19 +61,25 @@
 
         // VOTE
         vm.aVote = function(vote){
-            if(vm.reponse){
-                var v = {
-                    "uid"   :   user.uid,
-                    "idVote" : vote,
-                    "reponse" : vm.reponse,
-                    "group" : groupS.id
-                };
-                 $http.post(mode.dev + "votes/users", v).then(function(data){
-                     User.setUser(data);
-                     vm.votes = data.data.votes;
-                     vm.messageOK_V = "Votre vote a été pris en compte"
-                 });
-            }
+
+            var v = {
+                "uid"   :   user.uid,
+                "idVote" : vote.id,
+                "reponse" : vm.reponse,
+                "group" : groupS.id,
+                "choix" : vote.choix
+            };
+             $http.post(mode.dev + "votes/users", v).then(function(data){
+                 User.setUser(data);
+                 vm.votes = data.data.votes;
+                 vm.messageOK_V = "Votre vote a été pris en compte";
+                 if(vm.votes.length){
+                     vm.hasVote = true;
+                 }else{
+                     vm.hasNoVote = true;
+                 }
+             });
+
         };
 
         // REMOVE VOTE
@@ -76,6 +88,10 @@
                 User.setUser(data);
                 vm.votes = data.data.votes;
                 vm.messageOK_V = "Le vote a été correctement supprimé";
+                if(vm.votes.length)
+                    vm.hasVote = true;
+                else
+                    vm.hasNoVote = true;
             });
         };
     }

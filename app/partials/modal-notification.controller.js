@@ -19,6 +19,7 @@
         $http.get(mode.dev + "notifications/"+user.uid).then(function(data){
             vm.notifsAmis = data.data.notifsAmis;
             vm.notifsGroupes = data.data.notifsGroupes;
+            vm.notifsEvents = data.data.notifsEvents;
             if(vm.notifsAmis.length || vm.notifsGroupes.length)
                 vm.hasNotifs = true;
             else
@@ -32,9 +33,7 @@
                 "uidR" : user.uid
             };
             $http.post(mode.dev + "users/friends", friend).then(function(data){
-                User.setUser(data);
-                vm.notifsAmis = data.data.notifsAmis;
-                vm.notifsGroupes = data.data.notifsGroupes;
+                reload(data);
                 vm.messageOK = "La notification a été validé";
             });
         };
@@ -42,9 +41,7 @@
         // REMOVE NOTIF
         vm.dontAddFriend = function(friend){
             $http.delete(mode.dev + "notifications/users/"+user.uid+"/friends/" +friend).then(function(data){
-                User.setUser(data);
-                vm.notifsAmis = data.data.notifsAmis;
-                vm.notifsGroupes = data.data.notifsGroupes;
+                reload(data);
                 vm.messageOK = "La notification a été supprimée";
             });
         };
@@ -56,28 +53,31 @@
                 "uidR" : user.uid
             };
             $http.post(mode.dev + "users/groups", group).then(function(data){
-                console.log(data);
-                User.setUser(data);
-                vm.notifsAmis = data.data.notifsAmis;
-                vm.notifsGroupes = data.data.notifsGroupes;
+                reload(data);
                 vm.messageOK = "La notification a été supprimée";
             });
         };
 
+        // REMOVE NOTIF
         vm.dontJoinGroupe = function(u){
             $http.delete(mode.dev + "notifications/users/"+user.uid+"/groups/" +u).then(function(data){
-                User.setUser(data);
-                vm.notifsAmis = data.data.notifsAmis;
-                vm.notifsGroupes = data.data.notifsGroupes;
+                reload(data);
                 vm.messageOK = "La notification a été supprimée";
             });
         };
 
-
-
+        // CANCEL
         vm.cancel = function(){
             $uibModalInstance.dismiss();
         };
+
+        function reload(data){
+            User.setUser(data);
+            vm.notifsAmis = data.data.notifsAmis;
+            vm.notifsGroupes = data.data.notifsGroupes;
+            vm.notifsEvents = data.data.notifsEvents
+        }
+
 
     }
 

@@ -12,10 +12,14 @@
     function Groups(Users){
 
         var groupSelect = {};
+        var eventSelect = {};
 
         /* GETTER */
         this.getGroupSelected = function(){
             return this.groupSelect;
+        };
+        this.getEventSelected = function(){
+            return this.eventSelect;
         };
 
         this.getAllPhoto = function(){
@@ -58,6 +62,9 @@
         /* SETTER */
         this.setGroupSelected = function(data){
             this.groupSelect = data;
+        };
+        this.setEventSelected = function(data){
+            this.eventSelect = data;
         };
 
 

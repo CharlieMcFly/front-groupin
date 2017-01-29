@@ -4,16 +4,25 @@
         <strong>Succès !</strong> {{vm.messageOK_V}}
         <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
     </div>
-    <ul class="list-group" ng-show="vm.hasVote">
+    <ul class="list-group" ng-if="vm.hasVote">
         <li ng-repeat="vote in vm.votes" class="list-group-item">
             <div class="media">
                 <div class="media-body">
                     <h4 class="media-heading">{{vote.question}}</h4>
                     <div ng-if="!vote.hasalreadyvote">
                         <div ng-repeat="c in vote.choix">
-                            <input type="radio" ng-model="vm.reponse" value="{{c}}">  {{c}}
+                            <div ng-if="!vote.QCM" class="radio">
+                                <label>
+                                    <input type="radio" ng-model="c.reponse" ng-value=true>  {{c.choix}}
+                                </label>
+                            </div>
+                            <div ng-if="vote.QCM" class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="c.reponse" value="{{c.choix}}"> {{c.choix}}
+                                </label>
+                            </div>
                         </div>
-                        <button ng-click="vm.aVote(vote.id)"> Valider </button>
+                        <button ng-click="vm.aVote(vote)"> Valider </button>
                     </div>
                     <div ng-if="vote.hasalreadyvote">
                         <div ng-repeat="c in vote.choix">
@@ -35,7 +44,8 @@
     <p ng-if="!vm.hasVote && !vm.hasNoVote" style="text-align: center">
         <img class="logo-loading" src="../../style/gilogocenter.png"/>
     </p>
-    <p ng-show="vm.hasNoVote" style="text-align: center">
-        Vous n'avez aucun évènent avec vos amis !
-    </p>    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-primary btn-lg btn-block">Créer un vote</button>
+    <p ng-if="vm.hasNoVote" style="text-align: center">
+        Il n'y a aucun vote dans ce groupe !
+    </p>
+    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-primary btn-lg btn-block">Créer un vote</button>
 </div>

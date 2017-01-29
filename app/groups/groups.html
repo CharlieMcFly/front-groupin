@@ -7,29 +7,29 @@
             <strong>Succès !</strong> {{vm.messageOK}}
             <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="panel panel-gi-left">
+            <div class="panel-heading" style="background-color: #eacf6a; border-color: #eacf6a;">
                 <h3 class="panel-title">
-                    <div class="pull-left">Groupes</div>
+                    <div class="pull-left"><strong class="text-uppercase">Groupes</strong></div>
                     <div class="pull-right">
-                        <a class="btn btn-primary btn-xs btn-code" ng-click="vm.reloadGroups()">
+                        <a class="btn btn-reload btn-xs btn-code" ng-click="vm.reloadGroups()">
                             <i class="icon icon-refresh icon-light"></i>
                         </a>
                     </div>
                     <div class="clearfix"></div>
                 </h3>
             </div>
-            <div class="list-group" ng-show="vm.hasGroup">
+            <div class="list-group list-panel-gi" ng-show="vm.hasGroup">
                 <div class="list-group-item" ng-repeat="group in vm.groups">
                     <div class="media">
                         <div class="media-left">
                             <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
                         </div>
                         <div class="media-body">
-                            <h4 class="text-uppercase">{{group.nom}}</h4>
+                            <h4 class="text-uppercase"><strong>{{group.nom}}</strong></h4>
                         </div>
-                        <div class="media-right">
-                            <a href="" class="doigt-right" ng-click="vm.afficheGroupe(group)"><i class="icon icon-hand-o-right icon-4x"></i></a>
+                        <div class="media-right" style="vertical-align: middle;">
+                            <a class="doigt-right" ng-click="vm.afficheGroupe(group)"><i class="icon icon-hand-o-right icon-2x"></i></a>
                         </div>
                     </div>
                 </div>
@@ -41,27 +41,34 @@
                 Vous n'avez aucun groupe d'amis !
             </p>
         </div>
-        <button type="button" ng-click="vm.open()" class="btn btn-lg btn-primary btn-block">Créer un groupe</button>
+        <button type="button" ng-click="vm.open()" class="btn btn-lg btn-left">Créer un groupe</button>
     </div>
     <!-- MENUS GROUPES -->
     <div class="col-lg-18" ng-if="vm.affiche">
-        <div class="media">
-            <div class="media-body">
-                <h1 class="text-uppercase">{{vm.nomG}}</h1>
+        <div class="panel-gi-right">
+            <div class="media">
+                <div class="media-body">
+                    <div style="display: inline-flex;">
+                        <h1 class="text-uppercase"><strong>{{vm.nomG}}</strong></h1>
+                        <a class="doigt-right" ng-click="vm.modifGroupe(vm.group)">
+                            <i class="icon icon-cog icon-2x" style="margin-left: 15px; margin-top: 36px;"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="media-right" style="vertical-align: middle;">
+                    <a class="doigt-right" ng-click="vm.quitGroupe()"><i class="icon icon-sign-out icon-fw icon-2x"></i></a>
+                </div>
             </div>
-            <div class="media-right" style="vertical-align: middle;">
-                <a href="" class="doigt-right" ng-click="vm.quitGroupe()"><i class="icon icon-sign-out icon-fw icon-2x"></i></a>
-            </div>
+            <ul class="nav nav-pills nav-justified" style="background-color: #eacf6a;">
+                <li><a ui-sref=".events"><strong class="text-uppercase">Evenements</strong></a></li>
+                <li><a ui-sref=".membres"><strong class="text-uppercase">Membres</strong></a></li>
+                <li><a ui-sref=".votes"><strong class="text-uppercase">Votes</strong></a></li>
+                <li><a ui-sref=".euro"><strong class="text-uppercase">€uro</strong></a></li>
+                <li><a ui-sref=".chat"><strong class="text-uppercase">Chat</strong></a></li>
+                <li><a ui-sref=".photos"><strong class="text-uppercase">Photos</strong></a></li>
+            </ul>
         </div>
-        <ul class="nav nav-pills nav-justified nav-warning">
-            <li><a ui-sref=".events">Evenements</a></li>
-            <li><a ui-sref=".membres">Membres</a></li>
-            <li><a ui-sref=".votes">Votes</a></li>
-            <li><a ui-sref=".euro">€</a></li>
-            <li><a ui-sref=".chat">Chat</a></li>
-            <li><a ui-sref=".photos">Photos</a></li>
-        </ul>
-        <div  ui-view>
+        <div  ui-view class="panel-gi-right-content" style="margin-top: 10px;">
             <div class="jumbotron">
                 <div class="container">
                     <h2>{{vm.nomG}}</h2>
@@ -73,12 +80,28 @@
 
     <div class="col-lg-18" ng-if="!vm.affiche">
         <div class="jumbotron">
-            <h2>Groupin</h2>
-            <p> Groupin est une application créé par des étudiants de l'Université de Lille 1. </p>
-            <p> Auteur : Florian Malapel & Charlie Quetstroey </p>
-
-            <h4>Bienvenue ! </h4>
-            <p>Ce projet a pour but de facilité la vie des utilisateurs pour se faire on leur a donné la possibilité de créer des groupes et de gérer la totalité des évènements.</p>
+            <div class="container">
+                <div style="text-align: center">
+                    <img src="../../style/gilogocenter.png" style="width:15%">
+                    <h2><strong class="text-uppercase">Groupin</strong></h2>
+                </div>
+                <hr>
+                <div>
+                    <h3><u>Objectifs</u></h3>
+                    <p>Ce projet a pour but de facilité la vie des utilisateurs pour se faire on
+                        leur a donné la possibilité de créer des groupes et de gérer la totalité des évènements.</p>
+                </div>
+                <hr>
+                <div>
+                    <h3><u>Auteurs</u></h3>
+                    <p>Charlie Quetstroey</p>
+                    <p>Florian Malapel</p>
+                </div>
+                <hr >
+                <div>
+                    <p>Disponible sur Android : </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

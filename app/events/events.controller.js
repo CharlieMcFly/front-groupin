@@ -30,7 +30,6 @@
         /* alert on eventClick */
         vm.alertOnEventClick = function( date, jsEvent, view){
             $http.get(mode.dev + "events/" +date.id).then(function(data){
-                console.log(data.data);
                 vm.event = data.data;
                 vm.affiche = true;
             });

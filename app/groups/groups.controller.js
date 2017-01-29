@@ -15,9 +15,6 @@
         var vm = this;
         var user = User.getUser();
 
-        if(user.uid_mail)
-            user.uid = user.uid_mail;
-
         // GET USER
         $http.get( mode.dev + "users/"+user.uid).then(function(d){
             user = d.data.user;
@@ -43,15 +40,27 @@
                     User.setUser(data);
                     vm.groups = data.data.groups;
                     vm.messageOK = "Vous avez quitté le groupe";
+                    vm.hasGroup = false;
+                    vm.hasNoGroup = false;
+                    if(vm.groups.length)
+                        vm.hasGroup = true;
+                    else
+                        vm.hasNoGroup = true;
                 });
             }
         };
 
         // RELOAD GROUPS
         vm.reloadGroups = function(){
+            vm.hasGroup = null;
+            vm.hasNoGroup = null;
             $http.get( mode.dev + "groups/"+user.uid).then(function(d){
                 vm.groups = d.data.groups;
                 vm.affiche = false;
+                if(vm.groups.length)
+                    vm.hasGroup = true;
+                else
+                    vm.hasNoGroup = true;
             });
         };
 
@@ -64,12 +73,15 @@
         vm.afficheGroupe = function(group){
             $state.go('profile.groups');
             vm.affiche = true;
+            vm.group = group;
             vm.nomG = group.nom;
             vm.descG = group.description;
             Groups.setGroupSelected(group);
         };
 
+        // CREATE A GROUPE
         vm.open = function () {
+
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/partials/modal-create-group.html',
@@ -78,13 +90,43 @@
             });
 
             modalInstance.result.then(function (group) {
+                vm.hasGroup = false;
+                vm.hasNoGroup = false;
                 group['uid'] = user.uid;
                 group['email'] = user.email;
                 $http.post(mode.dev + "groups", group).then(function(data){
                     User.setUser(data);
                     vm.groups = data.data.groups;
                     vm.messageOK = "Le groupe "+group.nom+" a bien été créé.";
+                    if(vm.groups.length)
+                        vm.hasGroup = true;
+                    else
+                        vm.hasNoGroup = true;
                 });
+            });
+        };
+
+        // MODIFY A GROUPE
+        vm.modifGroupe = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/partials/modal-update-group.html',
+                controller: 'modalUpdateGroupeController',
+                controllerAs: 'vm'
+            });
+
+            modalInstance.result.then(function (group) {
+                group['uid'] = user.uid;
+                $http.post(mode.dev+"groups/edit", group).then(function(data){
+                    $state.go("profile.groups");
+                    User.setUser(data);
+                    vm.affiche = false;
+                    vm.groups = data.data.groups;
+                    if(vm.groups.length)
+                        vm.hasGroup = true;
+                    else
+                        vm.hasNoGroup = true;
+                })
             });
         };
     }

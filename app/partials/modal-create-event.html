@@ -53,7 +53,11 @@
                 <label for="objEvent">
                     <input type="checkbox" ng-model="haveObj"> Objet à ramener pour l'évènement
                 </label>
-                <input type="text" ng-show="haveObj" ng-model="vm.obj" class="form-control" id="objEvent" placeholder="une bouteille de whisky">
+                <input ng-show="haveObj" ng-repeat="o in vm.objs" type="text" ng-model="o.obj" class="form-control"
+                       id="objEvent" placeholder="Entrez un objet à ramener"> <br >
+                <button ng-show="haveObj" ng-click="vm.ajouterObj()"> Ajouter un objet </button>
+                <button ng-show="haveObj" ng-click="vm.supprimerObj()"> Supprimer un objet </button>
+
             </div>
 
     </div>

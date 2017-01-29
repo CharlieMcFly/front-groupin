@@ -1,0 +1,64 @@
+<link href="../../node_modules/angular-moment-picker/dist/angular-moment-picker.css" rel="stylesheet">
+
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Modification d'event</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+            <div ng-if="vm.messageKO" class="alert alert-danger alert-dismissable fade in">
+                <i class="icon icon-times-circle icon-lg"></i>
+                <strong>Erreur !</strong> {{vm.messageKO}}
+                <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
+            </div>
+            <div ng-if="!vm.event.photoURL" class="form-group" style="text-align: center">
+                <img src="http://placehold.it/150x150&text=img-circle" alt="" class="img-circle" style="text-align: center">
+            </div>
+            <div ng-if="vm.event.photoURL" class="form-group" style="text-align: center">
+                <img ng-src="{{vm.event.photoURL}}" alt="" class="img-circle" style="text-align: center; width: 150px; height: 150px">
+            </div>
+            <div class="form-group">
+                <label for="NomEvent">Nom de l'event</label>
+                <input type="text" ng-model="vm.event.nom" class="form-control" id="NomEvent" placeholder="Nom de l'évènement">
+            </div>
+            <div class="form-group">
+                <label for="DescriptionEvent">Description</label>
+                <textarea id="DescriptionEvent"  ng-model="vm.event.description" class="form-control" placeholder="Description de l'event" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="URLPhotoEvent">URL de la photo</label>
+                <input type="text" ng-model="vm.event.photoURL" class="form-control" id="URLPhotoEvent" placeholder="URL de la photo de l'évènement">
+            </div>
+            <!-- DATE -->
+            <div class="form-group">
+                <label for="dateD">Date de début : <span>{{vm.event.dateDebut | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></label>
+                <input class="form-control" ng-model="vm.event.dateDebutNew" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateD" id="dateD">
+            </div>
+            <div class="form-group">
+                <label for="dateD">Date de fin :  <span>{{vm.event.dateFin | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></label>
+                <input class="form-control" ng-model="vm.event.dateFinNew" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateF" id="dateF">
+            </div>
+            <div class="form-group">
+                <label for="themeEvent">
+                    <input type="checkbox" ng-model="haveTheme"> Thème de l'évènement
+                </label>
+                <input type="text" ng-show="haveTheme" ng-model="vm.event.theme" class="form-control" id="themeEvent" placeholder="Carnaval">
+            </div>
+            <div class="form-group">
+                <label for="prixEvent">
+                    <input type="checkbox" ng-model="havePrix"> Prix de l'évènement
+                </label>
+                <input type="text" ng-show="havePrix" ng-model="vm.event.prix" class="form-control" id="prixEvent" placeholder="10 €">
+            </div>
+            <div class="form-group">
+                <label for="objEvent">
+                    <input type="checkbox" ng-model="haveObj"> Objet à ramener pour l'évènement
+                </label>
+                <input type="text" ng-show="haveObj" ng-model="vm.event.obj" class="form-control" id="objEvent" placeholder="une bouteille de whisky">
+            </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="vm.modifier()" >Modifier</button>
+        <button class="btn btn-danger" type="button" ng-click="vm.cancel()">Annuler</button>
+    </div>
+</div>

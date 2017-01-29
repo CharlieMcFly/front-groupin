@@ -26,6 +26,14 @@
                 vm.hasNoEvent = true;
         });
 
+        // RAPPEL EVENT
+        vm.rappel = function(event){
+            var send = {"idEvent" : event.id, "uid" : user.uid};
+            $http.post(mode.dev + "events/rappel", send).then(function(data){
+               vm.messageOK_E = "Le rappel a bien été envoyé à tous les participants";
+            });
+        };
+
         // DISPLAY EVENT
         vm.showEvent = function(event){
             if(event.show == undefined || !event.show){
@@ -47,6 +55,10 @@
             $http.post(mode.dev + "events/participants", data).then(function(d){
                 User.setUser(d);
                 vm.events = d.data.events;
+                if(vm.events.length)
+                    vm.hasEvent = true;
+                else
+                    vm.hasNoEvent = true;
             });
         };
 
@@ -66,6 +78,10 @@
                 $http.delete(mode.dev + "events/"+event.id+"/groups/"+gSelect.id+"/users/"+user.uid).then(function(data){
                     User.setUser(data);
                     vm.events = data.data.events;
+                    if(vm.events.length)
+                        vm.hasEvent = true;
+                    else
+                        vm.hasNoEvent = true;
                 });
                 vm.messageOK_E = "L'évènement a été correctement supprimé";
             }
@@ -92,6 +108,34 @@
                     User.setUser(data);
                     vm.events = data.data.events;
                     vm.messageOK_E = "L'évènement " + event.nom + " a bien été créé";
+                    if(vm.events.length)
+                        vm.hasEvent = true;
+                    else
+                        vm.hasNoEvent = true;
+                });
+            });
+        };
+
+        // MODIFY EVENT
+        vm.modifEvent = function (event) {
+            Groups.setEventSelected(event);
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/partials/modal-update-event.html',
+                controller: 'modalUpdateEventController',
+                controllerAs: 'vm'
+            });
+
+            modalInstance.result.then(function (event) {
+                event["id"] = event.id;
+                event["groupId"] = gSelect.id;
+                event["userId"] = event.createur;
+                $http.post(mode.dev + "events/edit", event).then(function(d){
+                    vm.events = d.data.events;
+                    if(vm.events.length)
+                        vm.hasEvent = true;
+                    else
+                        vm.hasNoEvent = true;
                 });
             });
         };

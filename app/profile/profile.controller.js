@@ -8,26 +8,41 @@
         .module('app')
         .controller('profileController', profileController);
 
-    profileController.$inject = ['$state','Config', 'User', 'Users', '$uibModal'];
+    profileController.$inject = ['$state','Config', 'User', 'Users', '$uibModal', '$http', 'mode'];
 
-    function profileController ($state, Config, User, Users,  $uibModal ) {
+    function profileController ($state, Config, User, Users,  $uibModal , $http, mode) {
 
         var vm = this;
-
         var authObj = Config.auth;
-        var user = User.getUser();
         var users = Users.getAllUsers();
+        var user = User.getUser();
 
-        if(user.uid === user.email)
-            this.uid = user.uid_mail;
+        $http.get(mode.dev + "users/"+user.uid).then(function(data){
+            User.setUser(data);
+            vm.user = User.getUser();
+            vm.name = vm.user.displayName;
+            vm.photo = vm.user.photoURL;
+            $state.go("profile.groups");
+        });
 
-        if(user.displayName == undefined)
-            vm.name = user.email;
-        else
-            vm.name = user.displayName;
+        // UPDATE PROFILE
+        vm.modifierProfile = function(){
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/partials/modal-profile-update.html',
+                controller: 'modalUpdateUserController',
+                controllerAs: 'vm'
+            });
 
-        vm.photo = user.photoURL;
+            modalInstance.result.then(function (result) {
+                User.login(result);
+                vm.user = User.getUser();
+                vm.name = vm.user.displayName;
+                vm.photo = vm.user.photoURL;
+            });
+        };
 
+        // LOG OFF
         vm.logout = function () {
             var r = confirm("Êtes vous sûr de vouloir vous déconnecter ?");
             if (r == true) {
@@ -36,8 +51,7 @@
             }
         };
 
-        $state.go("profile.groups");
-
+        // GET NOTIFICATIONS
         vm.openNotifications = function(){
 
             var modalInstance = $uibModal.open({
@@ -48,9 +62,8 @@
             });
 
             modalInstance.result.then(function () {
-                console.log(result)
-            });
 
+            });
         };
 
     }

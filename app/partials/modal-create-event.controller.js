@@ -13,6 +13,16 @@
     function modalCreateEventController ($uibModalInstance) {
 
         var vm = this;
+        vm.objs = [{"obj": ""}];
+
+        vm.ajouterObj = function(){
+            vm.objs.push({"obj": ""});
+
+        };
+
+        vm.supprimerObj = function(){
+            vm.objs.pop();
+        };
 
         vm.cancel = function(){
             $uibModalInstance.dismiss();
@@ -32,8 +42,8 @@
                         "dateFin": vm.dateF.toDate().getTime(),
                         "theme": vm.theme,
                         "prix" : vm.prix,
-                        "obj": vm.obj,
-                        "photoURL": vm.photoURL
+                        "obj": vm.objs,
+                        "photoURL": vm.photoURL,
                     };
                     $uibModalInstance.close(event);
                 }

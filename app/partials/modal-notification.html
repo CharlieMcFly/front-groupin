@@ -64,6 +64,32 @@
                 </div>
             </div>
         </div>
+        <div class="list-group" ng-repeat="event in vm.notifsEvents">
+            <div class="list-group-item media">
+                <div class="media-left">
+                    <a><img class="media-object img-circle" ng-src="{{event.photoURL}}" style="width: 64px"; height="64px"></a>
+                </div>
+                <div ng-if="event.create" class="media-body" style="vertical-align: middle">
+                   Participerez vous à l'évènement :  {{event.nom}}
+                </div>
+                <div class="media-right" style="vertical-align: middle">
+                    <a href="" class="doigt-right">
+                            <span class="icon-stack icon-2x" ng-click="vm.joinGroup(group.id)">
+                              <i class="icon icon-circle icon-stack-2x"></i>
+                              <i class="icon icon-check icon-stack-1x icon-inverse"></i>
+                            </span>
+                    </a>
+                </div>
+                <div class="media-right" style="vertical-align: middle">
+                    <a href="" class="doigt-right">
+                            <span class="icon-stack icon-2x" ng-click="vm.dontJoinGroupe(group.id)">
+                              <i class="icon icon-circle icon-stack-2x"></i>
+                              <i class="icon icon-times icon-stack-1x icon-inverse"></i>
+                            </span>
+                    </a>
+                </div>
+            </div>
+        </div>
         <p ng-if="!vm.hasNotifs && !vm.hasNoNotifs" style="text-align: center">
             <img class="logo-loading" src="../../style/gilogocenter.png"/>
         </p>

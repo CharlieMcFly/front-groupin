@@ -1,30 +1,40 @@
+
 <div class="modal-header">
     <h3 class="modal-title" id="modal-title">Création d'une dépense</h3>
 </div>
 <div class="modal-body" id="modal-body">
-    <div ng-if="vm.messageKO" class="alert alert-danger alert-dismissable fade in">
-        <i class="icon icon-times-circle icon-lg"></i>
-        <strong>Erreur !</strong> {{vm.messageKO}}
-        <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
-    </div>
-    <div ng-if="!vm.photoURL" class="form-group" style="text-align: center">
-        <img src="http://placehold.it/150x150&text=img-circle" alt="" class="img-circle" style="text-align: center">
-    </div>
-    <div ng-if="vm.photoURL" class="form-group" style="text-align: center">
-        <img ng-src="{{vm.photoURL}}" alt="" class="img-circle" style="text-align: center; width: 150px; height: 150px">
+    <div class="form-group">
+        <label for="NomFacture">Quoi ?</label>
+        <input type="text" ng-model="vm.what" class="form-control" id="NomFacture" placeholder="Ce que vous avez payé" required>
     </div>
     <div class="form-group">
-        <label for="NomGroupe">Nom du groupe</label>
-        <input type="text" ng-model="vm.nom" class="form-control" id="NomGroupe" placeholder="Nom du groupe" required>
+        <label for="PrixFacture">Combien ?</label>
+        <input type="number" ng-model="vm.prix" class="form-control" id="PrixFacture" placeholder="15" required>
     </div>
     <div class="form-group">
-        <label for="DescriptionGroupe">Description</label>
-        <textarea id="DescriptionGroupe"  ng-model="vm.description" class="form-control" placeholder="Description du groupe" rows="4" required></textarea>
+        <label for="Payeur">Qui ?</label>
+        <select class="form-control" id="Payeur" ng-options="m as m.displayName for m in vm.membres track by m.uid" ng-model="vm.payeur"></select>
     </div>
     <div class="form-group">
-        <label for="URLPhotoGroupe">URL de la photo</label>
-        <input type="text" ng-model="vm.photoURL" class="form-control" id="URLPhotoGroupe" placeholder="URL de la photo du groupe" required>
+        <label for="PayeurPour">Pour Qui ?</label>
+        <div ng-repeat="m in vm.membres">
+            <div class="media" id="PayeurPour">
+                <div class="media-left">
+                    <a><img class="media-object img-circle" style="width: 32px; height: 32px;" ng-src="{{m.photoURL}}"></a>
+                </div>
+                <div class="media-body">
+                    {{m.displayName}}
+                </div>
+                <div class="media-right" ng-if="m.isSelected" ng-click="vm.selectionPayeurPour(m)" style="vertical-align: middle;">
+                    <a href="" class="doigt-right"><span class="icon icon-check-square-o icon-2x" aria-hidden="true"></span></a>
+                </div>
+                <div class="media-right" ng-if="!m.isSelected" ng-click="vm.selectionPayeurPour(m)" style="vertical-align: middle;">
+                    <a href="" class="doigt-right"><span class="icon icon-square-o icon-2x" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 <div class="modal-footer">
     <button class="btn btn-success" type="button" ng-click="vm.creer()" >Créer</button>

@@ -21,7 +21,7 @@
 
         ])
         .constant("mode", {
-                "prod" : "http://localhost:8080/",
-                "dev" : "https://platine-groupin.herokuapp.com/"
+                "dev" : "http://localhost:8080/",
+                "prod" : "https://platine-groupin.herokuapp.com/"
         });
 })();

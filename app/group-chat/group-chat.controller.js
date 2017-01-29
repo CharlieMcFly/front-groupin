@@ -43,6 +43,10 @@
                     vm.messages = data.data.messages;
                     vm.messageOK_M  = "Votre message a été correctement envoyé";
                     vm.msg = null;
+                    if(vm.messages.length)
+                        vm.hasMsg = true;
+                    else
+                        vm.hasNoMsg = true;
                 });
             }else{
                 vm.messageKO_M = "Vous devez entrer un message avant de l'envoyer";
