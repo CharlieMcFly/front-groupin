@@ -75,6 +75,8 @@
         // REMOVE EVENT
         vm.removeEvent = function(event){
             if(confirm("Êtes vous sûr de supprimer l'évènement du groupe ?")){
+                vm.hasEvent = false;
+                vm.hasNoEvent = false;
                 $http.delete(mode.dev + "events/"+event.id+"/groups/"+gSelect.id+"/users/"+user.uid).then(function(data){
                     User.setUser(data);
                     vm.events = data.data.events;
@@ -131,6 +133,8 @@
                 event["groupId"] = gSelect.id;
                 event["userId"] = event.createur;
                 $http.post(mode.dev + "events/edit", event).then(function(d){
+                    User.setUser(d);
+                    vm.messageOK_E = "L'évènement " + event.nom + " a bien été modifié";
                     vm.events = d.data.events;
                     if(vm.events.length)
                         vm.hasEvent = true;

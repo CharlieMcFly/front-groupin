@@ -9507,11 +9507,13 @@ a.thumbnail-muted.thumbnail-shadow.active {
     vertical-align: middle
 }
 .media-bottom {
-    vertical-align: bottom
+    vertical-align: bottom;
+    height: 30px;
 }
 .media-heading {
     margin-top: 0;
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    height: 65px;
 }
 .media-list {
     padding-left: 0;
@@ -11271,7 +11273,46 @@ button.close {
 .panel-gi-right{
     position : relative
 }
+.option-admin
+{
 
+}
+
+.label-participe {
+    background-color: #EACF6A;
+    border-radius: 5px;
+    color: #115471;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.label-participe-pas {
+    background-color: #7b241b;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+.label-modifier{
+    cursor:pointer;
+    background-color: #eee;
+    border-radius: 5px;
+    color: grey;
+    padding: 1px;
+    text-align: center;
+    width: 100%;
+}
+
+.label-modifier:hover{
+    background-color: #115471;
+    color : white;
+}
+
+.fleche{
+    margin-top : 60px;
+}
 @media screen and (min-width: 1200px) {
     .btn-left {
         bottom: 6px;
@@ -11312,5 +11353,44 @@ button.close {
         position: fixed;
         top: 235px;
         width: 73.6%;
+    }
+
+    .option-admin
+    {
+        text-align: right;
+    }
+
+    .label-participe {
+        background-color: #EACF6A;
+        border-radius: 5px;
+        color: #115471;
+        padding: 5px;
+        text-align: center;
+        width: 50%
+    }
+
+    .label-participe-pas {
+        background-color: #7b241b;
+        border-radius: 5px;
+        color: white;
+        padding: 5px;
+        text-align: center;
+        width: 50%
+
+    }
+    .label-modifier{
+        cursor:pointer;
+        background-color: #eee;
+        border-radius: 5px;
+        color: grey;
+        padding: 1px;
+        text-align: center;
+        width: 50%
+
+    }
+
+
+    .fleche{
+        margin-top : 0px;
     }
 }

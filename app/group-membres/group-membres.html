@@ -1,10 +1,11 @@
 <div ng-controller="groupMembresController as vm" >
-    <div ng-if="vm.messageOK_M" class="alert alert-success alert-dismissable fade in">
-        <i class="icon icon-check-circle icon-lg"></i>
-        <strong>Succès !</strong> {{vm.messageOK_M}}
-        <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
-    </div>
-    <ul class="list-group" ng-if="vm.membres.length">
+
+    <ul class="list-group panel-list-right" ng-if="vm.membres.length">
+        <div ng-if="vm.messageOK_M" class="alert alert-success alert-dismissable fade in">
+            <i class="icon icon-check-circle icon-lg"></i>
+            <strong>Succès !</strong> {{vm.messageOK_M}}
+            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+        </div>
         <li class="list-group-item" ng-repeat="membre in vm.membres | orderBy: 'name'">
             <div class="media">
                 <div class="media-left">
@@ -23,5 +24,5 @@
         </li>
     </ul>
     <p ng-if="!vm.membres.length"> Il n'y a aucun membre dans ce groupe !</p>
-    <button type="button" ng-click="vm.openAddMembers()" class="btn btn-primary btn-lg btn-block">Ajouter des membres</button>
+    <button type="button" ng-click="vm.openAddMembers()" class="btn btn-lg btn-right">Ajouter des membres</button>
 </div>

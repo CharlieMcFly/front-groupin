@@ -8,58 +8,73 @@
             </div>
             <li class="list-group-item" ng-repeat="event in vm.events" >
                 <div class="media" >
-                    <div class="media-left">
+                    <div class="media-left" style="vertical-align: middle;">
                         <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{event.photoURL}}"></a>
                     </div>
                     <div class="media-body" >
-                        <div class="row">
-                            <h4 class="text-uppercase col-md-8" >{{event.nom}}</h4>
-                            <div class="col-md-8">
-                                <p> Début : <span>{{event.dateDebut | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></p>
-                                <p> Fin : <span>{{event.dateFin | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></p>
-                            </div>
-                            <h5 style="text-align: center" ng-if="!event.prix" class="text-uppercase col-md-8" ><strong>GRATUIT</strong></h5>
-                            <h5 style="text-align: center" ng-if="event.prix" class="text-uppercase col-md-8" ><strong>{{event.prix}} €</strong></h5>
+                        <h3 class="text-uppercase col-md-8" style="margin-top: 15px;"><strong>{{event.nom}}</strong></h3>
+                        <div class="col-md-8">
+                            <p> Début <span>{{event.dateDebut | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></p>
+                            <p> Fin <span>{{event.dateFin | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></p>
                         </div>
-                        <div ng-if="event.show">
-                            <hr >
-                            <blockquote>
+                        <div class="col-md-8 option-admin" ng-if="vm.user.uid == event.createur"  style="vertical-align: middle;">
+                            <a class="doigt-right" ><span class="icon icon-trash-o icon-2x" ng-click="vm.removeEvent(event)" aria-hidden="true"></span></a>
+                            <a class="doigt-right" ><span class="icon icon-bell-o icon-2x" ng-click="vm.rappel(event)" aria-hidden="true"></span></a>
+                            <a class="doigt-right" ><span class="icon icon-edit icon-2x" ng-click="vm.modifEvent(event)" aria-hidden="true"></span></a>
+                        </div>
+                        <div class="col-md-24" ng-if="event.show" >
+                            <div class="col-md-12">
+                                <h4><u>Description</u></h4>
                                 <p>{{event.description}}</p>
-                                <p ng-if="event.obj">Ne pas oublier d'apporter : {{event.obj}}</p>
-                                <p ng-if="event.theme">Le thème de la soirée sera : {{event.theme}}</p>
-                            </blockquote>
-                            <hr >
-                            <h4>Participants</h4>
-                            <ul class="list-group">
-                                <li ng-repeat="u in event.participantsValues" class="col-md-8">
-                                    <div class="media">
-                                    <div class="media-left">
-                                        <a><img class="media-object img-circle" style="width: 32px; height: 32px;" ng-src="{{u.photoURL}}"></a>
-                                    </div>
-                                    <div class="media-body">
-                                        {{u.displayName}}
-                                    </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                <br>
+                                <p ng-if="event.obj">Ne pas oublier d'apporter </p>
+                                <ul ng-if="event.obj">
+                                    <li ng-repeat="o in event.obj">{{o}}</li>
+                                </ul>
+                                <p ng-if="event.theme">Le thème de l'évènement sera {{event.theme}}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <h4><u>Participants</u></h4>
+                                <ul class="list-group">
+                                    <li ng-repeat="u in event.participantsValues" class="col-md-12 list-group-item">
+                                        <div class="media">
+                                        <div class="media-left">
+                                            <a><img class="media-object img-circle" style="width: 32px; height: 32px;" ng-src="{{u.photoURL}}"></a>
+                                        </div>
+                                        <div class="media-body">
+                                            {{u.displayName}}
+                                        </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-24">
+                                <h5 ng-if="!event.prix" class="text-uppercase" ><strong>GRATUIT</strong></h5>
+                                <h5 ng-if="event.prix" class="text-uppercase" ><strong>{{event.prix}} €</strong></h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="media-right" ng-if="vm.user.uid == event.createur"  style="vertical-align: middle;">
-                        <a href="" class="doigt-right" ><span class="icon icon-trash-o icon-2x" ng-click="vm.removeEvent(event)" aria-hidden="true"></span></a>
-                        <a href="" class="doigt-right" ><span class="icon icon-bell-o icon-2x" ng-click="vm.rappel(event)" aria-hidden="true"></span></a>
-                        <a href="" class="doigt-right" ><span class="icon icon-edit icon-2x" ng-click="vm.modifEvent(event)" aria-hidden="true"></span></a>
+                    <div ng-if="!event.edit">
+                        <div class="media-bottom" ng-if="!event.participants[vm.user.uid]" style="margin-bottom: 10px;margin-top: 5px;">
+                            <label class="label-participe-pas col-md-12">NE PARTICIPE PAS</label>
+                            <div class="label-modifier col-md-12" ng-click="vm.edit_participation(event)">
+                                <span><i class="icon icon-edit icon-2x"></i></span>
+                            </div>
+                        </div>
+                        <div class="media-bottom" ng-if="event.participants[vm.user.uid]" style="margin-bottom: 10px;margin-top: 5px;">
+                            <label class="label-participe col-md-12">PARTICIPE</label>
+                            <div class="label-modifier col-md-12"  ng-click="vm.edit_participation(event)">
+                                <span ><i  class="icon icon-edit icon-2x"></i></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="media-bottom" ng-if="!event.participants[vm.user.uid] || event.edit" style="margin-top: 10px;">
-                        Participeras-tu à cet évènement ?
-                        <button ng-click="vm.participe(event, true)">OUI</button>
-                        <button ng-click="vm.participe(event, false)">NON</button>
+                    <div class="media-bottom" ng-if="event.edit" style="margin-bottom: 10px;margin-top: 5px;">
+                        <label style="padding:5px" class="label-modifier col-md-12" ng-click="vm.participe(event, true)">PARTICIPE</label>
+                        <label style="padding:5px" class="label-modifier col-md-12" ng-click="vm.participe(event, false)">NE PARTICIPE PAS</label>
                     </div>
-                    <div class="media-bottom" ng-if="event.participants[vm.user.uid]" style="margin-top: 10px;">
-                        Tu participeras à cet évènement ! <a href="" ng-click="vm.edit_participation(event)" ><span class="icon icon-edit icon-lg"></span></a>
-                    </div>
-                    <div class="media-bottom" style="text-align: center;" >
-                        <a ng-if="!event.show" ng-click="vm.showEvent(event)" href="" class="doigt-right" ><span class="icon icon-chevron-down icon-lg" aria-hidden="true"></span></a>
-                        <a ng-if="event.show" ng-click="vm.showEvent(event)" href="" class="doigt-right" ><span class="icon icon-chevron-up icon-lg" aria-hidden="true"></span></a>
+                    <div class="media-bottom fleche" style="text-align: center;" >
+                        <a ng-if="!event.show" ng-click="vm.showEvent(event)" class="doigt-right" ><span class="icon icon-chevron-down icon-lg" aria-hidden="true"></span></a>
+                        <a ng-if="event.show" ng-click="vm.showEvent(event)" class="doigt-right" ><span class="icon icon-chevron-up icon-lg" aria-hidden="true"></span></a>
                     </div>
                 </div>
             </li>

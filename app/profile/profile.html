@@ -19,16 +19,17 @@
                             <img ng-if="!vm.photo" class="media-object img-circle" alt="64x64" style="width: 64px; height: 64px;" src="http://placehold.it/64x64&text=img-circle">
                         </div>
                         <div style="color:white; width: 75%;" class="media-body">
-                            <h4 ng-click="vm.modifierProfile()">{{vm.name}}</h4>
+                            <h4 ng-if="vm.name">{{vm.name}}</h4>
+                            <h4 ng-if="!vm.name" style="cursor:pointer;" ng-click="vm.modifierProfile()">Modifier vos informations <i class="icon icon-edit"></i> </h4>
                         </div>
                     </div>
                 </div>
                 <ul class="nav navbar-nav navbar-right" style="margin-top: 8px;">
-                    <li><a href="" ng-click="vm.openNotifications()"><span class="icon icon-asterisk icon-lg"></span></a></li>
+                    <li><a style="cursor:pointer;" ng-click="vm.openNotifications()"><span class="icon icon-asterisk icon-lg"></span></a></li>
                     <li><a ui-sref=".groups"><span class="icon icon-users icon-lg"></span></a></li>
                     <li><a ui-sref=".events"><span class="icon icon-calendar icon-lg"></span></a></li>
                     <li><a ui-sref=".amis"><span class="icon icon-user icon-lg"></span></a></li>
-                    <li><a href="" class="navbar-link" ng-click="vm.logout()"><span class="icon icon-sign-out icon-lg"></span></a></li>
+                    <li><a style="cursor:pointer;" class="navbar-link" ng-click="vm.logout()"><span class="icon icon-sign-out icon-lg"></span></a></li>
                 </ul>
             </div>
         </div>

@@ -30,31 +30,43 @@
             </div>
             <!-- DATE -->
             <div class="form-group">
-                <label for="dateD">Date de début : <span>{{vm.event.dateDebut | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></label>
-                <input class="form-control" ng-model="vm.event.dateDebutNew" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateD" id="dateD">
+                <label for="dateDebutNew">Date de début : <span>{{vm.event.dateDebut | date:"dd/MM/yyyy 'à' HH:mm"}}</span></label>
+                <input class="form-control" ng-model="vm.dateD" locale="fr" max-view="hour" format="DD/MM/YYYY HH:mm" ng-model-options="{ updateOn: 'blur'}"
+                       placeholder="Selectionnez une date" moment-picker="vm.dateD" id="dateDebutNew">
             </div>
             <div class="form-group">
-                <label for="dateD">Date de fin :  <span>{{vm.event.dateFin | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></label>
-                <input class="form-control" ng-model="vm.event.dateFinNew" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateF" id="dateF">
+                <label for="dateFinNew">Date de fin :  <span>{{vm.event.dateFin | date:"dd/MM/yyyy 'à' HH:mm"}}</span></label>
+                <input class="form-control" ng-model="vm.dateF" locale="fr" max-view="hour" format="DD/MM/YYYY HH:mm" ng-model-options="{ updateOn: 'blur'}"
+                       placeholder="Selectionnez une date" moment-picker="vm.dateF" id="dateFinNew">
             </div>
-            <div class="form-group">
-                <label for="themeEvent">
-                    <input type="checkbox" ng-model="haveTheme"> Thème de l'évènement
-                </label>
-                <input type="text" ng-show="haveTheme" ng-model="vm.event.theme" class="form-control" id="themeEvent" placeholder="Carnaval">
-            </div>
-            <div class="form-group">
-                <label for="prixEvent">
-                    <input type="checkbox" ng-model="havePrix"> Prix de l'évènement
-                </label>
-                <input type="text" ng-show="havePrix" ng-model="vm.event.prix" class="form-control" id="prixEvent" placeholder="10 €">
-            </div>
-            <div class="form-group">
-                <label for="objEvent">
-                    <input type="checkbox" ng-model="haveObj"> Objet à ramener pour l'évènement
-                </label>
-                <input type="text" ng-show="haveObj" ng-model="vm.event.obj" class="form-control" id="objEvent" placeholder="une bouteille de whisky">
-            </div>
+        <div class="form-group">
+            <label for="themeEvent" style="display: inline-flex;">
+                <p style="cursor: pointer; margin-right: 10px;  margin-top: 2px;" ng-if="!vm.haveTheme" ng-click="vm.toggleTheme()"><i class="icon icon-toggle-off icon-lg"></i></p>
+                <p style="cursor: pointer; margin-right: 10px;  margin-top: 2px;" ng-if="vm.haveTheme" ng-click="vm.toggleTheme()"><i class="icon icon-toggle-on icon-lg"></i></p>
+                Thème de l'évènement
+            </label>
+            <input type="text" ng-show="vm.haveTheme" ng-model="vm.event.theme" class="form-control" id="themeEvent" placeholder="Ex : Carnaval">
+        </div>
+        <div class="form-group">
+            <label for="PrixEvent" style="display: inline-flex;">
+                <p style="cursor: pointer; margin-right: 10px;  margin-top: 2px;" ng-if="!vm.havePrix" ng-click="vm.togglePrix()"><i class="icon icon-toggle-off icon-lg"></i></p>
+                <p style="cursor: pointer; margin-right: 10px;  margin-top: 2px;" ng-if="vm.havePrix" ng-click="vm.togglePrix()"><i class="icon icon-toggle-on icon-lg"></i></p>
+                Prix de l'évènement
+            </label>
+            <input type="number" ng-show="vm.havePrix" ng-model="vm.event.prix" class="form-control" id="prixEvent" placeholder="Ex : 10">
+        </div>
+        <div class="form-group">
+            <label for="ObjEvent" style="display: inline-flex;">
+                <p style="cursor: pointer; margin-right: 10px;  margin-top: 2px;" ng-if="!vm.haveObj" ng-click="vm.toggleObj()"><i class="icon icon-toggle-off icon-lg"></i></p>
+                <p style="cursor: pointer; margin-right: 10px;  margin-top: 2px;" ng-if="vm.haveObj" ng-click="vm.toggleObj()"><i class="icon icon-toggle-on icon-lg"></i></p>
+                Choses à prendre pour l'évènement
+            </label>
+            <input ng-show="vm.haveObj" ng-repeat="o in vm.objsNew" type="text" ng-model="o.obj" class="form-control"
+                   id="ObjEvent" placeholder="Entrez un objet à ramener" required> <br >
+            <button ng-show="vm.haveObj" ng-click="vm.ajouterObj()"> Ajouter un objet </button>
+            <button ng-show="vm.haveObj" ng-click="vm.supprimerObj()"> Supprimer un objet </button>
+
+        </div>
 
     </div>
     <div class="modal-footer">

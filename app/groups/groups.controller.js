@@ -15,14 +15,10 @@
         var vm = this;
         var user = User.getUser();
 
-        // GET USER
-        $http.get( mode.dev + "users/"+user.uid).then(function(d){
-            user = d.data.user;
-        });
-
         // GET ALL GROUP USER
         $http.get( mode.dev + "groups/"+user.uid).then(function(d){
             vm.groups = d.data.groups;
+            user = d.data.user;
             vm.affiche = false;
             if(vm.groups.length)
                 vm.hasGroup = true;
@@ -35,13 +31,13 @@
             var r = confirm("Êtes vous sûr de vouloir quitter le groupe ?");
             if (r == true) {
                 var g = Groups.getGroupSelected();
+                vm.hasGroup = false;
+                vm.hasNoGroup = false;
                 $http.delete(mode.dev + "users/" + user.uid + "/groups/" + g.id).then(function (data) {
                     vm.affiche = false;
                     User.setUser(data);
                     vm.groups = data.data.groups;
                     vm.messageOK = "Vous avez quitté le groupe";
-                    vm.hasGroup = false;
-                    vm.hasNoGroup = false;
                     if(vm.groups.length)
                         vm.hasGroup = true;
                     else
@@ -118,15 +114,15 @@
             modalInstance.result.then(function (group) {
                 group['uid'] = user.uid;
                 $http.post(mode.dev+"groups/edit", group).then(function(data){
+                    vm.affiche = false;
                     $state.go("profile.groups");
                     User.setUser(data);
-                    vm.affiche = false;
                     vm.groups = data.data.groups;
+                    vm.messageOK = "Le groupe a été correctement modifié";
                     if(vm.groups.length)
                         vm.hasGroup = true;
                     else
                         vm.hasNoGroup = true;
-                    vm.messageOK = "Le groupe a été correctement modifié";
                 })
             });
         };
