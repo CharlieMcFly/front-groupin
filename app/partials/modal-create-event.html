@@ -17,44 +17,44 @@
                 <img ng-src="{{vm.photoURL}}" alt="" class="img-circle" style="text-align: center; width: 150px; height: 150px">
             </div>
             <div class="form-group">
-                <label for="NomGroupe">Nom de l'event</label>
-                <input type="text" ng-model="vm.nomE" class="form-control" id="NomGroupe" placeholder="Nom du groupe">
+                <label for="NomEvent">Nom de l'event</label>
+                <input type="text" ng-model="vm.nomE" class="form-control" id="NomEvent" placeholder="Nom de l'évènement">
             </div>
             <div class="form-group">
-                <label for="DescriptionGroupe">Description</label>
-                <textarea id="DescriptionGroupe"  ng-model="vm.descE" class="form-control" placeholder="Description du groupe" rows="4"></textarea>
+                <label for="DescriptionEvent">Description</label>
+                <textarea id="DescriptionEvent"  ng-model="vm.descE" class="form-control" placeholder="Description de l'évènement" rows="4"></textarea>
             </div>
             <div class="form-group">
-                <label for="URLPhotoGroupe">URL de la photo</label>
-                <input type="text" ng-model="vm.photoURL" class="form-control" id="URLPhotoGroupe" placeholder="URL de la photo du groupe">
+                <label for="URLPhotoEvent">URL de la photo</label>
+                <input type="text" ng-model="vm.photoURL" class="form-control" id="URLPhotoEvent" placeholder="URL de la photo de l'évènement">
             </div>
             <!-- DATE -->
             <div class="form-group">
                 <label for="dateD">Date de début</label>
-                <input class="form-control" ng-model="vm.dateD" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateD" id="dateD">
+                <input class="form-control" ng-model="vm.dateD" max-view="hour" format="DD/MM/YYYY HH:mm" ng-model-options="{ updateOn: 'blur'}" placeholder="Selectionnez une date" moment-picker="vm.dateD" id="dateD">
             </div>
             <div class="form-group">
                 <label for="dateD">Date de fin</label>
-                <input class="form-control" ng-model="vm.dateF" ng-model-options="{ updateOn: 'blur' }" placeholder="Select a date..." moment-picker="vm.dateF" id="dateF">
+                <input class="form-control" ng-model="vm.dateF" locate="fr" max-view="hour" format="DD/MM/YYYY HH:mm" ng-model-options="{ updateOn: 'blur'}" placeholder="Selectionnez une date" moment-picker="vm.dateF" id="dateF">
             </div>
             <div class="form-group">
                 <label for="themeEvent">
                     <input type="checkbox" ng-model="haveTheme"> Thème de l'évènement
                 </label>
-                <input type="text" ng-show="haveTheme" ng-model="vm.theme" class="form-control" id="themeEvent" placeholder="Carnaval">
+                <input type="text" ng-show="haveTheme" ng-model="vm.theme" locate="fr" class="form-control" id="themeEvent" placeholder="Ex : Carnaval">
             </div>
             <div class="form-group">
                 <label for="prixEvent">
                     <input type="checkbox" ng-model="havePrix"> Prix de l'évènement
                 </label>
-                <input type="text" ng-show="havePrix" ng-model="vm.prix" class="form-control" id="prixEvent" placeholder="10 €">
+                <input type="number" ng-show="havePrix" ng-model="vm.prix" class="form-control" id="prixEvent" placeholder="Ex : 10">
             </div>
             <div class="form-group">
                 <label for="objEvent">
                     <input type="checkbox" ng-model="haveObj"> Objet à ramener pour l'évènement
                 </label>
                 <input ng-show="haveObj" ng-repeat="o in vm.objs" type="text" ng-model="o.obj" class="form-control"
-                       id="objEvent" placeholder="Entrez un objet à ramener"> <br >
+                       id="objEvent" placeholder="Entrez un objet à ramener" required> <br >
                 <button ng-show="haveObj" ng-click="vm.ajouterObj()"> Ajouter un objet </button>
                 <button ng-show="haveObj" ng-click="vm.supprimerObj()"> Supprimer un objet </button>
 

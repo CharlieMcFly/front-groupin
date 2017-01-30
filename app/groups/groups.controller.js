@@ -126,6 +126,7 @@
                         vm.hasGroup = true;
                     else
                         vm.hasNoGroup = true;
+                    vm.messageOK = "Le groupe a été correctement modifié";
                 })
             });
         };

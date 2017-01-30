@@ -13,7 +13,7 @@
     function modalCreateEventController ($uibModalInstance) {
 
         var vm = this;
-        vm.objs = [{"obj": ""}];
+        vm.objs = [];
 
         vm.ajouterObj = function(){
             vm.objs.push({"obj": ""});

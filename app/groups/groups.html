@@ -1,12 +1,7 @@
 <link href="../../style/groups.css" rel="stylesheet">
 <div ng-controller="groupsController as vm">
     <!-- GROUPES -->
-    <div class="col-lg-6">
-        <div ng-if="vm.messageOK" class="alert alert-success alert-dismissable fade in">
-            <i class="icon icon-check-circle icon-lg"></i>
-            <strong>Succès !</strong> {{vm.messageOK}}
-            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
-        </div>
+    <div class="col-lg-6" >
         <div class="panel panel-gi-left">
             <div class="panel-heading" style="background-color: #eacf6a; border-color: #eacf6a;">
                 <h3 class="panel-title">
@@ -19,8 +14,14 @@
                     <div class="clearfix"></div>
                 </h3>
             </div>
-            <div class="list-group list-panel-gi" ng-show="vm.hasGroup">
-                <div class="list-group-item" ng-repeat="group in vm.groups">
+
+            <ul class="list-group list-panel-gi" ng-show="vm.hasGroup">
+                <div ng-if="vm.messageOK" class="alert alert-success alert-dismissable fade in">
+                    <i class="icon icon-check-circle icon-lg"></i>
+                    <strong>Succès !</strong> {{vm.messageOK}}
+                    <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+                </div>
+                <li class="list-group-item" ng-repeat="group in vm.groups">
                     <div class="media">
                         <div class="media-left">
                             <a><img class="media-object img-circle" style="width: 64px; height: 64px;" ng-src="{{group.photoURL}}"></a>
@@ -32,8 +33,8 @@
                             <a class="doigt-right" ng-click="vm.afficheGroupe(group)"><i class="icon icon-hand-o-right icon-2x"></i></a>
                         </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
             <p ng-if="!vm.hasGroup && !vm.hasNoGroup" style="text-align: center">
                 <img class="logo-loading" src="../../style/gilogocenter.png"/>
             </p>
@@ -65,7 +66,9 @@
                 <li><a ui-sref=".votes"><strong class="text-uppercase">Votes</strong></a></li>
                 <li><a ui-sref=".euro"><strong class="text-uppercase">€uro</strong></a></li>
                 <li><a ui-sref=".chat"><strong class="text-uppercase">Chat</strong></a></li>
+<!--
                 <li><a ui-sref=".photos"><strong class="text-uppercase">Photos</strong></a></li>
+-->
             </ul>
         </div>
         <div  ui-view class="panel-gi-right-content" style="margin-top: 10px;">

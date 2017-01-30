@@ -9159,7 +9159,8 @@ a.thumbnail-muted.thumbnail-shadow.active {
 }
 .alert {
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     border: 1px solid transparent;
     border-radius: 4px
 }
@@ -11236,6 +11237,7 @@ button.close {
 }
 
 /* MINE */
+.btn-right,
 .btn-left{
     width : 100%;
     bottom : 6px;
@@ -11243,10 +11245,13 @@ button.close {
     background-color: #115471;
     color:white;
 }
+
 .btn-reload{
     background-color: #115471;
     color:white;
 }
+
+.btn-right:hover,
 .btn-reload:hover,
 .btn-left:hover{
     background-color: #EACF6A;
@@ -11261,6 +11266,7 @@ button.close {
     width : 100%;
     position: relative;
 }
+.panel-list-right
 .panel-gi-right-content,
 .panel-gi-right{
     position : relative
@@ -11271,6 +11277,11 @@ button.close {
         bottom: 6px;
         position: fixed;
         width: 23.6%;
+    }
+    .btn-right {
+        bottom: 6px;
+        position: fixed;
+        width: 73.6%;
     }
     .panel-gi-left {
         bottom: 40px;
@@ -11292,7 +11303,14 @@ button.close {
     .panel-gi-right-content{
         bottom: 6px;
         position: fixed;
-        top: 234px;
+        top: 235px;
+        width: 73.6%;
+    }
+    .panel-list-right{
+        bottom: 50px;
+        overflow: auto;
+        position: fixed;
+        top: 235px;
         width: 73.6%;
     }
 }
