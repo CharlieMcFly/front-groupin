@@ -14,13 +14,14 @@
 
         var vm = this;
         var user = User.getUser();
+        vm.user = user;
 
         // GET NOTIFICATIONS AMIS
         $http.get(mode.dev + "notifications/"+user.uid).then(function(data){
             vm.notifsAmis = data.data.notifsAmis;
             vm.notifsGroupes = data.data.notifsGroupes;
             vm.notifsEvents = data.data.notifsEvents;
-            if(vm.notifsAmis.length || vm.notifsGroupes.length)
+            if(vm.notifsAmis.length || vm.notifsGroupes.length || vm.notifsEvents.length)
                 vm.hasNotifs = true;
             else
                 vm.hasNoNotifs = true;
@@ -69,6 +70,27 @@
         // CANCEL
         vm.cancel = function(){
             $uibModalInstance.dismiss();
+        };
+
+        // REMOVE NOTIF EVENT
+        vm.removeNotifEvent = function(u){
+            $http.delete(mode.dev + "notifications/users/"+user.uid+"/event/"+u.id).then(function(data){
+                reload(data);
+                vm.messageOK = "La notification a été supprimée";
+            })
+        };
+
+        // PARTICIPATE TO AN EVENT
+        vm.participateEvent = function(u, participe){
+            var p = {
+                "uid" : user.uid,
+                "event" : u.id,
+                "participe" : participe
+            };
+            $http.post(mode.dev + "/notifications/events/participate").then(function(data){
+                reload(data);
+                vm.messageOK = "La notification a été acceptée";
+            });
         };
 
         function reload(data){
