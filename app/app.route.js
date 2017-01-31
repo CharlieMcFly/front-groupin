@@ -73,10 +73,7 @@
                 url: '/chat',
                 templateUrl: 'app/group-chat/group-chat.html'
             })
-            .state('profile.groups.photos', {
-                url: '/photos',
-                templateUrl: 'app/group-photos/group-photos.html'
-            })
+
             ;
     }
 })();

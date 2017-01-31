@@ -16,8 +16,7 @@
             'app.group-membres',
             'app.group-votes',
             'app.group-euro',
-            'app.group-chat',
-            'app.group-photos'
+            'app.group-chat'
 
         ])
         .constant("mode", {

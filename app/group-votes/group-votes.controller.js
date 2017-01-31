@@ -28,8 +28,6 @@
 
         // CREATE VOTE
         vm.openCreateVote = function(){
-            vm.hasVote = false;
-            vm.hasNoVote = false;
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -39,6 +37,8 @@
             });
 
             modalInstance.result.then(function (vote) {
+                vm.hasVote = false;
+                vm.hasNoVote = false;
                 vote['createur'] = user.uid;
                 vote['group'] = groupS.id;
                 $http.post(mode.dev + "votes", vote).then(function(data){
@@ -61,30 +61,37 @@
 
         // VOTE
         vm.aVote = function(vote){
-
-            var v = {
-                "uid"   :   user.uid,
-                "idVote" : vote.id,
-                "reponse" : vm.reponse,
-                "group" : groupS.id,
-                "choix" : vote.choix
-            };
-             $http.post(mode.dev + "votes/users", v).then(function(data){
-                 User.setUser(data);
-                 vm.votes = data.data.votes;
-                 vm.messageOK_V = "Votre vote a été pris en compte";
-                 if(vm.votes.length){
-                     vm.hasVote = true;
-                 }else{
-                     vm.hasNoVote = true;
-                 }
-             });
+            if(checkChoix(vote)){
+                var v = {
+                    "uid"   :   user.uid,
+                    "idVote" : vote.id,
+                    "group" : groupS.id,
+                    "choix" : vote.choix
+                };
+                 $http.post(mode.dev + "votes/users", v).then(function(data){
+                     vm.hasVote = false;
+                     vm.hasNoVote = false;
+                     User.setUser(data);
+                     vm.votes = data.data.votes;
+                     vm.messageOK_V = "Votre vote a été pris en compte";
+                     if(vm.votes.length){
+                         vm.hasVote = true;
+                     }else{
+                         vm.hasNoVote = true;
+                     }
+                 });
+            }else{
+                vm.messageKO_V = "Le vote est érroné veuillez recommencer.";
+            }
 
         };
 
         // REMOVE VOTE
         vm.removeVote = function(vote){
             $http.delete(mode.dev + "votes/"+vote.id+"/groups/"+groupS.id+"/users/"+user.uid).then(function(data){
+                vm.hasVote = false;
+                vm.hasNoVote = false;
+
                 User.setUser(data);
                 vm.votes = data.data.votes;
                 vm.messageOK_V = "Le vote a été correctement supprimé";
@@ -94,5 +101,21 @@
                     vm.hasNoVote = true;
             });
         };
+
+        function checkChoix(vote){
+            var i = 0;
+            for(var j = 0; j < vote.choix.length ; j++){
+                if(vote.choix[j].reponse){
+                    i++;
+                }
+            }
+            if(vote.QCM != undefined){
+                if(i > 0) return true;
+                else return false;
+            }else {
+                if(i == 1) return true;
+                else return false;
+            }
+        }
     }
 })();

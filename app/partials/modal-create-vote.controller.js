@@ -16,22 +16,35 @@
         var vote = {};
         vm.choices = [];
 
+        // TOGGLE QCM
+        vm.toggleQcm = function(){
+            if(!vm.qcm || vm.qcm == undefined)
+                vm.qcm = true;
+            else
+                vm.qcm = false;
+        };
+
+        // ADD CHOICE
         vm.ajouterChoix = function(){
             vm.choices.push({"choix": ""});
         };
 
+        // REMOVE ALERT
         vm.dismiss = function(){
           vm.messageKO_V = null;
         };
 
+        // REMOVE CHOICe
         vm.supprimerChoix = function(){
             vm.choices.pop();
         };
 
+        // CANCEL
         vm.cancel = function(){
             $uibModalInstance.dismiss();
         };
 
+        // CREATE
         vm.creer = function(){
             if(vm.question){
                 vote = {

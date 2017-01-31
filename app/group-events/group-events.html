@@ -14,8 +14,8 @@
                     <div class="media-body" >
                         <h3 class="text-uppercase col-md-8" style="margin-top: 15px;"><strong>{{event.nom}}</strong></h3>
                         <div class="col-md-8">
-                            <p> Début <span>{{event.dateDebut | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></p>
-                            <p> Fin <span>{{event.dateFin | date:"dd/MM/yyyy 'à' hh:mm a"}}</span></p>
+                            <p> Début <span>{{event.dateDebut | date:"dd/MM/yyyy 'à' HH:mm"}}</span></p>
+                            <p> Fin <span>{{event.dateFin | date:"dd/MM/yyyy 'à' HH:mm"}}</span></p>
                         </div>
                         <div class="col-md-8 option-admin" ng-if="vm.user.uid == event.createur"  style="vertical-align: middle;">
                             <a class="doigt-right" ><span class="icon icon-trash-o icon-2x" ng-click="vm.removeEvent(event)" aria-hidden="true"></span></a>

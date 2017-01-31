@@ -8,9 +8,9 @@
         .module('app')
         .controller('amisController', amisController);
 
-    amisController.$inject = ['$uibModal', 'User', 'NotifsAmisService'];
+    amisController.$inject = ['$uibModal', 'User', 'NotifsAmisService', '$http' , 'mode', 'Users'];
 
-    function amisController ($uibModal, User, NotifsAmisService) {
+    function amisController ($uibModal, User, NotifsAmisService, $http, mode, Users) {
 
         var vm = this;
 
@@ -18,6 +18,13 @@
 
         // Affichage des amis
         vm.friends = User.getFriends();
+
+
+        vm.reloadUsers = function(){
+          $http.get(mode.dev + "users").then(function(data){
+             Users.setAllUsers(data.data);
+          });
+        };
 
         vm.dismiss = function(){
             vm.messageOK = null;

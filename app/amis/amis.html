@@ -15,9 +15,17 @@
             <strong>Succès !</strong> {{vm.messageOK}}
             <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Amis</h3>
+        <div class="panel">
+            <div class="panel-heading" style="background-color: #eacf6a; border-color: #eacf6a;">
+                <h3 class="panel-title">
+                    <div class="pull-left"><strong class="text-uppercase">Amis</strong></div>
+                    <div class="pull-right">
+                        <a class="btn btn-reload btn-xs btn-code" ng-click="vm.reloadUsers()">
+                            <i class="icon icon-refresh icon-light"></i>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </h3>
             </div>
             <div class="list-group" ng-if="vm.friends.length">
                 <div class="list-group-item col-md-8" ng-repeat="friend in vm.friends | filter : search | orderBy: 'name'">
@@ -35,8 +43,9 @@
 
         </div>
     </div>
-    <div class="col-md-24">
-    <button type="button" ng-click="vm.openAjoutFriends()" class="btn btn-primary btn-lg btn-block">Ajouter un ami</button>
+    <div class="col-md-24" style="margin-top:10px;">
+
+    <button type="button" ng-click="vm.openAjoutFriends()" class="btn btn-lg btn-ami">Ajouter un ami</button>
     </div>
-</div>
+    </div>
 </div>

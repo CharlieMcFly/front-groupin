@@ -1,15 +1,16 @@
 <div ng-controller="groupChatController as vm">
-    <div ng-if="vm.messageOK_M" class="alert alert-success alert-dismissable fade in">
-        <i class="icon icon-check-circle icon-lg"></i>
-        <strong>Succès !</strong> {{vm.messageOK_M}}
-        <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
-    </div>
-    <div ng-if="vm.messageKO_M" class="alert alert-danger alert-dismissable fade in">
-        <i class="icon icon-times-circle icon-lg"></i>
-        <strong>Erreur !</strong> {{vm.messageKO_M}}
-        <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
-    </div>
-    <ul class="list-group" ng-show="vm.hasMsg">
+
+    <ul class="list-group panel-list-right" ng-show="vm.hasMsg">
+        <div ng-if="vm.messageOK_M" class="alert alert-success alert-dismissable fade in">
+            <i class="icon icon-check-circle icon-lg"></i>
+            <strong>Succès !</strong> {{vm.messageOK_M}}
+            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+        </div>
+        <div ng-if="vm.messageKO_M" class="alert alert-danger alert-dismissable fade in">
+            <i class="icon icon-times-circle icon-lg"></i>
+            <strong>Erreur !</strong> {{vm.messageKO_M}}
+            <button ng-click="vm.dismiss()" type='button' class='close'>×</button>
+        </div>
         <li class="list-group-item" ng-repeat="message in vm.messages ">
             <div class="media">
                 <div class="media-left">
@@ -20,7 +21,7 @@
                         <div class="header">
                             <strong class="primary-font">{{message.auteur.displayName}}</strong>
                             <small class="pull-right text-muted">
-                                <span class="glyphicon glyphicon-time"></span>{{message.date}}</small>
+                                <span class="icon icon-time"></span><span>{{message.date | date:"dd/MM/yyyy 'à' HH:mm"}}</span></small>
                         </div>
                         <p>
                             {{message.message}}
@@ -37,6 +38,6 @@
         Il n'y a aucun message dans ce groupe !
     </p>
 
-    <textarea  ng-model="vm.msg" class="form-control" placeholder="Tapes ton message " rows="2"></textarea>
-    <button type="button" ng-click="vm.envoyerMsg()" class="btn btn-primary btn-lg btn-block">Envoyer un message</button>
+    <textarea ng-model="vm.msg" class="form-control textareafixed" placeholder="Tapes ton message " rows="2"></textarea>
+    <button type="button" ng-click="vm.envoyerMsg()" class="btn btn-lg btn-right">Envoyer un message</button>
 </div>

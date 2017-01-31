@@ -19,6 +19,10 @@
             return this.users;
         };
 
+        this.setAllUsers = function(data){
+            this.users = data;
+        };
+
         this.getAllUsersAddFriends = function(user){
             var users = this.users;
             var tabUser = [];

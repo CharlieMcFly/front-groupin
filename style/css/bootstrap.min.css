@@ -11248,11 +11248,22 @@ button.close {
     color:white;
 }
 
+.btn-valider{
+    background-color: #115471;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+
 .btn-reload{
     background-color: #115471;
     color:white;
 }
-
+.btn-ami:hover,
+.btn-valider:hover,
 .btn-right:hover,
 .btn-reload:hover,
 .btn-left:hover{
@@ -11268,7 +11279,19 @@ button.close {
     width : 100%;
     position: relative;
 }
-.panel-list-right
+
+
+.btn-ami{
+    background-color: #115471;
+    color:white;
+    bottom: 6px;
+    position: fixed;
+    width: 98.5%;
+    margin-left:7px:
+}
+
+.textareafixed,
+.panel-list-right,
 .panel-gi-right-content,
 .panel-gi-right{
     position : relative
@@ -11313,7 +11336,17 @@ button.close {
 .fleche{
     margin-top : 60px;
 }
+
+
 @media screen and (min-width: 1200px) {
+
+    .textareafixed{
+        bottom: 55px;
+        position: fixed;
+        width: 73.6%;
+    }
+
+
     .btn-left {
         bottom: 6px;
         position: fixed;
@@ -11324,6 +11357,7 @@ button.close {
         position: fixed;
         width: 73.6%;
     }
+
     .panel-gi-left {
         bottom: 40px;
         position: fixed;
@@ -11386,11 +11420,18 @@ button.close {
         padding: 1px;
         text-align: center;
         width: 50%
-
     }
-
 
     .fleche{
         margin-top : 0px;
+    }
+
+    .btn-ami{
+        background-color: #115471;
+        color:white;
+        bottom: 6px;
+        position: fixed;
+        width: 98.5%;
+        margin-left:7px:
     }
 }

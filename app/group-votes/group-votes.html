@@ -1,19 +1,25 @@
 <div ng-controller="groupVotesController as vm" >
-    <div ng-if="vm.messageOK_V" class="alert alert-success alert-dismissable fade in">
-        <i class="icon icon-check-circle icon-lg"></i>
-        <strong>Succès !</strong> {{vm.messageOK_V}}
-        <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
-    </div>
-    <ul class="list-group" ng-if="vm.hasVote">
-        <li ng-repeat="vote in vm.votes" class="list-group-item">
+
+    <ul class="list-group panel-list-right" ng-if="vm.hasVote">
+        <div ng-if="vm.messageOK_V" class="alert alert-success alert-dismissable fade in">
+            <i class="icon icon-check-circle icon-lg"></i>
+            <strong>Succès !</strong> {{vm.messageOK_V}}
+            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+        </div>
+        <div ng-if="vm.messageKO_V" class="alert alert-danger alert-dismissable fade in">
+            <i class="icon icon-check-circle icon-lg"></i>
+            <strong>Erreur !</strong> {{vm.messageOK_V}}
+            <button type='button' ng-click="vm.dismiss()" class='close'>×</button>
+        </div>
+        <li ng-repeat="vote in vm.votes" class="list-group-item ">
             <div class="media">
                 <div class="media-body">
-                    <h4 class="media-heading">{{vote.question}}</h4>
+                    <h4 class="media-heading text-capitalize" style="height: 20px;"><strong>{{vote.question}}</strong></h4>
                     <div ng-if="!vote.hasalreadyvote">
                         <div ng-repeat="c in vote.choix">
                             <div ng-if="!vote.QCM" class="radio">
                                 <label>
-                                    <input type="radio" ng-model="c.reponse" ng-value=true>  {{c.choix}}
+                                    <input type="radio" name="mychoice"m ng-model="c.reponse" ng-value=true>  {{c.choix}}
                                 </label>
                             </div>
                             <div ng-if="vote.QCM" class="checkbox">
@@ -22,13 +28,19 @@
                                 </label>
                             </div>
                         </div>
-                        <button ng-click="vm.aVote(vote)"> Valider </button>
+                        <label class="btn-valider" ng-click="vm.aVote(vote)"> VALIDER </label>
                     </div>
-                    <div ng-if="vote.hasalreadyvote">
+                    <div ng-if="vote.hasalreadyvote" style="text-align: center">
                         <div ng-repeat="c in vote.choix">
-                           {{c.choix}}
+                           <strong>{{c.choix}}</strong>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{c.pourcentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{c.pourcentage}}%;">
+                                <div ng-if="c.pourcentage > 75" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{c.pourcentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{c.pourcentage}}%;">
+                                    {{c.pourcentage}} %
+                                </div>
+                                <div ng-if="c.pourcentage < 75 && c.pourcentage > 25" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{c.pourcentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{c.pourcentage}}%;">
+                                    {{c.pourcentage}} %
+                                </div>
+                                <div ng-if="c.pourcentage < 25" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{c.pourcentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{c.pourcentage}}%;">
                                     {{c.pourcentage}} %
                                 </div>
                             </div>
@@ -47,5 +59,5 @@
     <p ng-if="vm.hasNoVote" style="text-align: center">
         Il n'y a aucun vote dans ce groupe !
     </p>
-    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-primary btn-lg btn-block">Créer un vote</button>
+    <button type="button" ng-click="vm.openCreateVote()" class="btn btn-lg btn-right">Créer un vote</button>
 </div>
